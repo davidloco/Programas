@@ -10,7 +10,7 @@ export class ProgramasService {
   constructor(private http: HttpClient) { }
 
   getTopHeadlines() {
-    return this.http.get<RespuestaTopHeadlines>(`http://localhost:8090/users`);
+    return this.http.get<RespuestaTopHeadlines>(`/users/`);
   }
 
 }

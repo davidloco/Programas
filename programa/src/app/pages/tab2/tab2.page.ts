@@ -10,12 +10,16 @@ import { RespuestaTopHeadlines } from '../../interfaces/interfaces';
 
 export class Tab2Page implements OnInit {
 
+  programas: RespuestaTopHeadlines[] = [];
+
   constructor(private programasServices: ProgramasService) { }
 
   ngOnInit() {
     this.programasServices.getTopHeadlines().subscribe((resp: RespuestaTopHeadlines) => {
 
       console.log('programas', resp);
+
+      this.programas.push(...resp);
     });
   }
 
