@@ -1,4 +1,8 @@
-export interface RespuestaTopHeadlines {
+export interface NivelObject {
+  nivel: Nivel[];
+}
+
+export interface Nivel {
   id: number;
   nombre: string;
   descripcion: string;

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgramasService } from 'src/app/services/programas.service';
-import { RespuestaTopHeadlines } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-tab1',
@@ -15,9 +14,7 @@ export class Tab1Page implements OnInit {
   constructor(private programasServices: ProgramasService) { }
 
   ngOnInit() {
-    this.programasServices.getTopHeadlines().subscribe((resp: RespuestaTopHeadlines) => {
-      console.log('programas', resp);
-    });
+    
   }
 
   slideOpts = {

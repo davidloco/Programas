@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgramasService } from 'src/app/services/programas.service';
-import { RespuestaTopHeadlines } from '../../interfaces/interfaces';
+import { Nivel } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-tab2',
@@ -10,16 +10,16 @@ import { RespuestaTopHeadlines } from '../../interfaces/interfaces';
 
 export class Tab2Page implements OnInit {
 
-  programas: RespuestaTopHeadlines[] = [];
+  programas: Nivel[] = [];
 
   constructor(private programasServices: ProgramasService) { }
 
   ngOnInit() {
-    this.programasServices.getTopHeadlines().subscribe((resp: RespuestaTopHeadlines) => {
+    this.programasServices.getTopHeadlines().subscribe(resp => {
 
       console.log('programas', resp);
 
-      this.programas.push(...resp);
+      this.programas.push(...resp.nivel);
     });
   }
 
