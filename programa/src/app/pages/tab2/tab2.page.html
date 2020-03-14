@@ -1,23 +1,5 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid >
-    <ion-row>
-      <ion-col size="12" size-lg="3" size-md="4" size-sm="6" size-xs="12" *ngFor="let programa of programas">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>
-              {{ programa.nombre }}
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>
-              {{ programa.descripcion }}
-            </p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-</ion-content>
+  <app-programas [programas]="programas"></app-programas>
+</ion-content>  
