@@ -3,7 +3,7 @@ const app = express();
 
 // importamos los middleware convierte datos json a javaScrip
 app.use(express.json());
-app.use(express.urlencoded({extended: false})); //recibir datos desde el formulario
+app.use(express.urlencoded({ extended: false })); //recibir datos desde el formulario
 //Importar routes
 app.use(require('./routes/index'));
 
