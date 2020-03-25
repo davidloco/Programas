@@ -23,4 +23,12 @@ export class Tab2Page implements OnInit {
     });
   }
 
+  updateList(ev) {
+    this.programasServices.getTopHeadlinesFind(ev.target.value).subscribe(resp => {
+
+      console.log('programas', resp);
+
+      this.programas.push(...resp.nivel);
+    });    
+  }
 }

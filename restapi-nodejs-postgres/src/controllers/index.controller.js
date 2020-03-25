@@ -11,14 +11,21 @@ const pool = new Pool({
 const getUserById = async(req, res) => {
     const id= req.params.id;
     const response = await pool.query('SELECT * FROM nivel where id =  $1', [id]);
-    res.json(response.rows);
+    var prueba = { nivel : response.rows};
+    res.status(200).send(prueba); 
+}
+
+const getUserByLike = async(req, res) => {
+    const response = await pool.query("SELECT * FROM nivel where nombre ilike '%" + req.params.nombre +"%'");
+    var prueba = { nivel : response.rows};
+    res.status(200).send(prueba); 
 }
 
 const getUsers = async(req, res) => {
-    const response = await pool.query('SELECT id, nombre, descripcion, duracion FROM nivel');
+    const response = await pool.query('SELECT * FROM nivel');
     console.log(response.rows);
     var prueba = { nivel : response.rows};
-    res.status(200).send(prueba);
+    res.status(200).send(prueba); 
   }
 
 const createUser = async(req, res) => {
@@ -56,5 +63,6 @@ module.exports = {
     getUserById,
     createUser,
     deleteUser,
-     updateUser
+     updateUser,
+     getUserByLike
 }

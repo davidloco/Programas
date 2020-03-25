@@ -2,16 +2,14 @@
   <ion-card-header>
 
     <ion-card-subtitle>
-
-      <span>{{ programa.nombre }}</span>
-
       <div>
+        <span>{{ programa.nombre }}</span>
         <ion-button fill="clear" (click)="lanzarMenu()">
-          <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+          <ion-icon slot="icon-only" name="ellipsis-horizontal-outline"></ion-icon>
         </ion-button>
       </div>
-
     </ion-card-subtitle>
+
     <ion-card-title (click)="abrirPrograma()">{{ programa.nombre }}</ion-card-title>
   </ion-card-header>
   <ion-card-content>

@@ -18,7 +18,7 @@ export class ProgramaComponent implements OnInit {
 
   constructor( private iab: InAppBrowser,
                private actionSheetCtrl: ActionSheetController,
-               private socialSharing: SocialSharing,
+               //private socialSharing: SocialSharing,
                private datalocalService: DataLocalService ) { }
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class ProgramaComponent implements OnInit {
         icon: 'trash',
         cssClass: 'action-dark',
         handler: () => {
-          //console.log('Borrar de favorito');
+          console.log('Borrar de favorito');
           this.datalocalService.borrarPrograma( this.programa );
         }
       };
@@ -56,7 +56,7 @@ export class ProgramaComponent implements OnInit {
         icon: 'star',
         cssClass: 'action-dark',
         handler: () => {
-          //console.log('Favorito');
+          console.log('Favorito');
           this.datalocalService.guardarPrograma( this.programa );
         }
       };
@@ -72,12 +72,8 @@ export class ProgramaComponent implements OnInit {
           icon: 'share',
           cssClass: 'action-dark',
           handler: () => {
-            //console.log('Share clicked');
-              this.socialSharing.share(
-              this.programa.nombre,
-              this.programa.descripcion,
-              ''
-            );
+            console.log('Share clicked');
+            
         }
       },
       guardarBorrarBtn,
@@ -87,7 +83,7 @@ export class ProgramaComponent implements OnInit {
         role: 'cancel',
         cssClass: 'action-dark',
         handler: () => {
-          //console.log('Cancel clicked');
+          console.log('Cancel clicked');
         }
       }]
     });

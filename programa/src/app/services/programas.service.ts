@@ -13,4 +13,7 @@ export class ProgramasService {
     return this.http.get<NivelObject>(`/users/`);
   }
 
+  getTopHeadlinesFind(search) {
+    return this.http.get<NivelObject>(`/users/find/`+search);
+  }
 }

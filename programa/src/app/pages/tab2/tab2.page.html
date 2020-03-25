@@ -1,5 +1,11 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true">
-  <app-programas [programas]="programas"></app-programas>
+
+  <ion-item>
+    <ion-searchbar animated placeholder="Buscar Nivel de Escolaridad"
+                  (keyup)="updateList($event)" ></ion-searchbar>
+  </ion-item>  
+      <app-programas [programas]="programas"></app-programas>
+  
 </ion-content>  

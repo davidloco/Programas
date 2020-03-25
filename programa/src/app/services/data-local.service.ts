@@ -13,9 +13,6 @@ export class DataLocalService {
 
   constructor(private storage: Storage,
     public toastController: ToastController) {
-
-    this.cargarFavoritos();
-
   }
 
   async presentToast(message: string) {
