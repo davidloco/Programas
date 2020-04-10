@@ -16,10 +16,14 @@ export class ProgramasService {
   }
 
   getTopHeadlinesFind(search) {
-    return this.http.get<NivelObject>(`/users/find/` + search);
+    return this.http.get<NivelObject>(`/users/find/${search}`);
   }
 
   getOferts() {
     return this.http.get<OfertaObject>(`/oferts/`);
+  }
+  
+  getOfertsFind(id) {
+    return this.http.get<OfertaObject>(`/oferts/${id}`);
   }
 }

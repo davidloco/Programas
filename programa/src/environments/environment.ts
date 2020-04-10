@@ -7,7 +7,7 @@ export const environment = {
   urlJson: "http://localhost:8090",
   urlImagen: "./assets",
   imgOriginal: "original.jpg"
-};
+ };
 
 /*
  * For easier debugging in development mode, you can import the following file

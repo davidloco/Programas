@@ -21,16 +21,10 @@ export class ProgramaComponent implements OnInit {
                //private socialSharing: SocialSharing,
                private datalocalService: DataLocalService ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
 
-    console.log('Favoritos', this.enFavoritos );
-  
-  }
-
-  abrirNoticia() {
-    // console.log('Noticia', );
+  abrirPrograma() {
     const browser = this.iab.create(this.programa.nombre, '_system');
-
   }
 
   async lanzarMenu() {
@@ -62,8 +56,6 @@ export class ProgramaComponent implements OnInit {
       };
 
     }
-
-
 
     const actionSheet = await this.actionSheetCtrl.create({
       buttons: [

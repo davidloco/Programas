@@ -11,7 +11,7 @@ const pool = new Pool({
 
 const getOfertsById = async(req, res) => {
     const id= req.params.id;
-    const response = await pool.query('SELECT * FROM oferta where id =  $1', [id]);
+    const response = await pool.query('SELECT o.id, o.fecha_incio_inscripcion, o.fecha_fin_inscripcion, o.fecha_inicio_periodo, o.fecha_fin_periodo, p.nombre AS nombre_programa, n.descripcion, j.nombre AS nombre_jornada, j.hora_inicio, j.hora_fin, cf.nombre AS nombre_centro, l.departamento, l.municipio, r.nombre AS nombre_region, imagen_poster, imagen_banner FROM oferta AS o JOIN centro_formacion AS cf ON cf.id = o.centro_formacion_id JOIN programa AS p ON p.id = o.programa_id JOIN nivel AS n ON n.id = p.nivel_id JOIN jornada AS j ON j.id = o.jornada_id JOIN localidad AS l ON l.id = cf.localidad_id JOIN region AS r ON r.id = l.region_id WHERE o.id = $1', [id]);
     var prueba = { oferta : response.rows};
     res.status(200).send(prueba); 
 }
@@ -23,7 +23,7 @@ const getOfertsByLike = async(req, res) => {
 }
 
 const getOferts = async(req, res) => {
-    const response = await pool.query('SELECT o.fecha_incio_inscripcion, o.fecha_fin_inscripcion, o.fecha_inicio_periodo, o.fecha_fin_periodo, p.nombre, n.descripcion, j.nombre, j.hora_inicio, j.hora_fin, cf.nombre, l.departamento, l.municipio, r.nombre, imagen_poster, imagen_banner FROM oferta AS o JOIN centro_formacion AS cf ON cf.id = o.centro_formacion_id JOIN programa AS p ON p.id = o.programa_id JOIN nivel AS n ON n.id = p.nivel_id JOIN jornada AS j ON j.id = o.jornada_id JOIN localidad AS l ON l.id = cf.localidad_id JOIN region AS r ON r.id = l.region_id');
+    const response = await pool.query('SELECT o.id, o.fecha_incio_inscripcion, o.fecha_fin_inscripcion, o.fecha_inicio_periodo, o.fecha_fin_periodo, p.nombre AS nombre_programa, n.descripcion, j.nombre AS nombre_jornada, j.hora_inicio, j.hora_fin, cf.nombre AS nombre_centro, l.departamento, l.municipio, r.nombre AS nombre_region, imagen_poster, imagen_banner FROM oferta AS o JOIN centro_formacion AS cf ON cf.id = o.centro_formacion_id JOIN programa AS p ON p.id = o.programa_id JOIN nivel AS n ON n.id = p.nivel_id JOIN jornada AS j ON j.id = o.jornada_id JOIN localidad AS l ON l.id = cf.localidad_id JOIN region AS r ON r.id = l.region_id');
     console.log(response.rows);
     var prueba = { oferta : response.rows};
     res.status(200).send(prueba); 
