@@ -11,23 +11,22 @@ import { Nivel } from 'src/app/interfaces/interfaces';
 export class Tab2Page implements OnInit {
 
   programas: Nivel[] = [];
+  textoBuscar= '';
 
   constructor(private programasServices: ProgramasService){}
 
   ngOnInit() {
     this.programasServices.getTopHeadlines().subscribe(resp => {
-
-      console.log('programas', resp);
-
       this.programas.push(...resp.nivel);
     });
   }
 
+  buscarNivel(event){
+    this.textoBuscar = event.target.value;
+  }
+
   updateList(ev) {
     this.programasServices.getTopHeadlinesFind(ev.target.value).subscribe(resp => {
-
-      console.log('programas', resp);
-
       this.programas.push(...resp.nivel);
     });    
   }

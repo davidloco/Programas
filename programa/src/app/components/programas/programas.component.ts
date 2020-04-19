@@ -9,6 +9,7 @@ import { Nivel } from 'src/app/interfaces/interfaces';
 export class ProgramasComponent implements OnInit {
 
   @Input() programas: Nivel[] = [];
+  @Input() textoBuscar: string;
   @Input() enFavoritos = false;
 
   constructor() { }

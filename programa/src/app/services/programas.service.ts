@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NivelObject } from '../interfaces/interfaces';
 import { OfertaObject } from '../interfaces/ofertInterfaces';
+import { delay } from 'rxjs/operators';
 
 
 @Injectable({
@@ -12,7 +13,9 @@ export class ProgramasService {
   constructor(private http: HttpClient) { }
 
   getTopHeadlines() {
-    return this.http.get<NivelObject>(`/users/`);
+    return this.http.get<NivelObject>(`/users/`).pipe(
+      delay(2500)
+    );
   }
 
   getTopHeadlinesFind(search) {
@@ -22,7 +25,7 @@ export class ProgramasService {
   getOferts() {
     return this.http.get<OfertaObject>(`/oferts/`);
   }
-  
+
   getOfertsFind(id) {
     return this.http.get<OfertaObject>(`/oferts/${id}`);
   }

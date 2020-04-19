@@ -1,7 +1,22 @@
 <ion-grid fixed>
-  <ion-row>
-    <ion-col size="12" size-lg="3" size-md="4" size-sm="6" size-xs="12" *ngFor="let programa of programas">
+  <ion-row *ngIf="programas.length > 0">
+    <ion-col size="12" size-lg="3" size-md="4" size-sm="6" size-xs="12"
+      *ngFor="let programa of programas | filtro:textoBuscar">
       <app-programa [programa]="programa" [enFavoritos]="enFavoritos"></app-programa>
     </ion-col>
   </ion-row>
 </ion-grid>
+
+<ion-list *ngIf="programas.length === 0">
+  <ion-item *ngFor="let i of [1,1,1,1,1,1,1]">
+    <ion-label>
+      <h3>
+        <ion-skeleton-text width="40%"></ion-skeleton-text>
+        <ion-skeleton-text width="80%"></ion-skeleton-text>
+      </h3>
+      <p>
+        <ion-skeleton-text width="40px"></ion-skeleton-text>
+      </p>
+    </ion-label>
+  </ion-item>
+</ion-list>
