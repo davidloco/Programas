@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgramasService } from 'src/app/services/programas.service';
-import { Nivel } from 'src/app/interfaces/interfaces';
+import { Programa } from 'src/app/interfaces/programa.model';
 
 @Component({
   selector: 'app-tab2',
@@ -10,24 +10,24 @@ import { Nivel } from 'src/app/interfaces/interfaces';
 
 export class Tab2Page implements OnInit {
 
-  programas: Nivel[] = [];
+  programas: Programa[] = [];
   textoBuscar= '';
 
   constructor(private programasServices: ProgramasService){}
 
   ngOnInit() {
-    this.programasServices.getTopHeadlines().subscribe(resp => {
-      this.programas.push(...resp.nivel);
+    this.programasServices.getProgramas().subscribe(resp => {
+      this.programas.push(...resp.programa);
     });
   }
 
-  buscarNivel(event){
+  buscarPrograma(event){
     this.textoBuscar = event.target.value;
   }
 
   updateList(ev) {
-    this.programasServices.getTopHeadlinesFind(ev.target.value).subscribe(resp => {
-      this.programas.push(...resp.nivel);
+    this.programasServices.getProgramasFind(ev.target.value).subscribe(resp => {
+      this.programas.push(...resp.programa);
     });    
   }
 }

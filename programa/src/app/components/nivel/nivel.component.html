@@ -1,0 +1,17 @@
+<ion-card>
+  <ion-card-header>
+
+    <ion-card-subtitle>
+      <div>
+        <span>{{ nivel.nombre }}</span>
+      </div>
+    </ion-card-subtitle>
+
+    <ion-card-title (click)="abrirNivel()">{{ nivel.nombre }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p>
+      {{ nivel.descripcion }}
+    </p>
+  </ion-card-content>
+</ion-card>

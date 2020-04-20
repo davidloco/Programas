@@ -1,7 +1,7 @@
 import { ToastController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Nivel } from '../interfaces/interfaces';
+import { Programa } from '../interfaces/programa.model';
 
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Nivel } from '../interfaces/interfaces';
 })
 export class DataLocalService {
 
-  programas: Nivel[] = [];
+  programas: Programa[] = [];
 
   constructor(private storage: Storage,
     public toastController: ToastController) {
@@ -24,7 +24,7 @@ export class DataLocalService {
   }
 
 
-  guardarPrograma(programa: Nivel) {
+  guardarPrograma(programa: Programa) {
 
     const existe = this.programas.find(prog => prog.nombre === programa.nombre);
 
@@ -44,7 +44,7 @@ export class DataLocalService {
     }
   }
 
-  borrarPrograma(programa: Nivel) {
+  borrarPrograma(programa: Programa) {
     this.programas = this.programas.filter(prog => prog.nombre !== programa.nombre);
     this.storage.set('favoritos', this.programas);
     this.presentToast('Borrado de favoritos');

@@ -4,6 +4,7 @@ import { DataLocalService } from 'src/app/services/data-local.service';
 import { ActionSheetController } from '@ionic/angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Programa } from 'src/app/interfaces/programa.model';
 
 @Component({
   selector: 'app-programa',
@@ -12,7 +13,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 })
 export class ProgramaComponent implements OnInit {
 
-  @Input() programa: Nivel;
+  @Input() programa: Programa;
   @Input() indice: number;
   @Input() enFavoritos;
 

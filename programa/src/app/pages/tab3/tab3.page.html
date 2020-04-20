@@ -13,7 +13,8 @@
 
   <app-programas *ngIf="datalocalService.programas.length > 0" 
                 [enFavoritos]="true"
-                [programas]="datalocalService.programas">
+                [programas]="datalocalService.programas"
+                [textoBuscar]="textoBuscar">
   </app-programas>
 
   </ion-content>

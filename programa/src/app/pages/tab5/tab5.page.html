@@ -1,0 +1,11 @@
+<app-header></app-header>
+
+<ion-content>
+
+    <ion-item>
+        <ion-searchbar animated placeholder="Buscar Nivel de Escolaridad" (ionChange)="buscarNivel($event)">
+        </ion-searchbar>
+    </ion-item>
+
+    <app-niveles [niveles]="niveles" [textoBuscar]="textoBuscar"></app-niveles>
+</ion-content>

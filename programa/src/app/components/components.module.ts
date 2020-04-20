@@ -10,6 +10,8 @@ import { OfertasComponent } from './ofertas/ofertas.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { OfertasPosterComponent } from './ofertas-poster/ofertas-poster.component';
 import { FooterInscribirseComponent } from './footer-inscribirse/footer-inscribirse.component';
+import { NivelesComponent } from './niveles/niveles.component';
+import { NivelComponent } from './nivel/nivel.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { FooterInscribirseComponent } from './footer-inscribirse/footer-inscribi
     ProgramasComponent,
     OfertasPosterComponent,
     OfertasComponent,
-    FooterInscribirseComponent
+    FooterInscribirseComponent,
+    NivelComponent,
+    NivelesComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +36,7 @@ import { FooterInscribirseComponent } from './footer-inscribirse/footer-inscribi
     FooterComponent,
     MenuComponent,
     ProgramasComponent,
+    NivelesComponent,
     OfertasPosterComponent,
     OfertasComponent,
     FooterInscribirseComponent

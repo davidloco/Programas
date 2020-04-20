@@ -2,31 +2,40 @@ const { Router } = require('express');
 const router = Router();
 
 // const { getUsers, getUserById, createUser, deleteUser, updateUser } = require('../controllers/index.controller');
-const { 
+const {
     //Niveles
-    getUsers, 
-    getUserById,
-    getUserByLike,
+    getNiveles,
+    getNivelById,
+    getNivelesByLike,
     //Ofertas
-    getOferts, 
+    getOferts,
     getOfertsById,
     getOfertsByLike,
-    
-    createUser, 
-    deleteUser, 
-    updateUser    
+    //Programas
+    getProgramaById,
+    getProgramasByLike,
+    getProgramas,
+
+    createUser,
+    deleteUser,
+    updateUser
 } = require('../controllers/index.controller');
 
 //Crear rutas
 //Niveles
-router.get('/users', getUsers);
-router.get('/users/:id', getUserById);
-router.get('/users/find/:nombre', getUserByLike);
+router.get('/niveles', getNiveles);
+router.get('/niveles/:id', getNivelById);
+router.get('/niveles/find/:nombre', getNivelesByLike);
 
 //Ofertas
 router.get('/oferts', getOferts);
 router.get('/oferts/:id', getOfertsById);
 router.get('/oferts/find/:nombre', getOfertsByLike);
+
+//Programas
+router.get('/programas', getProgramas);
+router.get('/programas/:id', getProgramaById);
+router.get('/programas/find/:nombre', getProgramasByLike);
 
 router.post('/users', createUser);
 router.delete('/users/:id', deleteUser);

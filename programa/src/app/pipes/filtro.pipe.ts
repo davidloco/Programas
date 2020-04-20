@@ -1,21 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Nivel } from '../interfaces/interfaces';
+import { Programa } from '../interfaces/programa.model';
 
 @Pipe({
   name: 'filtro'
 })
 export class FiltroPipe implements PipeTransform {
 
-  transform(niveles: Nivel[], texto: string): Nivel[] {
+  transform(programas: Programa[], texto: string): Programa[] {
     if (texto.length === 0) {
-      return niveles;
+      return programas;
     } 
 
     texto = texto.toLocaleLowerCase();
 
-    return niveles.filter( nivel => {
-      return  nivel.nombre.toLocaleLowerCase().includes(texto) || 
-              nivel.descripcion.toLocaleLowerCase().includes(texto);
+    return programas.filter( programa => {
+      return  programa.nombre.toLocaleLowerCase().includes(texto) || 
+              programa.nivel_nombre.toLocaleLowerCase().includes(texto);
     });
   }
 
