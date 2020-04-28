@@ -1,0 +1,2086 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.11
+-- Dumped by pg_dump version 10.11
+
+-- Started on 2020-04-28 01:10:05
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 1 (class 3079 OID 12924)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2877 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 204 (class 1259 OID 16474)
+-- Name: centro_formacion; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.centro_formacion (
+    id integer NOT NULL,
+    nombre character varying,
+    localidad_id character varying,
+    descripcion character varying
+);
+
+
+ALTER TABLE public.centro_formacion OWNER TO postgres;
+
+--
+-- TOC entry 203 (class 1259 OID 16472)
+-- Name: centro_formación_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."centro_formación_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."centro_formación_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 2878 (class 0 OID 0)
+-- Dependencies: 203
+-- Name: centro_formación_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."centro_formación_id_seq" OWNED BY public.centro_formacion.id;
+
+
+--
+-- TOC entry 208 (class 1259 OID 16511)
+-- Name: jornada; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.jornada (
+    id integer NOT NULL,
+    nombre character varying,
+    hora_inicio character varying,
+    hora_fin character varying
+);
+
+
+ALTER TABLE public.jornada OWNER TO postgres;
+
+--
+-- TOC entry 207 (class 1259 OID 16509)
+-- Name: jornada_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.jornada_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.jornada_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2879 (class 0 OID 0)
+-- Dependencies: 207
+-- Name: jornada_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.jornada_id_seq OWNED BY public.jornada.id;
+
+
+--
+-- TOC entry 202 (class 1259 OID 16462)
+-- Name: localidad; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.localidad (
+    id character varying(100) NOT NULL,
+    latitud numeric(20,14),
+    longitud numeric(20,14),
+    departamento character varying(100),
+    municipio character varying(100),
+    pais character varying(100),
+    region_id integer
+);
+
+
+ALTER TABLE public.localidad OWNER TO postgres;
+
+--
+-- TOC entry 2880 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: COLUMN localidad.id; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.localidad.id IS 'Clave Primaria';
+
+
+--
+-- TOC entry 2881 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: COLUMN localidad.latitud; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.localidad.latitud IS 'Latitud';
+
+
+--
+-- TOC entry 2882 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: COLUMN localidad.longitud; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.localidad.longitud IS 'Longitud';
+
+
+--
+-- TOC entry 2883 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: COLUMN localidad.departamento; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.localidad.departamento IS 'Departamento';
+
+
+--
+-- TOC entry 2884 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: COLUMN localidad.municipio; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.localidad.municipio IS 'Municipio';
+
+
+--
+-- TOC entry 2885 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: COLUMN localidad.pais; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.localidad.pais IS 'Pais';
+
+
+--
+-- TOC entry 2886 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: COLUMN localidad.region_id; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.localidad.region_id IS 'Region';
+
+
+--
+-- TOC entry 197 (class 1259 OID 16397)
+-- Name: nivel; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.nivel (
+    id integer NOT NULL,
+    nombre character varying NOT NULL,
+    descripcion character varying NOT NULL,
+    duracion integer NOT NULL
+);
+
+
+ALTER TABLE public.nivel OWNER TO postgres;
+
+--
+-- TOC entry 196 (class 1259 OID 16395)
+-- Name: nivel_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.nivel_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.nivel_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2887 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: nivel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.nivel_id_seq OWNED BY public.nivel.id;
+
+
+--
+-- TOC entry 206 (class 1259 OID 16503)
+-- Name: oferta; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.oferta (
+    id integer NOT NULL,
+    fecha_incio_inscripcion date,
+    fecha_fin_inscripcion date,
+    fecha_inicio_periodo date,
+    fecha_fin_periodo date,
+    programa_id integer,
+    jornada_id integer,
+    centro_formacion_id integer,
+    imagen_poster character varying,
+    imagen_banner character varying
+);
+
+
+ALTER TABLE public.oferta OWNER TO postgres;
+
+--
+-- TOC entry 205 (class 1259 OID 16501)
+-- Name: oferta_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.oferta_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oferta_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2888 (class 0 OID 0)
+-- Dependencies: 205
+-- Name: oferta_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.oferta_id_seq OWNED BY public.oferta.id;
+
+
+--
+-- TOC entry 199 (class 1259 OID 16408)
+-- Name: programa; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.programa (
+    nombre character varying,
+    nivel_id integer,
+    id integer NOT NULL,
+    descripcion character varying,
+    prerrequisito character varying,
+    habilidades character varying
+);
+
+
+ALTER TABLE public.programa OWNER TO postgres;
+
+--
+-- TOC entry 198 (class 1259 OID 16406)
+-- Name: programa_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.programa_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.programa_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2889 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: programa_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.programa_id_seq OWNED BY public.programa.id;
+
+
+--
+-- TOC entry 201 (class 1259 OID 16429)
+-- Name: region; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.region (
+    id integer NOT NULL,
+    nombre character varying
+);
+
+
+ALTER TABLE public.region OWNER TO postgres;
+
+--
+-- TOC entry 200 (class 1259 OID 16427)
+-- Name: region_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.region_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.region_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2890 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.region_id_seq OWNED BY public.region.id;
+
+
+--
+-- TOC entry 2713 (class 2604 OID 16477)
+-- Name: centro_formacion id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.centro_formacion ALTER COLUMN id SET DEFAULT nextval('public."centro_formación_id_seq"'::regclass);
+
+
+--
+-- TOC entry 2715 (class 2604 OID 16514)
+-- Name: jornada id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.jornada ALTER COLUMN id SET DEFAULT nextval('public.jornada_id_seq'::regclass);
+
+
+--
+-- TOC entry 2710 (class 2604 OID 16400)
+-- Name: nivel id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nivel ALTER COLUMN id SET DEFAULT nextval('public.nivel_id_seq'::regclass);
+
+
+--
+-- TOC entry 2714 (class 2604 OID 16506)
+-- Name: oferta id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oferta ALTER COLUMN id SET DEFAULT nextval('public.oferta_id_seq'::regclass);
+
+
+--
+-- TOC entry 2711 (class 2604 OID 16411)
+-- Name: programa id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.programa ALTER COLUMN id SET DEFAULT nextval('public.programa_id_seq'::regclass);
+
+
+--
+-- TOC entry 2712 (class 2604 OID 16432)
+-- Name: region id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.region ALTER COLUMN id SET DEFAULT nextval('public.region_id_seq'::regclass);
+
+
+--
+-- TOC entry 2865 (class 0 OID 16474)
+-- Dependencies: 204
+-- Data for Name: centro_formacion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.centro_formacion (id, nombre, localidad_id, descripcion) FROM stdin;
+1	CENTRO DE PROCESOS INDUSTRIALES Y CONSTRUCCIÓN​	16917001	Km. 10 Vía al Magdalena Manizales 96 8849412 8748100 8:00 a.m. a 5:00 p.m.
+2	CENTRO PARA LA FORMACIÓN CAFETERA	16917001	Km. 10 Vía al Magdalena Manizales 96 8849412 --- 8:00 a.m. a 5:00 p.m.
+4	CENTRO DE COMERCIO Y SERVICIOS	16917001	Km. 10 Vía al Magdalena Manizales 96 8849412 --- 8:00 a.m. a 5:00 p.m.
+5	CENTRO DE AUTOMATIZACI​ÓN INDUSTRIAL	16917001	Km. 10 Vía al Magdalena Manizales 96 8849412 --- Aprendices 7:00 a.m. a 9:30 p.m.\nPúblico 8:00 a.m. a 5:00 p.m. Sábado 7:00 a.m. a 5:00 p.m.
+3	CENTRO PECUARIO Y AGROEMPRESARIAL​	16917380	Calle 41 Kra. 1ª. La Dorada 96 8573904 --- 8:00 a.m. a 12:00 m. y 2:00 p.m. a 6:00 p.m.
+\.
+
+
+--
+-- TOC entry 2869 (class 0 OID 16511)
+-- Dependencies: 208
+-- Data for Name: jornada; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.jornada (id, nombre, hora_inicio, hora_fin) FROM stdin;
+1	Diurna	08:00 am	12:00 am
+2	Nocturna	06:30 pm	09:30 pm
+3	Mixta	\N	\N
+\.
+
+
+--
+-- TOC entry 2863 (class 0 OID 16462)
+-- Dependencies: 202
+-- Data for Name: localidad; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.localidad (id, latitud, longitud, departamento, municipio, pais, region_id) FROM stdin;
+16905001	6.29138890000000	-75.53611110000000	Antioquia	Medellín	Colombia	1
+16905002	5.75000000000000	-75.41666670000000	Antioquia	Abejorral	Colombia	1
+16905004	6.66666670000000	-76.08333330000000	Antioquia	Abriaquí	Colombia	1
+16905021	0.00000000000000	0.00000000000000	Antioquia	Alejandría	Colombia	1
+16905030	6.05000000000000	-75.70000000000000	Antioquia	Amagá	Colombia	1
+16905031	7.00000000000000	-74.91666670000000	Antioquia	Amalfi	Colombia	1
+16905034	5.58333330000000	-75.91666670000000	Antioquia	Andes	Colombia	1
+16905036	6.13333330000000	-75.70000000000000	Antioquia	Angelópolis	Colombia	1
+16905038	6.86666670000000	-75.33333330000000	Antioquia	Angostura	Colombia	1
+16905040	7.16666670000000	-75.08333330000000	Antioquia	Anorí	Colombia	1
+16905042	0.00000000000000	0.00000000000000	Antioquia	Antioquia	Colombia	1
+16905044	0.00000000000000	0.00000000000000	Antioquia	Anza	Colombia	1
+16905045	7.88555560000000	-76.63472220000000	Antioquia	Apartadó	Colombia	1
+16905051	8.50000000000000	-76.41666670000000	Antioquia	Arboletes	Colombia	1
+16905055	4.70000000000000	-76.13333330000000	Antioquia	Argelia	Colombia	1
+16905059	4.53388890000000	-75.68111110000000	Antioquia	Armenia	Colombia	1
+16905079	6.00000000000000	-73.55000000000000	Antioquia	Barbosa	Colombia	1
+16905086	6.66666670000000	-75.66666670000000	Antioquia	Belmira	Colombia	1
+16905088	6.33888890000000	-75.56222220000000	Antioquia	Bello	Colombia	1
+16905091	5.75000000000000	-75.96666670000000	Antioquia	Betania	Colombia	1
+16905093	7.08333330000000	-73.33333330000000	Antioquia	Betulia	Colombia	1
+16905101	4.33333330000000	-76.33333330000000	Antioquia	Bolívar	Colombia	1
+16905107	5.75000000000000	-73.83333330000000	Antioquia	Briceño	Colombia	1
+16905113	0.00000000000000	0.00000000000000	Antioquia	Buriticá	Colombia	1
+16905120	7.66666670000000	-75.33333330000000	Antioquia	Cáceres	Colombia	1
+16905125	6.45000000000000	-75.96666670000000	Antioquia	Caicedo	Colombia	1
+16905129	5.55000000000000	-73.88333330000000	Antioquia	Caldas	Colombia	1
+16905134	7.08333330000000	-75.25000000000000	Antioquia	Campamento	Colombia	1
+16905138	6.75000000000000	-76.00000000000000	Antioquia	Cañasgordas	Colombia	1
+16905142	6.41194440000000	-74.76055560000000	Antioquia	Caracolí	Colombia	1
+16905145	5.58333330000000	-75.58333330000000	Antioquia	Caramanta	Colombia	1
+16905147	7.76638890000000	-76.66111110000000	Antioquia	Carepa	Colombia	1
+16905148	6085.00000000000000	-75.33861110000000	Antioquia	Carmen de Viboral	Colombia	1
+16905150	6.80000000000000	-75.25000000000000	Antioquia	Carolina	Colombia	1
+16905154	7.91666670000000	-75.00000000000000	Antioquia	Caucasia	Colombia	1
+16905172	7.66666670000000	-76.66666670000000	Antioquia	Chigorodó	Colombia	1
+16905190	6.58333330000000	-75.08333330000000	Antioquia	Cisneros	Colombia	1
+16905197	6.00000000000000	-75.00000000000000	Antioquia	Cocorná	Colombia	1
+16905206	6.91666670000000	-72.50000000000000	Antioquia	Concepción	Colombia	1
+16905209	9.84027780000000	-74.44472220000000	Antioquia	Concordia	Colombia	1
+16905212	6.33333330000000	-75.50000000000000	Antioquia	Copacabana	Colombia	1
+16905234	7.00000000000000	-76.25000000000000	Antioquia	Dabeiba	Colombia	1
+16905237	6.50000000000000	-75.33333330000000	Antioquia	Don Matías	Colombia	1
+16905240	6.33333330000000	-75.75000000000000	Antioquia	Ebéjico	Colombia	1
+16905250	7.59416670000000	-74.81194440000000	Antioquia	El Bagre	Colombia	1
+16905264	0.00000000000000	0.00000000000000	Antioquia	Entrerrios	Colombia	1
+16905266	6.17305560000000	-75.56388890000000	Antioquia	Envigado	Colombia	1
+16905282	5.91666670000000	-75.66666670000000	Antioquia	Fredonia	Colombia	1
+16905284	6.66666670000000	-76.33333330000000	Antioquia	Frontino	Colombia	1
+16905306	6.66666670000000	-75.91666670000000	Antioquia	Giraldo	Colombia	1
+16905308	6.41666670000000	-75.45000000000000	Antioquia	Girardota	Colombia	1
+16905310	6.75000000000000	-75.83333330000000	Antioquia	Gómez Plata	Colombia	1
+16905313	3.53861110000000	-73.70055560000000	Antioquia	Granada	Colombia	1
+16905315	6.30000000000000	-73.33333330000000	Antioquia	Guadalupe	Colombia	1
+16905318	6.25000000000000	-75.41666670000000	Antioquia	Guarne	Colombia	1
+16905321	0.00000000000000	0.00000000000000	Antioquia	Guatape	Colombia	1
+16905347	6.23333330000000	-75.75000000000000	Antioquia	Heliconia	Colombia	1
+16905353	5.80250000000000	-75.91166670000000	Antioquia	Hispania	Colombia	1
+16905360	0.00000000000000	0.00000000000000	Antioquia	Itagui	Colombia	1
+16905361	7.25000000000000	-76.00000000000000	Antioquia	Ituango	Colombia	1
+16905364	5.58333330000000	-75.83333330000000	Antioquia	Jardín	Colombia	1
+16905368	6.20000000000000	-72.58333330000000	Antioquia	Jericó	Colombia	1
+16905376	6.00000000000000	-75.41666670000000	Antioquia	La Ceja	Colombia	1
+16905380	6.16666670000000	-75.66666670000000	Antioquia	La Estrella	Colombia	1
+16905390	5.75000000000000	-75.60000000000000	Antioquia	La Pintada	Colombia	1
+16905400	4.53583330000000	-76.10666670000000	Antioquia	La Unión	Colombia	1
+16905411	6.75000000000000	-75.75000000000000	Antioquia	Liborina	Colombia	1
+16905425	6.50000000000000	-74.75000000000000	Antioquia	Maceo	Colombia	1
+16905440	6.20000000000000	-75.30000000000000	Antioquia	Marinilla	Colombia	1
+16905467	5.91666670000000	-75.50000000000000	Antioquia	Montebello	Colombia	1
+16905475	6.80000000000000	-76.80000000000000	Antioquia	Murindó	Colombia	1
+16905480	7.33333330000000	-76.50000000000000	Antioquia	Mutatá	Colombia	1
+16905483	1.50000000000000	-78.00000000000000	Antioquia	Nariño	Colombia	1
+16905490	8.42388890000000	-76.79111110000000	Antioquia	Necoclí	Colombia	1
+16905495	8.09638890000000	-74.77583330000000	Antioquia	Nechí	Colombia	1
+16905501	6.66666670000000	-75.75000000000000	Antioquia	Olaya	Colombia	1
+16905541	6.25000000000000	-75.25000000000000	Antioquia	Peñol	Colombia	1
+16905543	7.00000000000000	-75.83333330000000	Antioquia	Peque	Colombia	1
+16905576	5.80000000000000	-75.85000000000000	Antioquia	Pueblorrico	Colombia	1
+16905579	0.00000000000000	0.00000000000000	Antioquia	Puerto Berrio	Colombia	1
+16905585	6.19166670000000	-74.58666670000000	Antioquia	Puerto Nare	Colombia	1
+16905591	5.87083330000000	-74.64555560000000	Antioquia	Puerto Triunfo	Colombia	1
+16905604	7.00000000000000	-74.41666670000000	Antioquia	Remedios	Colombia	1
+16905607	6.08333330000000	-75.50000000000000	Antioquia	Retiro	Colombia	1
+16905615	0.00000000000000	0.00000000000000	Antioquia	Rionegro	Colombia	1
+16905628	4.85361110000000	-73.04305560000000	Antioquia	Sabanalarga	Colombia	1
+16905631	6.15000000000000	-75.60000000000000	Antioquia	Sabaneta	Colombia	1
+16905642	6.00000000000000	-76.00000000000000	Antioquia	Salgar	Colombia	1
+16905647	6.83333330000000	-72.75000000000000	Antioquia	San Andrés	Colombia	1
+16905649	8.70000000000000	-75.70000000000000	Antioquia	San Carlos	Colombia	1
+16905652	1.17722220000000	-76.88305560000000	Antioquia	San Francisco	Colombia	1
+16905656	6.45000000000000	-75.70000000000000	Antioquia	San Jerónimo	Colombia	1
+16905658	0.00000000000000	0.00000000000000	Antioquia	San José de la Montaña	Colombia	1
+16905659	0.00000000000000	0.00000000000000	Antioquia	San Juan de Uraba	Colombia	1
+16905660	4.16666670000000	-75.08333330000000	Antioquia	San Luis	Colombia	1
+16905664	4.00000000000000	-76.16666670000000	Antioquia	San Pedro	Colombia	1
+16905665	0.00000000000000	0.00000000000000	Antioquia	San Pedro de Uraba	Colombia	1
+16905667	6.30000000000000	-75.00000000000000	Antioquia	San Rafael	Colombia	1
+16905670	6.41666670000000	-74.83333330000000	Antioquia	San Roque	Colombia	1
+16905674	6.33333330000000	-75.33333330000000	Antioquia	San Vicente	Colombia	1
+16905679	6.99277780000000	-72.91027780000000	Antioquia	Santa Bárbara	Colombia	1
+16905686	6.66666670000000	-75.41666670000000	Antioquia	Santa Rosa de Osos	Colombia	1
+16905690	6.47222220000000	-75.16472220000000	Antioquia	Santo Domingo	Colombia	1
+16905697	0.00000000000000	0.00000000000000	Antioquia	El Santuario	Colombia	1
+16905736	7.25000000000000	-74.75000000000000	Antioquia	Segovia	Colombia	1
+16905756	5.75000000000000	-75.00000000000000	Antioquia	Sonsón	Colombia	1
+16905761	6.50000000000000	-75.75000000000000	Antioquia	Sopetrán	Colombia	1
+16905789	5.66666670000000	-75.66666670000000	Antioquia	Támesis	Colombia	1
+16905790	7.58333330000000	-75.35000000000000	Antioquia	Tarazá	Colombia	1
+16905792	5.83333330000000	-75.83333330000000	Antioquia	Tarso	Colombia	1
+16905809	6.08333330000000	-75.80000000000000	Antioquia	Titiribí	Colombia	1
+16905819	7.30000000000000	-72.25000000000000	Antioquia	Toledo	Colombia	1
+16905837	8.00000000000000	-76.58333330000000	Antioquia	Turbo	Colombia	1
+16905842	6.89944440000000	-76.17416670000000	Antioquia	Uramita	Colombia	1
+16905847	6.33333330000000	-76.41666670000000	Antioquia	Urrao	Colombia	1
+16905854	7.33333330000000	-75.33333330000000	Antioquia	Valdivia	Colombia	1
+16905856	0.00000000000000	0.00000000000000	Antioquia	Valparaíso	Colombia	1
+16905858	6.77305560000000	-74.80166670000000	Antioquia	Vegachí	Colombia	1
+16905861	5.91666670000000	-75.75000000000000	Antioquia	Venecia	Colombia	1
+16905873	6.59194440000000	-76.89861110000000	Antioquia	Vigía del Fuerte	Colombia	1
+16905885	6.83333330000000	-74.75000000000000	Antioquia	Yalí	Colombia	1
+16905887	7.00000000000000	-75.50000000000000	Antioquia	Yarumal	Colombia	1
+16905890	6.66666670000000	-75.00000000000000	Antioquia	Yolombó	Colombia	1
+16905893	0.00000000000000	0.00000000000000	Antioquia	Yondó	Colombia	1
+16905895	7.75000000000000	-74.75000000000000	Antioquia	Zaragoza	Colombia	1
+16908001	10.96388890000000	-74.79638890000000	Atlántico	Barranquilla	Colombia	2
+16908078	10.80000000000000	-74.91666670000000	Atlántico	Baranoa	Colombia	2
+16908137	10.41666670000000	-74.91666670000000	Atlántico	Campo de la Cruz	Colombia	2
+16908141	3.41305560000000	-76.35111110000000	Atlántico	Candelaria	Colombia	2
+16908296	10.91666670000000	-74.83333330000000	Atlántico	Galapa	Colombia	2
+16908372	10.83333330000000	-75.03333330000000	Atlántico	Juan de Acosta	Colombia	2
+16908421	10.61416670000000	-75.14611110000000	Atlántico	Luruaco	Colombia	2
+16908433	10.85888890000000	-74.77305560000000	Atlántico	Malambo	Colombia	2
+16908436	10.50000000000000	-75.00000000000000	Atlántico	Manatí	Colombia	2
+16908520	10.74666670000000	-74.75555560000000	Atlántico	Palmar de Varela	Colombia	2
+16908549	0.00000000000000	0.00000000000000	Atlántico	Piojó	Colombia	2
+16908558	0.00000000000000	0.00000000000000	Atlántico	Polo Nuevo	Colombia	2
+16908560	10.64361110000000	-74.75444440000000	Atlántico	Ponedera	Colombia	2
+16908573	11.01666670000000	-74.88333330000000	Atlántico	Puerto Colombia	Colombia	2
+16908606	10.55000000000000	-75.13333330000000	Atlántico	Repelón	Colombia	2
+16908634	10.80000000000000	-74.75000000000000	Atlántico	Sabanagrande	Colombia	2
+16908638	4.85361110000000	-73.04305560000000	Atlántico	Sabanalarga	Colombia	2
+16908675	10.32861110000000	-74.96444440000000	Atlántico	Santa Lucía	Colombia	2
+16908685	10.75000000000000	-74.83333330000000	Atlántico	Santo Tomás	Colombia	2
+16908758	10.91722220000000	-74.76666670000000	Atlántico	Soledad	Colombia	2
+16908770	10.33333330000000	-74.91666670000000	Atlántico	Suan	Colombia	2
+16908832	10.91666670000000	-74.95000000000000	Atlántico	Tubará	Colombia	2
+16908849	0.00000000000000	0.00000000000000	Atlántico	Usiacurí	Colombia	2
+16911001	4.59935385538105	-74.08802032470703	Bogotá D.C.	Bogotá	Colombia	2
+16913001	10.39972220000000	-75.51444440000000	Bolívar	Cartagena	Colombia	2
+16913006	8.25000000000000	-74.50000000000000	Bolívar	Achí	Colombia	2
+16913030	8.79444440000000	-74.16583330000000	Bolívar	Altos del Rosario	Colombia	2
+16913042	8.46666670000000	-73.95000000000000	Bolívar	Arenal	Colombia	2
+16913052	10.16666670000000	-75.33333330000000	Bolívar	Arjona	Colombia	2
+16913062	10.24972220000000	-75.01138890000000	Bolívar	Arroyohondo	Colombia	2
+16913074	8.83333330000000	-74.16666670000000	Bolívar	Barranco de Loba	Colombia	2
+16913140	1.95972220000000	-72.65388890000000	Bolívar	Calamar	Colombia	2
+16913160	7.37916670000000	-73.91805560000000	Bolívar	Cantagallo	Colombia	2
+16913188	9.41666670000000	-74.73333330000000	Bolívar	Cicuco	Colombia	2
+16913212	0.78333330000000	-77.33333330000000	Bolívar	Córdoba	Colombia	2
+16913222	10.58916670000000	-75.33416670000000	Bolívar	Clemencia	Colombia	2
+16913244	0.00000000000000	0.00000000000000	Bolívar	Carmen de Bolívar	Colombia	2
+16913248	10.08333330000000	-74.91666670000000	Bolívar	El Guamo	Colombia	2
+16913268	6.55000000000000	-72.83333330000000	Bolívar	El Peñon	Colombia	2
+16913300	8.95861110000000	-74.08083330000000	Bolívar	Hatillo de Loba	Colombia	2
+16913430	0.00000000000000	0.00000000000000	Bolívar	Magangue	Colombia	2
+16913433	10.16666670000000	-75.16666670000000	Bolívar	Mahates	Colombia	2
+16913440	9.08333330000000	-74.20000000000000	Bolívar	Margarita	Colombia	2
+16913442	10.00000000000000	-75.33333330000000	Bolívar	María la Baja	Colombia	2
+16913458	8.29944440000000	-74.47555560000000	Bolívar	Montecristo	Colombia	2
+16913468	0.00000000000000	0.00000000000000	Bolívar	Mompos	Colombia	2
+16913473	2.80000000000000	-76.66666670000000	Bolívar	Morales	Colombia	2
+16913490	8.53333330000000	-74.03333330000000	Bolívar	Norosí	Colombia	2
+16913549	8.91722220000000	-74.46638890000000	Bolívar	Pinillos	Colombia	2
+16913580	8.66666670000000	-73.83333330000000	Bolívar	Regidor	Colombia	2
+16913600	8.59000000000000	-73.84361110000000	Bolívar	Río Viejo	Colombia	2
+16913620	0.00000000000000	0.00000000000000	Bolívar	San Cristóbal	Colombia	2
+16913647	10.39833330000000	-75.15111110000000	Bolívar	San Estanislao	Colombia	2
+16913650	9.08333330000000	-74.33333330000000	Bolívar	San Fernando	Colombia	2
+16913654	9.83333330000000	-75.08333330000000	Bolívar	San Jacinto	Colombia	2
+16913655	9.83166670000000	-75.12638890000000	Bolívar	San Jacinto del Cauca	Colombia	2
+16913657	0.00000000000000	0.00000000000000	Bolívar	San Juan Nepomuceno	Colombia	2
+16913667	0.00000000000000	0.00000000000000	Bolívar	San Martín Loba	Colombia	2
+16913670	1.66666670000000	-76.91666670000000	Bolívar	San Pablo	Colombia	2
+16913673	0.00000000000000	0.00000000000000	Bolívar	Sta Catalina	Colombia	2
+16913683	1.50000000000000	-76.50000000000000	Bolívar	Santa Rosa	Colombia	2
+16913688	0.00000000000000	0.00000000000000	Bolívar	Sta Rosa Sur	Colombia	2
+16913744	0.00000000000000	0.00000000000000	Bolívar	Simiti	Colombia	2
+16913760	10.33333330000000	-75.10000000000000	Bolívar	Soplaviento	Colombia	2
+16913780	9.30694440000000	-74.56861110000000	Bolívar	Talaigua Nuevo	Colombia	2
+16913810	8.55972220000000	-74.26694440000000	Bolívar	Tiquisio (Puerto Rico)	Colombia	2
+16913836	10.35000000000000	-75.33333330000000	Bolívar	Turbaco	Colombia	2
+16913838	10.25000000000000	-75.41666670000000	Bolívar	Turbaná	Colombia	2
+16913873	5.28333330000000	-71.96666670000000	Bolívar	Villanueva	Colombia	2
+16913894	9.75000000000000	-74.83333330000000	Bolívar	Zambrano	Colombia	2
+16915001	5.53527780000000	-73.36777780000000	Boyacá	Tunja	Colombia	1
+16915022	4.91666670000000	-73.33333330000000	Boyacá	Almeida	Colombia	1
+16915047	5.51972220000000	-72.88750000000000	Boyacá	Aquitania	Colombia	1
+16915051	5.80000000000000	-73.38333330000000	Boyacá	Arcabuco	Colombia	1
+16915087	1.59750000000000	-77.01750000000000	Boyacá	Belén	Colombia	1
+16915090	5.33333330000000	-73.00000000000000	Boyacá	Berbeo	Colombia	1
+16915092	0.00000000000000	0.00000000000000	Boyacá	Betéitiva	Colombia	1
+16915097	6.41666670000000	-72.58333330000000	Boyacá	Boavita	Colombia	1
+16915104	5.50000000000000	-72.50000000000000	Boyacá	Boyacá	Colombia	1
+16915106	5.75000000000000	-73.83333330000000	Boyacá	Briceño	Colombia	1
+16915109	9.32222220000000	-74.97722220000000	Boyacá	Buenavista	Colombia	1
+16915114	5.91666670000000	-72.85000000000000	Boyacá	Busbanza	Colombia	1
+16915131	5.55000000000000	-73.88333330000000	Boyacá	Caldas	Colombia	1
+16915135	5.08333330000000	-73.00000000000000	Boyacá	Campohermoso	Colombia	1
+16915162	6.00000000000000	-72.91666670000000	Boyacá	Cerinza	Colombia	1
+16915172	5.25000000000000	-73.33333330000000	Boyacá	Chinavita	Colombia	1
+16915176	5.63333330000000	-73.75000000000000	Boyacá	Chiquinquirá	Colombia	1
+16915180	6.75000000000000	-72.33333330000000	Boyacá	Chiscas	Colombia	1
+16915183	6.16666670000000	-72.41666670000000	Boyacá	Chita	Colombia	1
+16915185	6.08333330000000	-73.36666670000000	Boyacá	Chitaraque	Colombia	1
+16915187	5.53333330000000	-73.26666670000000	Boyacá	Chivatá	Colombia	1
+16915189	0.00000000000000	0.00000000000000	Boyacá	Ciénega	Colombia	1
+16915204	5.75000000000000	-73.25000000000000	Boyacá	Cómbita	Colombia	1
+16915212	5.43333330000000	-74.03333330000000	Boyacá	Coper	Colombia	1
+16915215	5.86666670000000	-72.83333330000000	Boyacá	Corrales	Colombia	1
+16915218	6.58333330000000	-72.70000000000000	Boyacá	Covarachía	Colombia	1
+16915223	7.04111110000000	-72.06083330000000	Boyacá	Cubará	Colombia	1
+16915224	5.53333330000000	-73.46666670000000	Boyacá	Cucaita	Colombia	1
+16915226	0.00000000000000	0.00000000000000	Boyacá	Cuítiva	Colombia	1
+16915232	5.60833330000000	-73.48861110000000	Boyacá	Chíquiza	Colombia	1
+16915236	0.00000000000000	0.00000000000000	Boyacá	Chivor	Colombia	1
+16915238	5.82694440000000	-73.02027780000000	Boyacá	Duitama	Colombia	1
+16915244	6.41666670000000	-72.41666670000000	Boyacá	El Cocuy	Colombia	1
+16915248	6.58333330000000	-72.41666670000000	Boyacá	El Espino	Colombia	1
+16915272	5.75000000000000	-72.96666670000000	Boyacá	Firavitoba	Colombia	1
+16915276	5.91666670000000	-72.91666670000000	Boyacá	Floresta	Colombia	1
+16915293	5.75000000000000	-73.50000000000000	Boyacá	Gachantivá	Colombia	1
+16915296	0.00000000000000	0.00000000000000	Boyacá	Gameza	Colombia	1
+16915299	5.13333330000000	-73.30000000000000	Boyacá	Garagoa	Colombia	1
+16915317	6.50000000000000	-72.50000000000000	Boyacá	Guacamayas	Colombia	1
+16915322	5.08333330000000	-73.50000000000000	Boyacá	Guateque	Colombia	1
+16915325	5.00000000000000	-73.50000000000000	Boyacá	Guayatá	Colombia	1
+16915332	0.00000000000000	0.00000000000000	Boyacá	Guican	Colombia	1
+16915362	0.00000000000000	0.00000000000000	Boyacá	Iza	Colombia	1
+16915367	5.38888890000000	-73.36805560000000	Boyacá	Jenesano	Colombia	1
+16915368	6.20000000000000	-72.58333330000000	Boyacá	Jericó	Colombia	1
+16915377	5.58333330000000	-72.58333330000000	Boyacá	Labranzagrande	Colombia	1
+16915380	5.15000000000000	-73.45000000000000	Boyacá	La Capilla	Colombia	1
+16915401	4.52388890000000	-76.04111110000000	Boyacá	La Victoria	Colombia	1
+16915403	6.33333330000000	-72.50000000000000	Boyacá	La Uvita	Colombia	1
+16915407	0.00000000000000	0.00000000000000	Boyacá	Villa de Leyva	Colombia	1
+16915425	4.91666670000000	-73.25000000000000	Boyacá	Macanal	Colombia	1
+16915442	5.58333330000000	-74.00000000000000	Boyacá	Maripí	Colombia	1
+16915455	1.33666670000000	-71.95111110000000	Boyacá	Miraflores	Colombia	1
+16915464	5.83333330000000	-72.66666670000000	Boyacá	Mongua	Colombia	1
+16915466	5.75000000000000	-72.83333330000000	Boyacá	Monguí	Colombia	1
+16915469	5.91666670000000	-73.50000000000000	Boyacá	Moniquirá	Colombia	1
+16915476	5.57972220000000	-73.37138890000000	Boyacá	Motavita	Colombia	1
+16915480	5.51666670000000	-74.11666670000000	Boyacá	Muzo	Colombia	1
+16915491	5.83333330000000	-72.91666670000000	Boyacá	Nobsa	Colombia	1
+16915494	5.41666670000000	-73.41666670000000	Boyacá	Nuevo Colón	Colombia	1
+16915500	5.60000000000000	-73.31666670000000	Boyacá	Oicatá	Colombia	1
+16915507	5.75000000000000	-74.25000000000000	Boyacá	Otanche	Colombia	1
+16915511	5.13333330000000	-73.40000000000000	Boyacá	Pachavita	Colombia	1
+16915514	5.10444440000000	-73.05555560000000	Boyacá	Páez	Colombia	1
+16915516	5.83333330000000	-73.10000000000000	Boyacá	Paipa	Colombia	1
+16915518	5.41666670000000	-72.66666670000000	Boyacá	Pajarito	Colombia	1
+16915522	6.50000000000000	-72.41666670000000	Boyacá	Panqueba	Colombia	1
+16915531	5.75000000000000	-73.91666670000000	Boyacá	Pauna	Colombia	1
+16915533	5.66666670000000	-72.38166670000000	Boyacá	Paya	Colombia	1
+16915537	6.08333330000000	-72.75000000000000	Boyacá	Paz de Río	Colombia	1
+16915542	5.58333330000000	-73.05000000000000	Boyacá	Pesca	Colombia	1
+16915550	0.00000000000000	0.00000000000000	Boyacá	Pisba	Colombia	1
+16915572	5.97805560000000	-74.58972220000000	Boyacá	Puerto Boyacá	Colombia	1
+16915580	0.00000000000000	0.00000000000000	Boyacá	Quípama	Colombia	1
+16915599	5.41666670000000	-73.33333330000000	Boyacá	Ramiriquí	Colombia	1
+16915600	5.61666670000000	-73.63333330000000	Boyacá	Ráquira	Colombia	1
+16915621	5.41666670000000	-73.16666670000000	Boyacá	Rondón	Colombia	1
+16915632	5.75000000000000	-73.70000000000000	Boyacá	Saboyá	Colombia	1
+16915638	5.66666670000000	-73.50000000000000	Boyacá	Sáchica	Colombia	1
+16915646	5.50000000000000	-73.50000000000000	Boyacá	Samacá	Colombia	1
+16915660	5.21666670000000	-73.13333330000000	Boyacá	San Eduardo	Colombia	1
+16915664	6.08333330000000	-73.46666670000000	Boyacá	San José de Pare	Colombia	1
+16915667	0.00000000000000	0.00000000000000	Boyacá	San Luis de Gaceno	Colombia	1
+16915673	6.50000000000000	-72.50000000000000	Boyacá	San Mateo	Colombia	1
+16915676	5.55000000000000	-73.75000000000000	Boyacá	San Miguel de Sema	Colombia	1
+16915681	5.75000000000000	-74.08333330000000	Boyacá	San Pablo de Borbur	Colombia	1
+16915686	6.05722220000000	-73.48222220000000	Boyacá	Santana	Colombia	1
+16915690	3.00000000000000	-75.70000000000000	Boyacá	Santa María	Colombia	1
+16915693	5.91666670000000	-73.00000000000000	Boyacá	Santa Rosa de Viterbo	Colombia	1
+16915696	5.75000000000000	-73.58333330000000	Boyacá	Santa Sofía	Colombia	1
+16915720	6.16666670000000	-72.66666670000000	Boyacá	Sativanorte	Colombia	1
+16915723	6.13333330000000	-72.66666670000000	Boyacá	Sativasur	Colombia	1
+16915740	5.58333330000000	-73.16666670000000	Boyacá	Siachoque	Colombia	1
+16915753	0.00000000000000	0.00000000000000	Boyacá	Soata	Colombia	1
+16915755	0.00000000000000	0.00000000000000	Boyacá	Socota	Colombia	1
+16915757	6.00000000000000	-72.66666670000000	Boyacá	Socha	Colombia	1
+16915759	5.72055560000000	-72.92972220000000	Boyacá	Sogamoso	Colombia	1
+16915761	4.98777780000000	-73.43611110000000	Boyacá	Somondoco	Colombia	1
+16915762	5.56666670000000	-73.43333330000000	Boyacá	Sora	Colombia	1
+16915763	5.83333330000000	-73.25000000000000	Boyacá	Sotaquirá	Colombia	1
+16915764	5.50000000000000	-73.31666670000000	Boyacá	Soracá	Colombia	1
+16915774	6.26666670000000	-72.66666670000000	Boyacá	Susacón	Colombia	1
+16915776	5.66666670000000	-73.58333330000000	Boyacá	Sutamarchán	Colombia	1
+16915778	5.01666670000000	-73.45000000000000	Boyacá	Sutatenza	Colombia	1
+16915790	5.91666670000000	-72.70000000000000	Boyacá	Tasco	Colombia	1
+16915798	5.15000000000000	-73.45000000000000	Boyacá	Tenza	Colombia	1
+16915804	5.33333330000000	-73.38333330000000	Boyacá	Tibaná	Colombia	1
+16915806	5.83333330000000	-72.96666670000000	Boyacá	Tibasosa	Colombia	1
+16915808	5.63333330000000	-73.65000000000000	Boyacá	Tinjacá	Colombia	1
+16915810	6.42333330000000	-72.69527780000000	Boyacá	Tipacoque	Colombia	1
+16915814	5.66666670000000	-73.16666670000000	Boyacá	Toca	Colombia	1
+16915816	0.00000000000000	0.00000000000000	Boyacá	Togui	Colombia	1
+16915820	0.00000000000000	0.00000000000000	Boyacá	Tópaga	Colombia	1
+16915822	5.50000000000000	-73.00000000000000	Boyacá	Tota	Colombia	1
+16915832	0.00000000000000	0.00000000000000	Boyacá	Tununguá	Colombia	1
+16915835	5.33333330000000	-73.50000000000000	Boyacá	Turmequé	Colombia	1
+16915837	5.75000000000000	-73.16666670000000	Boyacá	Tuta	Colombia	1
+16915839	0.00000000000000	0.00000000000000	Boyacá	Tutazá	Colombia	1
+16915842	0.00000000000000	0.00000000000000	Boyacá	Umbita	Colombia	1
+16915861	5.41666670000000	-73.50000000000000	Boyacá	Ventaquemada	Colombia	1
+16915879	5.50000000000000	-73.25000000000000	Boyacá	Viracachá	Colombia	1
+16915897	0.00000000000000	0.00000000000000	Boyacá	Zetaquira	Colombia	1
+16917001	5.07000000000000	-75.52055560000000	Caldas	Manizales	Colombia	1
+16917013	5.63333330000000	-75.41666670000000	Caldas	Aguadas	Colombia	1
+16917042	5.25000000000000	-75.75000000000000	Caldas	Anserma	Colombia	1
+16917050	5.30000000000000	-75.45000000000000	Caldas	Aranzazu	Colombia	1
+16917088	5.00000000000000	-75.83333330000000	Caldas	Belalcázar	Colombia	1
+16917174	5.00000000000000	-75.66666670000000	Caldas	Chinchiná	Colombia	1
+16917272	5.30000000000000	-75.60000000000000	Caldas	Filadelfia	Colombia	1
+16917380	5.53333330000000	-74.70000000000000	Caldas	La Dorada	Colombia	1
+16917388	5.40194440000000	-75.88472220000000	Caldas	La Merced	Colombia	1
+16917433	5.25000000000000	-75.16666670000000	Caldas	Manzanares	Colombia	1
+16917442	5.50000000000000	-75.58333330000000	Caldas	Marmato	Colombia	1
+16917444	5.33333330000000	-75.00000000000000	Caldas	Marquetalia	Colombia	1
+16917446	5.33333330000000	-75.25000000000000	Caldas	Marulanda	Colombia	1
+16917486	5.16666670000000	-75.50000000000000	Caldas	Neira	Colombia	1
+16917495	5.56666670000000	-74.88333330000000	Caldas	Norcasia	Colombia	1
+16917513	5.50000000000000	-75.50000000000000	Caldas	Pácora	Colombia	1
+16917524	1.75000000000000	-76.06666670000000	Caldas	Palestina	Colombia	1
+16917541	5.50000000000000	-75.08333330000000	Caldas	Pensilvania	Colombia	1
+16917614	0.00000000000000	0.00000000000000	Caldas	Riosucio	Colombia	1
+16917616	5.16666670000000	-75.75000000000000	Caldas	Risaralda	Colombia	1
+16917653	10.50000000000000	-74.70000000000000	Caldas	Salamina	Colombia	1
+16917662	5.58333330000000	-74.91666670000000	Caldas	Samaná	Colombia	1
+16917665	5.08583330000000	-75.78833330000000	Caldas	San José	Colombia	1
+16917777	5.50000000000000	-75.63333330000000	Caldas	Supía	Colombia	1
+16917867	0.00000000000000	0.00000000000000	Caldas	Victoria	Colombia	1
+16917873	5.00000000000000	-75.50000000000000	Caldas	Villamaría	Colombia	1
+16917877	5.08333330000000	-75.86666670000000	Caldas	Viterbo	Colombia	1
+16918001	1.69444440000000	-77.07583330000000	Caquetá	Florencia	Colombia	3
+16918029	5.83333330000000	-73.75000000000000	Caquetá	Albania	Colombia	3
+16918094	0.00000000000000	0.00000000000000	Caquetá	Belén de los Andaquies	Colombia	3
+16918150	1.35000000000000	-74.84000000000000	Caquetá	Cartagena del Chairá	Colombia	3
+16918205	1.03527780000000	-75.92472220000000	Caquetá	Curillo	Colombia	3
+16918247	1.67944440000000	-75.27916670000000	Caquetá	El Doncello	Colombia	3
+16918256	1564.00000000000000	-75332.00000000000000	Caquetá	El Paujil	Colombia	3
+16918410	1.58333330000000	-75.25000000000000	Caquetá	La Montañita	Colombia	3
+474	0.00000000000000	0.00000000000000	\N	\N	Marruecos	6
+16918460	1.34833330000000	-75.51166670000000	Caquetá	Milán	Colombia	3
+16918479	1.48750000000000	-75725.00000000000000	Caquetá	Morelia	Colombia	3
+16918592	2.93833330000000	-73.20833330000000	Caquetá	Puerto Rico	Colombia	3
+16918610	1.36111110000000	-75.98833330000000	Caquetá	San José del Fragua	Colombia	3
+16918753	2.15250000000000	-74.78888890000000	Caquetá	San Vicente del Caguán	Colombia	3
+16918756	0.71472220000000	-75.24861110000000	Caquetá	Solano	Colombia	3
+16918785	0.90000000000000	-75623.00000000000000	Caquetá	Solita	Colombia	3
+16918860	0.00000000000000	0.00000000000000	Caquetá	Valparaíso	Colombia	3
+16919001	3.27750000000000	-75.62138890000000	Cauca	Popayán	Colombia	4
+16919022	1.91666670000000	-76.83333330000000	Cauca	Almaguer	Colombia	4
+16919050	4.70000000000000	-76.13333330000000	Cauca	Argelia	Colombia	4
+16919075	4.91666670000000	-75.95000000000000	Cauca	Balboa	Colombia	4
+16919100	4.33333330000000	-76.33333330000000	Cauca	Bolívar	Colombia	4
+16919110	2.91666670000000	-76.66666670000000	Cauca	Buenos Aires	Colombia	4
+16919130	2.66666670000000	-76.66666670000000	Cauca	Cajibío	Colombia	4
+16919137	2.83333330000000	-76.41666670000000	Cauca	Caldono	Colombia	4
+16919142	3.08333330000000	-76.33333330000000	Cauca	Caloto	Colombia	4
+16919212	3.16666670000000	-76.20000000000000	Cauca	Corinto	Colombia	4
+16919256	1.40000000000000	-77.33333330000000	Cauca	El Tambo	Colombia	4
+16919290	1.69444440000000	-77.07583330000000	Cauca	Florencia	Colombia	4
+16919300	3.13333330000000	-76.38333330000000	Cauca	Guachené	Colombia	4
+16919318	0.00000000000000	0.00000000000000	Cauca	Guapi	Colombia	4
+16919355	2.66666670000000	-76.08333330000000	Cauca	Inzá	Colombia	4
+16919364	2.85000000000000	-76.31666670000000	Cauca	Jambaló	Colombia	4
+16919392	2.25000000000000	-76.83333330000000	Cauca	La Sierra	Colombia	4
+16919397	5.00000000000000	-74.35000000000000	Cauca	La Vega	Colombia	4
+16919418	0.00000000000000	0.00000000000000	Cauca	López de Micay	Colombia	4
+16919450	1.75000000000000	-77.16666670000000	Cauca	Mercaderes	Colombia	4
+16919455	3.25000000000000	-76.25000000000000	Cauca	Miranda	Colombia	4
+16919473	2.80000000000000	-76.66666670000000	Cauca	Morales	Colombia	4
+16919513	3.06666670000000	-76.31666670000000	Cauca	Padilla	Colombia	4
+16919517	5.10444440000000	-73.05555560000000	Cauca	Páez	Colombia	4
+16919532	0.00000000000000	0.00000000000000	Cauca	Patía	Colombia	4
+16919533	7.78333330000000	-75.20000000000000	Cauca	Piamonte	Colombia	4
+16919548	0.00000000000000	0.00000000000000	Cauca	Piéndamo	Colombia	4
+16919573	3.25000000000000	-76.41666670000000	Cauca	Puerto Tejada	Colombia	4
+16919585	0.00000000000000	0.00000000000000	Cauca	Puracé	Colombia	4
+16919622	2.33333330000000	-76.75000000000000	Cauca	Rosas	Colombia	4
+16919693	1.91666670000000	-76.66666670000000	Cauca	San Sebastián	Colombia	4
+16919698	3.01305560000000	-76.48666670000000	Cauca	Santander de Quilichao	Colombia	4
+16919701	1.50000000000000	-76.50000000000000	Cauca	Santa Rosa	Colombia	4
+16919743	2.75000000000000	-76.33333330000000	Cauca	Silvia	Colombia	4
+16919760	0.00000000000000	0.00000000000000	Cauca	Sotara	Colombia	4
+16919780	4.08333330000000	-74.78333330000000	Cauca	Suárez	Colombia	4
+16919785	9.00000000000000	-75.00000000000000	Cauca	Sucre	Colombia	4
+16919807	2.41666670000000	-76.75000000000000	Cauca	Timbío	Colombia	4
+16919809	2.75000000000000	-77.58333330000000	Cauca	Timbiquí	Colombia	4
+16919821	0.00000000000000	0.00000000000000	Cauca	Toribio	Colombia	4
+16919824	2.58333330000000	-76.33333330000000	Cauca	Totoró	Colombia	4
+16919845	2.51361110000000	-76.84777780000000	Cauca	Villa Rica	Colombia	4
+16920001	10.47694440000000	-73.25055560000000	Cesar	Valledupar	Colombia	2
+16920011	8.33333330000000	-73.58333330000000	Cesar	Aguachica	Colombia	2
+16920013	9.91666670000000	-73.25000000000000	Cesar	Agustín Codazzi	Colombia	2
+16920032	9.50111110000000	-73.98027780000000	Cesar	Astrea	Colombia	2
+16920045	0.00000000000000	0.00000000000000	Cesar	Becerril	Colombia	2
+16920060	9.97611110000000	-73.89027780000000	Cesar	Bosconia	Colombia	2
+16920175	9.25777780000000	-73.81777780000000	Cesar	Chimichagua	Colombia	2
+16920178	9.50000000000000	-73.41666670000000	Cesar	Chiriguaná	Colombia	2
+16920228	9.20416670000000	-73.54861110000000	Cesar	Curumaní	Colombia	2
+16920238	10.15055560000000	-73965.00000000000000	Cesar	El Copey	Colombia	2
+16920250	9.66222220000000	-73.75194440000000	Cesar	El Paso	Colombia	2
+16920295	8.33333330000000	-73.66666670000000	Cesar	Gamarra	Colombia	2
+16920310	0.00000000000000	0.00000000000000	Cesar	González	Colombia	2
+16920383	8.58333330000000	-73.58333330000000	Cesar	La Gloria	Colombia	2
+16920400	9.56416670000000	-73.33750000000000	Cesar	La Jagua de Ibirico	Colombia	2
+16920443	0.00000000000000	0.00000000000000	Cesar	Manaure Balcón Cesar	Colombia	2
+16920517	8.96611110000000	-73.63166670000000	Cesar	Pailitas	Colombia	2
+16920550	8.69166670000000	-73.66638890000000	Cesar	Pelaya	Colombia	2
+16920570	10.36666670000000	-73.63333330000000	Cesar	Pueblo Bello	Colombia	2
+16920614	0.00000000000000	0.00000000000000	Cesar	Río de Oro	Colombia	2
+16920621	6.25000000000000	-73.46666670000000	Cesar	La Paz	Colombia	2
+16920710	7.75250000000000	-73.38916670000000	Cesar	San Alberto	Colombia	2
+16920750	10.33750000000000	-73.18250000000000	Cesar	San Diego	Colombia	2
+16920770	3.70000000000000	-73.70000000000000	Cesar	San Martín	Colombia	2
+16920787	8.83333330000000	-73.58333330000000	Cesar	Tamalameque	Colombia	2
+16923001	0.00000000000000	0.00000000000000	Córdoba	Montería	Colombia	2
+16923068	8.25000000000000	-75.25000000000000	Córdoba	Ayapel	Colombia	2
+16923079	9.32222220000000	-74.97722220000000	Córdoba	Buenavista	Colombia	2
+16923090	8.67611110000000	-76.20416670000000	Córdoba	Canalete	Colombia	2
+16923162	8.91666670000000	-76.00000000000000	Córdoba	Cereté	Colombia	2
+16923168	9.08333330000000	-75.63333330000000	Córdoba	Chimá	Colombia	2
+16923182	9.08333330000000	-75.33333330000000	Córdoba	Chinú	Colombia	2
+16923189	8.83333330000000	-75.66666670000000	Córdoba	Ciénaga de Oro	Colombia	2
+16923300	9.05000000000000	-75.80000000000000	Córdoba	Cotorra	Colombia	2
+16923350	0.00000000000000	0.00000000000000	Córdoba	La Apartada	Colombia	2
+16923417	9.16666670000000	-75.83333330000000	Córdoba	Lorica	Colombia	2
+16923419	8.90000000000000	-76.35972220000000	Córdoba	Los Córdobas	Colombia	2
+16923464	9.23722220000000	-75.67805560000000	Córdoba	Momil	Colombia	2
+16923466	7.75000000000000	-75.66666670000000	Córdoba	Montelíbano	Colombia	2
+16923500	8.25000000000000	-76.05000000000000	Córdoba	Moñitos	Colombia	2
+16923555	8.33333330000000	-75.58333330000000	Córdoba	Planeta Rica	Colombia	2
+16923570	8.23333330000000	-74.96666670000000	Córdoba	Pueblo Nuevo	Colombia	2
+580	0.00000000000000	0.00000000000000	\N	\N	Panama	6
+16923574	8.95000000000000	-76.25000000000000	Córdoba	Puerto Escondido	Colombia	2
+16923580	4.60000000000000	-74.11666670000000	Córdoba	Puerto Libertador	Colombia	2
+16923586	9.30000000000000	-75.66666670000000	Córdoba	Purísima	Colombia	2
+16923660	8.83333330000000	-75.41666670000000	Córdoba	Sahagún	Colombia	2
+16923670	9.16666670000000	-75.55000000000000	Córdoba	San Andrés Sotavento	Colombia	2
+16923672	9.35000000000000	-75.75000000000000	Córdoba	San Antero	Colombia	2
+16923675	9.25000000000000	-76.00000000000000	Córdoba	San Bernardo del Viento	Colombia	2
+16923678	8.70000000000000	-75.70000000000000	Córdoba	San Carlos	Colombia	2
+16923682	0.00000000000000	0.00000000000000	Córdoba	San Jose de Ure	Colombia	2
+16923686	9.00000000000000	-75.91666670000000	Córdoba	San Pelayo	Colombia	2
+16923807	8.17361110000000	-76.05916670000000	Córdoba	Tierralta	Colombia	2
+16923815	9.18333330000000	-75.55000000000000	Córdoba	Tuchín	Colombia	2
+16923855	8.30000000000000	-76.16666670000000	Córdoba	Valencia	Colombia	2
+16925001	4.41666670000000	-74.66666670000000	Cundinamarca	Agua de Dios	Colombia	1
+16925019	4.91666670000000	-74.45000000000000	Cundinamarca	Albán	Colombia	1
+16925035	4.61666670000000	-74.55000000000000	Cundinamarca	Anapoima	Colombia	1
+16925040	4.83333330000000	-74.50000000000000	Cundinamarca	Anolaima	Colombia	1
+16925053	4.30000000000000	-74.58333330000000	Cundinamarca	Arbeláez	Colombia	1
+16925086	4.80000000000000	-74.75000000000000	Cundinamarca	Beltrán	Colombia	1
+16925095	4.91666670000000	-74.55000000000000	Cundinamarca	Bituima	Colombia	1
+16925099	4.75000000000000	-74.33333330000000	Cundinamarca	Bojacá	Colombia	1
+16925120	6.63333330000000	-73.20000000000000	Cundinamarca	Cabrera	Colombia	1
+16925123	5.26666670000000	-74.56666670000000	Cundinamarca	Cachipay	Colombia	1
+16925126	5.00000000000000	-74.05000000000000	Cundinamarca	Cajicá	Colombia	1
+16925148	5.41666670000000	-74.58333330000000	Cundinamarca	Caparrapí	Colombia	1
+16925151	0.00000000000000	0.00000000000000	Cundinamarca	Caqueza	Colombia	1
+16925154	5.35027780000000	-73.90527780000000	Cundinamarca	Carmen de Carupa	Colombia	1
+16925168	5.00000000000000	-74.65000000000000	Cundinamarca	Chaguaní	Colombia	1
+16925175	4.91666670000000	-74.05000000000000	Cundinamarca	Chía	Colombia	1
+16925178	4.50000000000000	-74.08333330000000	Cundinamarca	Chipaque	Colombia	1
+16925181	4.58333330000000	-73.91666670000000	Cundinamarca	Choachí	Colombia	1
+16925183	5.16666670000000	-73.66666670000000	Cundinamarca	Chocontá	Colombia	1
+16925200	5.15000000000000	-73.96666670000000	Cundinamarca	Cogua	Colombia	1
+16925214	4.83333330000000	-74.13333330000000	Cundinamarca	Cota	Colombia	1
+16925224	5.25000000000000	-73.75000000000000	Cundinamarca	Cucunubá	Colombia	1
+16925245	4.58333330000000	-74.45000000000000	Cundinamarca	El Colegio	Colombia	1
+16925258	6.55000000000000	-72.83333330000000	Cundinamarca	El Peñon	Colombia	1
+16925260	4.85000000000000	-74.26666670000000	Cundinamarca	El Rosal	Colombia	1
+16925269	4.81666670000000	-74.36666670000000	Cundinamarca	Facatativá	Colombia	1
+16925279	0.00000000000000	0.00000000000000	Cundinamarca	Fomeque	Colombia	1
+16925281	4.33333330000000	-73.91666670000000	Cundinamarca	Fosca	Colombia	1
+16925286	4.78333330000000	-74.20000000000000	Cundinamarca	Funza	Colombia	1
+16925288	5.41666670000000	-73.80000000000000	Cundinamarca	Fúquene	Colombia	1
+16925290	4.41666670000000	-74.40000000000000	Cundinamarca	Fusagasugá	Colombia	1
+16925293	0.00000000000000	0.00000000000000	Cundinamarca	Gachala	Colombia	1
+16925295	5.08333330000000	-73.88333330000000	Cundinamarca	Gachancipá	Colombia	1
+16925297	4.91666670000000	-73.66666670000000	Cundinamarca	Gachetá	Colombia	1
+16925299	4.75000000000000	-73.60000000000000	Cundinamarca	Gama	Colombia	1
+16925307	4.30305560000000	-74.80083330000000	Cundinamarca	Girardot	Colombia	1
+16925312	3.53861110000000	-73.70055560000000	Cundinamarca	Granada	Colombia	1
+16925317	5.41666670000000	-73.70000000000000	Cundinamarca	Guachetá	Colombia	1
+16925320	5.25000000000000	-74.66666670000000	Cundinamarca	Guaduas	Colombia	1
+16925322	4.83333330000000	-73.83333330000000	Cundinamarca	Guasca	Colombia	1
+16925324	4.58333330000000	-74.80000000000000	Cundinamarca	Guataquí	Colombia	1
+16925326	4.96666670000000	-73.75000000000000	Cundinamarca	Guatavita	Colombia	1
+16925328	4.88138890000000	-74.47027780000000	Cundinamarca	Guayabal de Siquima	Colombia	1
+16925335	4.21638890000000	-73.81333330000000	Cundinamarca	Guayabetal	Colombia	1
+16925339	0.00000000000000	0.00000000000000	Cundinamarca	Gutiérreza	Colombia	1
+16925368	4.66666670000000	-74.66666670000000	Cundinamarca	Jerusalén	Colombia	1
+16925372	4.75000000000000	-73.66666670000000	Cundinamarca	Junín	Colombia	1
+16925377	4.75000000000000	-73.91666670000000	Cundinamarca	La Calera	Colombia	1
+16925386	4.66666670000000	-74.50000000000000	Cundinamarca	La Mesa	Colombia	1
+16925394	5.41666670000000	-74.41666670000000	Cundinamarca	La Palma	Colombia	1
+16925398	5.25000000000000	-74.41666670000000	Cundinamarca	La Peña	Colombia	1
+16925402	5.00000000000000	-74.35000000000000	Cundinamarca	La Vega	Colombia	1
+16925407	5.33333330000000	-73.66666670000000	Cundinamarca	Lenguazaque	Colombia	1
+16925426	0.00000000000000	0.00000000000000	Cundinamarca	Macheta	Colombia	1
+16925430	4.83333330000000	-74.30000000000000	Cundinamarca	Madrid	Colombia	1
+16925436	5.08333330000000	-73.58333330000000	Cundinamarca	Manta	Colombia	1
+16925438	4.50000000000000	-73.33333330000000	Cundinamarca	Medina	Colombia	1
+16925473	2.35000000000000	-78.35000000000000	Cundinamarca	Mosquera	Colombia	1
+16925483	1.50000000000000	-78.00000000000000	Cundinamarca	Nariño	Colombia	1
+16925486	5.13333330000000	-73.90000000000000	Cundinamarca	Nemocón	Colombia	1
+16925488	4.33333330000000	-74.58333330000000	Cundinamarca	Nilo	Colombia	1
+16925489	5.20000000000000	-74.41666670000000	Cundinamarca	Nimaima	Colombia	1
+16925491	5.11666670000000	-74.41666670000000	Cundinamarca	Nocaima	Colombia	1
+16925506	0.00000000000000	0.00000000000000	Cundinamarca	Venecia Ospina Pérez	Colombia	1
+16925513	5.25000000000000	-74.16666670000000	Cundinamarca	Pacho	Colombia	1
+16925518	5.41666670000000	-74.16666670000000	Cundinamarca	Paime	Colombia	1
+16925524	4.25000000000000	-74.50000000000000	Cundinamarca	Pandi	Colombia	1
+16925530	4.37305560000000	-73.22138890000000	Cundinamarca	Paratebueno	Colombia	1
+16925535	4.33333330000000	-74.28333330000000	Cundinamarca	Pasca	Colombia	1
+16925572	5.50000000000000	-74.58333330000000	Cundinamarca	Puerto Salgar	Colombia	1
+16925580	4.75000000000000	-74.66666670000000	Cundinamarca	Pulí	Colombia	1
+16925592	5.15000000000000	-74.50000000000000	Cundinamarca	Quebradanegra	Colombia	1
+16925594	4.33333330000000	-73.83333330000000	Cundinamarca	Quetame	Colombia	1
+16925596	4.75000000000000	-74.58333330000000	Cundinamarca	Quipile	Colombia	1
+16925599	4.58333330000000	-74.58333330000000	Cundinamarca	Apulo	Colombia	1
+16925612	1.16666670000000	-78.16666670000000	Cundinamarca	Ricaurte	Colombia	1
+16925645	4.13333330000000	-74.50000000000000	Cundinamarca	San Antonio de Tequendama	Colombia	1
+16925649	1.51638890000000	-77.04666670000000	Cundinamarca	San Bernardo	Colombia	1
+16925653	7.88333330000000	-72.58333330000000	Cundinamarca	San Cayetano	Colombia	1
+16925658	1.17722220000000	-76.88305560000000	Cundinamarca	San Francisco	Colombia	1
+16925662	0.00000000000000	0.00000000000000	Cundinamarca	San Juan de Rioseco	Colombia	1
+16925718	5.00000000000000	-74.45000000000000	Cundinamarca	Sasaima	Colombia	1
+16925736	5.08333330000000	-73.83333330000000	Cundinamarca	Sesquilé	Colombia	1
+16925740	4.49138890000000	-74.26055560000000	Cundinamarca	Sibaté	Colombia	1
+16925743	4.50000000000000	-74.33333330000000	Cundinamarca	Silvania	Colombia	1
+16925745	5.58333330000000	-73.83333330000000	Cundinamarca	Simijaca	Colombia	1
+16925754	4.58722220000000	-74.22138890000000	Cundinamarca	Soacha	Colombia	1
+16925758	4.91666670000000	-73.95000000000000	Cundinamarca	Sopó	Colombia	1
+16925769	5.00000000000000	-74.16666670000000	Cundinamarca	Subachoque	Colombia	1
+16925772	5.16666670000000	-73.83333330000000	Cundinamarca	Suesca	Colombia	1
+16925777	5.08333330000000	-74.25000000000000	Cundinamarca	Supatá	Colombia	1
+16925779	5.50000000000000	-73.83333330000000	Cundinamarca	Susa	Colombia	1
+16925781	5251.00000000000000	-73856.00000000000000	Cundinamarca	Sutatausa	Colombia	1
+16925785	5.00000000000000	-74.08333330000000	Cundinamarca	Tabio	Colombia	1
+16925793	5.25000000000000	-73.91666670000000	Cundinamarca	Tausa	Colombia	1
+16925797	4.70000000000000	-74.41666670000000	Cundinamarca	Tena	Colombia	1
+505	0.00000000000000	0.00000000000000	\N	\N	Mozambique	6
+16925799	4.91666670000000	-74.16666670000000	Cundinamarca	Tenjo	Colombia	1
+16925805	4.38333330000000	-74.50000000000000	Cundinamarca	Tibacuy	Colombia	1
+16925807	0.00000000000000	0.00000000000000	Cundinamarca	Tibiritá	Colombia	1
+16925815	4.50000000000000	-74.66666670000000	Cundinamarca	Tocaima	Colombia	1
+16925817	5.00000000000000	-73.91666670000000	Cundinamarca	Tocancipá	Colombia	1
+16925823	0.00000000000000	0.00000000000000	Cundinamarca	Topaipi	Colombia	1
+16925839	4.83333330000000	-73.50000000000000	Cundinamarca	Ubalá	Colombia	1
+16925841	4.58333330000000	-74.00000000000000	Cundinamarca	Ubaque	Colombia	1
+16925843	0.00000000000000	0.00000000000000	Cundinamarca	Villa de San Diego de Ubate	Colombia	1
+16925845	4.33333330000000	-74.08333330000000	Cundinamarca	Une	Colombia	1
+16925851	5.25000000000000	-74.50000000000000	Cundinamarca	Útica	Colombia	1
+16925862	5.16666670000000	-74.33333330000000	Cundinamarca	Vergara	Colombia	1
+16925867	0.00000000000000	0.00000000000000	Cundinamarca	Vianí	Colombia	1
+16925871	5.27611110000000	-74.19888890000000	Cundinamarca	Villagómez	Colombia	1
+16925873	0.00000000000000	0.00000000000000	Cundinamarca	Villa Pinzón	Colombia	1
+16925875	5.08333330000000	-74.50000000000000	Cundinamarca	Villeta	Colombia	1
+16925878	4.50000000000000	-74.50000000000000	Cundinamarca	Viotá	Colombia	1
+16925885	5.66666670000000	-74.41666670000000	Cundinamarca	Yacopí	Colombia	1
+16925898	4.83333330000000	-74.41666670000000	Cundinamarca	Zipacón	Colombia	1
+16925899	5.02833330000000	-74.00583330000000	Cundinamarca	Zipaquirá	Colombia	1
+16927001	5.69472220000000	-76.66111110000000	Chocó	Quibdó	Colombia	4
+16927006	8.33333330000000	-77.16666670000000	Chocó	Acandí	Colombia	4
+16927025	0.00000000000000	0.00000000000000	Chocó	Alto Baudó	Colombia	4
+16927050	0.00000000000000	0.00000000000000	Chocó	Atrato Yuto	Colombia	4
+16927073	5.50000000000000	-76.25000000000000	Chocó	Bagadó	Colombia	4
+16927075	0.00000000000000	0.00000000000000	Chocó	Bahía Solano	Colombia	4
+16927077	0.00000000000000	0.00000000000000	Chocó	Bajo Baudó Pizarro	Colombia	4
+16927086	7.37250000000000	-76.71472220000000	Chocó	Belén de Bajirá	Colombia	4
+16927099	0.00000000000000	0.00000000000000	Chocó	Bojayá/Bellavista	Colombia	4
+16927135	0.00000000000000	0.00000000000000	Chocó	Cantón del San Pablo	Colombia	4
+16927150	0.00000000000000	0.00000000000000	Chocó	Carmen del Darién	Colombia	4
+16927160	5.40000000000000	-76.60000000000000	Chocó	Cértegui	Colombia	4
+16927205	5.16666670000000	-76.50000000000000	Chocó	Condoto	Colombia	4
+16927245	0.00000000000000	0.00000000000000	Chocó	El Carmen de Atrato	Colombia	4
+16927250	0.00000000000000	0.00000000000000	Chocó	El Litoral del San Juan	Colombia	4
+16927361	5.15888890000000	-76.69166670000000	Chocó	Istmina	Colombia	4
+16927372	7.00000000000000	-77.66666670000000	Chocó	Juradó	Colombia	4
+16927413	5.58333330000000	-76.41666670000000	Chocó	Lloró	Colombia	4
+16927425	0.00000000000000	0.00000000000000	Chocó	Medio Atrato	Colombia	4
+16927430	0.00000000000000	0.00000000000000	Chocó	Medio Baudó	Colombia	4
+16927450	0.00000000000000	0.00000000000000	Chocó	Medio San Juan	Colombia	4
+16927491	4.91666670000000	-76.58333330000000	Chocó	Novita	Colombia	4
+16927495	6.00000000000000	-77.33333330000000	Chocó	Nuquí	Colombia	4
+16927580	0.00000000000000	0.00000000000000	Chocó	Río Iro	Colombia	4
+16927600	5.70000000000000	-76.66666670000000	Chocó	Río Quito	Colombia	4
+16927615	0.00000000000000	0.00000000000000	Chocó	Riosucio	Colombia	4
+16927660	4.91666670000000	-76.25000000000000	Chocó	San José del Palmar	Colombia	4
+16927745	4.58333330000000	-76.50000000000000	Chocó	Sipí	Colombia	4
+16927787	5.33333330000000	-76.41666670000000	Chocó	Tadó	Colombia	4
+16927800	8.04305560000000	-77.09611110000000	Chocó	Unguía	Colombia	4
+16927810	0.00000000000000	0.00000000000000	Chocó	Unión Panamericana	Colombia	4
+16941001	2.93055560000000	-75.33027780000000	Huila	Neiva	Colombia	1
+16941006	1.75000000000000	-75.91666670000000	Huila	Acevedo	Colombia	1
+16941013	2.33333330000000	-75.75000000000000	Huila	Agrado	Colombia	1
+16941016	3.25000000000000	-75.33333330000000	Huila	Aipe	Colombia	1
+16941020	2.58333330000000	-75.25000000000000	Huila	Algeciras	Colombia	1
+16941026	2.16666670000000	-75.83333330000000	Huila	Altamira	Colombia	1
+16941078	3.16666670000000	-75.00000000000000	Huila	Baraya	Colombia	1
+16941132	2.66666670000000	-75.33333330000000	Huila	Campoalegre	Colombia	1
+16941206	2.50000000000000	-75.75000000000000	Huila	Colombia	Colombia	1
+16941244	2.08333330000000	-76.00000000000000	Huila	Elías	Colombia	1
+16941298	2.25000000000000	-75.58333330000000	Huila	Garzón	Colombia	1
+16941306	2.50000000000000	-75.50000000000000	Huila	Gigante	Colombia	1
+16941319	6.30000000000000	-73.33333330000000	Huila	Guadalupe	Colombia	1
+16941349	2.58333330000000	-75.50000000000000	Huila	Hobo	Colombia	1
+16941357	2.75000000000000	-75.75000000000000	Huila	Íquira	Colombia	1
+16941359	2.08333330000000	-76.25000000000000	Huila	Isnos	Colombia	1
+16941378	2.25000000000000	-76.16666670000000	Huila	La Argentina	Colombia	1
+16941396	2.41666670000000	-76.16666670000000	Huila	La Plata	Colombia	1
+16941483	2.65000000000000	-75.80000000000000	Huila	Nátaga	Colombia	1
+16941503	2.08333330000000	-76.01666670000000	Huila	Oporapa	Colombia	1
+16941518	2.45000000000000	-75.75000000000000	Huila	Paicol	Colombia	1
+16941524	3.00000000000000	-75.50000000000000	Huila	Palermo	Colombia	1
+16941530	1.75000000000000	-76.06666670000000	Huila	Palestina	Colombia	1
+16941548	2.33333330000000	-75.83333330000000	Huila	Pital	Colombia	1
+16941551	1.75000000000000	-76.16666670000000	Huila	Pitalito	Colombia	1
+16941615	2.83333330000000	-75.16666670000000	Huila	Rivera	Colombia	1
+16941660	2.01444440000000	-76.05027780000000	Huila	Saladoblanco	Colombia	1
+16941668	1.91666670000000	-76.33333330000000	Huila	San Agustín	Colombia	1
+16941676	3.00000000000000	-75.70000000000000	Huila	Santa María	Colombia	1
+16941770	1.91666670000000	-75.83333330000000	Huila	Suaza	Colombia	1
+16941791	2.16666670000000	-75.91666670000000	Huila	Tarqui	Colombia	1
+16941797	2.66666670000000	-75.75000000000000	Huila	Tesalia	Colombia	1
+16941799	3.08333330000000	-75.08333330000000	Huila	Tello	Colombia	1
+16941801	2.91666670000000	-75.66666670000000	Huila	Teruel	Colombia	1
+16941807	2.00000000000000	-75.91666670000000	Huila	Timaná	Colombia	1
+16941872	3.33333330000000	-75.16666670000000	Huila	Villavieja	Colombia	1
+16941885	2.66666670000000	-75.58333330000000	Huila	Yaguará	Colombia	1
+16944001	11.54444440000000	-72.90722220000000	La Guajira	Riohacha	Colombia	2
+16944035	5.83333330000000	-73.75000000000000	La Guajira	Albania	Colombia	2
+16944078	11.00000000000000	-72.75000000000000	La Guajira	Barrancas	Colombia	2
+16944090	11.27222220000000	-73.30555560000000	La Guajira	Dibulla	Colombia	2
+16944098	10.89777780000000	-72.88694440000000	La Guajira	Distracción	Colombia	2
+16944110	10.65333330000000	-72.92416670000000	La Guajira	El Molino	Colombia	2
+16944279	10.83333330000000	-72.83333330000000	La Guajira	Fonseca	Colombia	2
+16944378	11.06944440000000	-72.76694440000000	La Guajira	Hatonuevo	Colombia	2
+16944420	10.51666670000000	-73.08333330000000	La Guajira	La Jagua del Pilar	Colombia	2
+16944430	11.38416670000000	-72.24416670000000	La Guajira	Maicao	Colombia	2
+16944560	11.77916670000000	-72.44944440000000	La Guajira	Manaure	Colombia	2
+16944650	10.83333330000000	-73.08333330000000	La Guajira	San Juan del Cesar	Colombia	2
+16944847	11.91666670000000	-72.00000000000000	La Guajira	Uribia	Colombia	2
+16944855	10.56666670000000	-73.01666670000000	La Guajira	Urumita	Colombia	2
+16944874	5.28333330000000	-71.96666670000000	La Guajira	Villanueva	Colombia	2
+16947001	11.24722220000000	-74.20166670000000	Magdalena	Santa Marta	Colombia	2
+16947030	10.18694440000000	-74.57527780000000	Magdalena	Algarrobo	Colombia	2
+16947053	10.58333330000000	-74.00000000000000	Magdalena	Aracataca	Colombia	2
+16947058	0.00000000000000	0.00000000000000	Magdalena	Ariguaní El Díficil	Colombia	2
+16947161	10.25000000000000	-74.83333330000000	Magdalena	Cerro San Antonio	Colombia	2
+16947170	0.00000000000000	0.00000000000000	Magdalena	Chibolo	Colombia	2
+16947189	10.83333330000000	-74.08333330000000	Magdalena	Ciénaga	Colombia	2
+16947205	9.84027780000000	-74.44472220000000	Magdalena	Concordia	Colombia	2
+16947245	9.04555560000000	-73.97472220000000	Magdalena	El Banco	Colombia	2
+16947258	10.33333330000000	-74.66666670000000	Magdalena	El Piñon	Colombia	2
+16947268	10.61666670000000	-74.26666670000000	Magdalena	El Retén	Colombia	2
+16947288	10.41666670000000	-73.91666670000000	Magdalena	Fundación	Colombia	2
+16947318	3.91666670000000	-74.00000000000000	Magdalena	Guamal	Colombia	2
+16947460	9.80305560000000	-74.39027780000000	Magdalena	Nueva Granada	Colombia	2
+16947541	10.16666670000000	-74.75000000000000	Magdalena	Pedraza	Colombia	2
+16947545	0.00000000000000	0.00000000000000	Magdalena	Pijiño del Carmen	Colombia	2
+16947551	10.41666670000000	-74.33333330000000	Magdalena	Pivijay	Colombia	2
+16947555	9.83333330000000	-74.33333330000000	Magdalena	Plato	Colombia	2
+16947570	10.98333330000000	-74.33333330000000	Magdalena	Puebloviejo	Colombia	2
+16947605	10.66666670000000	-74.58333330000000	Magdalena	Remolino	Colombia	2
+16947660	0.00000000000000	0.00000000000000	Magdalena	Sabanas de San Angel	Colombia	2
+16947675	10.50000000000000	-74.70000000000000	Magdalena	Salamina	Colombia	2
+16947692	9.33333330000000	-74.33333330000000	Magdalena	San Sebastián de Buenavista	Colombia	2
+16947703	9.33333330000000	-74.30000000000000	Magdalena	San Zenón	Colombia	2
+16947707	9.31666670000000	-74.58333330000000	Magdalena	Santa Ana	Colombia	2
+16947720	0.00000000000000	0.00000000000000	Magdalena	Santa Bárbara Pinto	Colombia	2
+16947745	10.91666670000000	-74.58333330000000	Magdalena	Sitionuevo	Colombia	2
+16947798	10.00000000000000	-74.66666670000000	Magdalena	Tenerife	Colombia	2
+16947960	0.00000000000000	0.00000000000000	Magdalena	Zapayán	Colombia	2
+16947980	0.00000000000000	0.00000000000000	Magdalena	Zona Bananera	Colombia	2
+16950001	4.15333330000000	-73635.00000000000000	Meta	Villavicencio	Colombia	3
+16950006	3.91666670000000	-73.83333330000000	Meta	Acacías	Colombia	3
+16950110	4.57555560000000	-72.96111110000000	Meta	Barranca de Upía	Colombia	3
+16950124	4.29027780000000	-72.79055560000000	Meta	Cabuyaro	Colombia	3
+16950150	3.80000000000000	-73.58333330000000	Meta	Castilla la Nueva	Colombia	3
+16950223	3.77138890000000	-73.83777780000000	Meta	Cubarral	Colombia	3
+16950226	4.25000000000000	-73.33333330000000	Meta	Cumaral	Colombia	3
+16950245	4.41666670000000	-73.66666670000000	Meta	El Calvario	Colombia	3
+16950251	3.56805560000000	-73.78388890000000	Meta	El Castillo	Colombia	3
+16950270	2.77916670000000	-72.87194440000000	Meta	El Dorado	Colombia	3
+16950287	3.45944440000000	-73.61277780000000	Meta	Fuente de Oro	Colombia	3
+16950313	3.53861110000000	-73.70055560000000	Meta	Granada	Colombia	3
+16950318	3.91666670000000	-74.00000000000000	Meta	Guamal	Colombia	3
+16950325	0.00000000000000	0.00000000000000	Meta	Mapiripán	Colombia	3
+16950330	3.37805560000000	-74.04472220000000	Meta	Mesetas	Colombia	3
+16950350	2.85361110000000	-73.94361110000000	Meta	La Macarena	Colombia	3
+16950370	0.00000000000000	0.00000000000000	Meta	La Uribe	Colombia	3
+16950400	3.51361110000000	-74.05166670000000	Meta	Lejanías	Colombia	3
+16950450	2.67944440000000	-72.76083330000000	Meta	Puerto Concordia	Colombia	3
+16950568	4.31416670000000	-72.08250000000000	Meta	Puerto Gaitán	Colombia	3
+16950573	4.08333330000000	-72.96666670000000	Meta	Puerto López	Colombia	3
+16950577	3.00000000000000	-72.50000000000000	Meta	Puerto Lleras	Colombia	3
+16950590	2.93833330000000	-73.20833330000000	Meta	Puerto Rico	Colombia	3
+16950606	3.78333330000000	-76.50000000000000	Meta	Restrepo	Colombia	3
+16950680	3.71222220000000	-73.24361110000000	Meta	San Carlos de Guaroa	Colombia	3
+16950683	3.34638890000000	-73.88944440000000	Meta	San Juan de Arama	Colombia	3
+16950686	4.45861110000000	-73.67305560000000	Meta	San Juanito	Colombia	3
+16950689	3.70000000000000	-73.70000000000000	Meta	San Martín	Colombia	3
+16950711	0.00000000000000	0.00000000000000	Meta	Vistahermosa	Colombia	3
+16952001	0.00000000000000	0.00000000000000	Nariño	Pasto	Colombia	4
+16952019	0.00000000000000	0.00000000000000	Nariño	Albán San José	Colombia	4
+16952022	0.91666670000000	-77.68333330000000	Nariño	Aldana	Colombia	4
+16952036	0.00000000000000	0.00000000000000	Nariño	Ancuyá	Colombia	4
+16952051	0.00000000000000	0.00000000000000	Nariño	Arboleda Berruecos	Colombia	4
+16952079	1.58333330000000	-78.00000000000000	Nariño	Barbacoas	Colombia	4
+16952083	1.59750000000000	-77.01750000000000	Nariño	Belén	Colombia	4
+16952110	1.25000000000000	-77.08333330000000	Nariño	Buesaco	Colombia	4
+16952203	0.00000000000000	0.00000000000000	Nariño	Colón Genova	Colombia	4
+16952207	0.00000000000000	0.00000000000000	Nariño	Consacá	Colombia	4
+16952210	0.91666670000000	-77.53333330000000	Nariño	Contadero	Colombia	4
+16952215	0.78333330000000	-77.33333330000000	Nariño	Córdoba	Colombia	4
+16952224	0.00000000000000	0.00000000000000	Nariño	Cuaspud Carlosama	Colombia	4
+16952227	0.91666670000000	-77.91666670000000	Nariño	Cumbal	Colombia	4
+16952233	1.65333330000000	-77.58333330000000	Nariño	Cumbitara	Colombia	4
+16952240	1.35943053925138	-77.28366851806640	Nariño	Chachaguí	Colombia	4
+16952250	2.33333330000000	-78.35000000000000	Nariño	El Charco	Colombia	4
+16952254	1.43333330000000	-77.43333330000000	Nariño	El Peñol	Colombia	4
+16952256	1.83333330000000	-77.33333330000000	Nariño	El Rosario	Colombia	4
+16952258	0.00000000000000	0.00000000000000	Nariño	El Tablón de Gómez	Colombia	4
+16952260	1.40000000000000	-77.33333330000000	Nariño	El Tambo	Colombia	4
+16952287	0.95000000000000	-77.33333330000000	Nariño	Funes	Colombia	4
+16952317	1.00000000000000	-77.75000000000000	Nariño	Guachucal	Colombia	4
+16952320	1.15000000000000	-77.50000000000000	Nariño	Guaitarilla	Colombia	4
+16952323	0.83333330000000	-77.58333330000000	Nariño	Gualmatán	Colombia	4
+507	0.00000000000000	0.00000000000000	\N	\N	Namibia	6
+16952352	0.95000000000000	-77.53333330000000	Nariño	Iles	Colombia	4
+16952354	0.00000000000000	0.00000000000000	Nariño	Imués	Colombia	4
+16952356	0.83027780000000	-77.64444440000000	Nariño	Ipiales	Colombia	4
+16952378	1.55000000000000	-76.88333330000000	Nariño	La Cruz	Colombia	4
+16952381	1.25000000000000	-77.41666670000000	Nariño	La Florida	Colombia	4
+16952385	1.47777780000000	-77.58388890000000	Nariño	La Llanada	Colombia	4
+16952390	2.41083330000000	-78.24277780000000	Nariño	La Tola	Colombia	4
+16952399	4.53583330000000	-76.10666670000000	Nariño	La Unión	Colombia	4
+16952405	1.93750000000000	-77.30805560000000	Nariño	Leiva	Colombia	4
+16952411	1.38333330000000	-77.45000000000000	Nariño	Linares	Colombia	4
+16952418	0.00000000000000	0.00000000000000	Nariño	Sotomayor	Colombia	4
+16952427	0.00000000000000	0.00000000000000	Nariño	Payan	Colombia	4
+16952435	0.00000000000000	0.00000000000000	Nariño	Mallama	Colombia	4
+16952473	2.35000000000000	-78.35000000000000	Nariño	Mosquera	Colombia	4
+16952480	1.50000000000000	-78.00000000000000	Nariño	Nariño	Colombia	4
+16952490	1.26666670000000	-77.48333330000000	Nariño	Olaya Herrera	Colombia	4
+16952506	1.03333330000000	-77.55000000000000	Nariño	Ospina	Colombia	4
+16952520	2.10194440000000	-78.72166670000000	Nariño	Francisco Pizarro	Colombia	4
+16952540	1.63166670000000	-77.46166670000000	Nariño	Policarpa	Colombia	4
+16952560	0.75000000000000	-77.41666670000000	Nariño	Potosí	Colombia	4
+16952565	12.50000000000000	-81.75000000000000	Nariño	Providencia	Colombia	4
+16952573	0.91666670000000	-77.25000000000000	Nariño	Puerres	Colombia	4
+16952585	0.91666670000000	-77.66666670000000	Nariño	Pupiales	Colombia	4
+16952612	1.16666670000000	-78.16666670000000	Nariño	Ricaurte	Colombia	4
+16952621	0.00000000000000	0.00000000000000	Nariño	Roberto Payán (San José )	Colombia	4
+16952678	1.41666670000000	-77.66666670000000	Nariño	Samaniego	Colombia	4
+16952683	1.25000000000000	-77.45000000000000	Nariño	Sandoná	Colombia	4
+16952685	1.51638890000000	-77.04666670000000	Nariño	San Bernardo	Colombia	4
+16952687	1.50000000000000	-77.16666670000000	Nariño	San Lorenzo	Colombia	4
+16952693	1.66666670000000	-76.91666670000000	Nariño	San Pablo	Colombia	4
+16952694	1.56138890000000	-77.11805560000000	Nariño	San Pedro de Cartago	Colombia	4
+16952696	0.00000000000000	0.00000000000000	Nariño	Santa Bárbara (Iscuande)	Colombia	4
+16952699	0.00000000000000	0.00000000000000	Nariño	Santacruz	Colombia	4
+16952720	1.03333330000000	-77.60000000000000	Nariño	Sapuyes	Colombia	4
+16952786	1.58333330000000	-77.25000000000000	Nariño	Taminango	Colombia	4
+16952788	1.08333330000000	-77.30000000000000	Nariño	Tangua	Colombia	4
+16952835	1.79861110000000	-78.81555560000000	Nariño	Tumaco	Colombia	4
+16952838	1.16666670000000	-77.58333330000000	Nariño	Túquerres	Colombia	4
+16952885	1.08333330000000	-77.41666670000000	Nariño	Yacuanquer	Colombia	4
+16954001	7.88333330000000	-72.50527780000000	Norte de Santander	Cúcuta	Colombia	1
+16954003	0.00000000000000	0.00000000000000	Norte de Santander	Abrego	Colombia	1
+16954051	7.66666670000000	-72.75000000000000	Norte de Santander	Arboledas	Colombia	1
+16954099	7.66666670000000	-72.58333330000000	Norte de Santander	Bochalema	Colombia	1
+16954109	8.08333330000000	-73.00000000000000	Norte de Santander	Bucarasica	Colombia	1
+16954125	7.25000000000000	-72.58333330000000	Norte de Santander	Cácota	Colombia	1
+16954128	0.00000000000000	0.00000000000000	Norte de Santander	Cachira	Colombia	1
+16954172	7.75000000000000	-72.55000000000000	Norte de Santander	Chinácota	Colombia	1
+16954174	7.16666670000000	-72.58333330000000	Norte de Santander	Chitagá	Colombia	1
+16954206	8.83333330000000	-73.20000000000000	Norte de Santander	Convención	Colombia	1
+16954223	7.50000000000000	-72.75000000000000	Norte de Santander	Cucutilla	Colombia	1
+16954239	7.75000000000000	-72.63333330000000	Norte de Santander	Durania	Colombia	1
+16954245	6.00000000000000	698.00000000000000	Norte de Santander	El Carmen	Colombia	1
+16954250	8.58472220000000	-73.08833330000000	Norte de Santander	El Tarra	Colombia	1
+16954261	7.93555560000000	-72605.00000000000000	Norte de Santander	El Zulia	Colombia	1
+16954313	7.91666670000000	-72.75000000000000	Norte de Santander	Gramalote	Colombia	1
+16954344	8.50000000000000	-73.08333330000000	Norte de Santander	Hacarí	Colombia	1
+16954347	7.50000000000000	-72.46666670000000	Norte de Santander	Herrán	Colombia	1
+16954377	7.33333330000000	-72.50000000000000	Norte de Santander	Labateca	Colombia	1
+16954385	8.16666670000000	-72.46666670000000	Norte de Santander	La Esperanza	Colombia	1
+16954398	8.25000000000000	-73.16666670000000	Norte de Santander	La Playa	Colombia	1
+16954405	7.83833330000000	-72.51333330000000	Norte de Santander	Los Patios	Colombia	1
+16954418	7.96666670000000	-72.83333330000000	Norte de Santander	Lourdes	Colombia	1
+16954480	7.33333330000000	-72.71666670000000	Norte de Santander	Mutiscua	Colombia	1
+16954498	8.25000000000000	-73.30000000000000	Norte de Santander	Ocaña	Colombia	1
+16954518	7.37805560000000	-72.65250000000000	Norte de Santander	Pamplona	Colombia	1
+16954520	7.50000000000000	-72.58333330000000	Norte de Santander	Pamplonita	Colombia	1
+16954553	8.36361110000000	-72.40750000000000	Norte de Santander	Puerto Santander	Colombia	1
+16954599	7.58333330000000	-72.50000000000000	Norte de Santander	Ragonvalia	Colombia	1
+16954660	7.80000000000000	-72.83333330000000	Norte de Santander	Salazar	Colombia	1
+16954670	8.75000000000000	-73.03333330000000	Norte de Santander	San Calixto	Colombia	1
+16954673	7.88333330000000	-72.58333330000000	Norte de Santander	San Cayetano	Colombia	1
+16954680	1.15111110000000	-77.00750000000000	Norte de Santander	Santiago	Colombia	1
+16954720	8.25000000000000	-72.75000000000000	Norte de Santander	Sardinata	Colombia	1
+16954743	7.20000000000000	-72.75000000000000	Norte de Santander	Silos	Colombia	1
+16954800	8.75000000000000	-73.16666670000000	Norte de Santander	Teorama	Colombia	1
+16954810	8.64805560000000	-72.73944440000000	Norte de Santander	Tibú	Colombia	1
+16954820	7.30000000000000	-72.25000000000000	Norte de Santander	Toledo	Colombia	1
+16954871	7.91694440000000	-72.97638890000000	Norte de Santander	Villa Caro	Colombia	1
+16954874	0.00000000000000	0.00000000000000	Norte de Santander	Villa Rosario	Colombia	1
+16963001	4.53388890000000	-75.68111110000000	Quindío	Armenia	Colombia	1
+16963111	9.32222220000000	-74.97722220000000	Quindío	Buenavista	Colombia	1
+16963130	0.00000000000000	0.00000000000000	Quindío	Calarca	Colombia	1
+16963190	4.61666670000000	-75.63333330000000	Quindío	Circasia	Colombia	1
+16963212	0.78333330000000	-77.33333330000000	Quindío	Córdoba	Colombia	1
+16963272	4.66666670000000	-75.63333330000000	Quindío	Filandia	Colombia	1
+16963302	4.25000000000000	-75.66666670000000	Quindío	Génova	Colombia	1
+16963401	4.45000000000000	-75.80000000000000	Quindío	La Tebaida	Colombia	1
+16963470	4.50000000000000	-75.80000000000000	Quindío	Montenegro	Colombia	1
+508	0.00000000000000	0.00000000000000	\N	\N	Nauru	6
+16963548	4.33333330000000	-75.66666670000000	Quindío	Pijao	Colombia	1
+16963594	4.63333330000000	-75.75000000000000	Quindío	Quimbaya	Colombia	1
+16963690	4.66666670000000	-75.50000000000000	Quindío	Salento	Colombia	1
+16966001	4.81333330000000	-75.69611110000000	Risaralda	Pereira	Colombia	1
+16966045	5.16666670000000	-76.00000000000000	Risaralda	Apía	Colombia	1
+16966075	4.91666670000000	-75.95000000000000	Risaralda	Balboa	Colombia	1
+16966088	5.25000000000000	-75.91666670000000	Risaralda	Belén de Umbría	Colombia	1
+16966170	0.00000000000000	0.00000000000000	Risaralda	Dosquebradas	Colombia	1
+16966318	5.33333330000000	-75.83333330000000	Risaralda	Guática	Colombia	1
+16966383	4.96666670000000	-76.00000000000000	Risaralda	La Celia	Colombia	1
+16966400	4.91666670000000	-75.83333330000000	Risaralda	La Virginia	Colombia	1
+16966440	4.91666670000000	-75.75000000000000	Risaralda	Marsella	Colombia	1
+16966456	5.41666670000000	-76.00000000000000	Risaralda	Mistrató	Colombia	1
+16966572	5.25000000000000	-76.16666670000000	Risaralda	Pueblo Rico	Colombia	1
+16966594	5.33333330000000	-75.66666670000000	Risaralda	Quinchía	Colombia	1
+16966682	4.86805560000000	-75.62138890000000	Risaralda	Santa Rosa de Cabal	Colombia	1
+16966687	5.08333330000000	-76.00000000000000	Risaralda	Santuario	Colombia	1
+16968001	7.12972220000000	-73.12583330000000	Santander	Bucaramanga	Colombia	1
+16968013	6.25000000000000	-73.46666670000000	Santander	Aguada	Colombia	1
+16968020	5.83333330000000	-73.75000000000000	Santander	Albania	Colombia	1
+16968051	6.83333330000000	-72.96666670000000	Santander	Aratoca	Colombia	1
+16968077	6.00000000000000	-73.55000000000000	Santander	Barbosa	Colombia	1
+16968079	6.75000000000000	-73.16666670000000	Santander	Barichara	Colombia	1
+16968081	7.06527780000000	-73.85472220000000	Santander	Barrancabermeja	Colombia	1
+16968092	7.08333330000000	-73.33333330000000	Santander	Betulia	Colombia	1
+16968101	4.33333330000000	-76.33333330000000	Santander	Bolívar	Colombia	1
+16968121	6.63333330000000	-73.20000000000000	Santander	Cabrera	Colombia	1
+16968132	7.41666670000000	-72.85000000000000	Santander	California	Colombia	1
+16968147	6.60000000000000	-72.63333330000000	Santander	Capitanejo	Colombia	1
+16968152	6.83333330000000	-72.50000000000000	Santander	Carcasí	Colombia	1
+16968160	0.00000000000000	0.00000000000000	Santander	Cepitá	Colombia	1
+16968162	7.00000000000000	-72.58333330000000	Santander	Cerrito	Colombia	1
+16968167	6.25000000000000	-73.08333330000000	Santander	Charalá	Colombia	1
+16968169	7.30000000000000	-72.96666670000000	Santander	Charta	Colombia	1
+16968176	6.41666670000000	-73.33333330000000	Santander	Chima	Colombia	1
+16968179	6.13333330000000	-73.55000000000000	Santander	Chipatá	Colombia	1
+16968190	6.31611110000000	-73.95055560000000	Santander	Cimitarra	Colombia	1
+16968207	6.91666670000000	-72.50000000000000	Santander	Concepción	Colombia	1
+16968209	6.41666670000000	-73.16666670000000	Santander	Confines	Colombia	1
+16968211	6.33333330000000	-73.41666670000000	Santander	Contratación	Colombia	1
+16968217	6.33333330000000	-73.00000000000000	Santander	Coromoro	Colombia	1
+16968229	6.66666670000000	-73.00000000000000	Santander	Curití	Colombia	1
+16968235	0.00000000000000	0.00000000000000	Santander	El Carmen de Chucurí	Colombia	1
+16968245	6.33333330000000	-73.46666670000000	Santander	El Guacamayo	Colombia	1
+16968250	5.33333330000000	-74.33333330000000	Santander	El Peñón	Colombia	1
+16968255	7.47666670000000	-73.20805560000000	Santander	El Playón	Colombia	1
+16968264	6.16666670000000	-73.00000000000000	Santander	Encino	Colombia	1
+16968266	6.75000000000000	-72.63333330000000	Santander	Enciso	Colombia	1
+16968271	5.80472220000000	-73.97416670000000	Santander	Florián	Colombia	1
+16968276	7.06472220000000	-73.08972220000000	Santander	Floridablanca	Colombia	1
+16968296	6.70000000000000	-73.30000000000000	Santander	Galán	Colombia	1
+16968298	0.00000000000000	0.00000000000000	Santander	Gambita	Colombia	1
+16968307	7.07083330000000	-73.17305560000000	Santander	Girón	Colombia	1
+16968318	7.00000000000000	-72.76666670000000	Santander	Guaca	Colombia	1
+16968320	6.30000000000000	-73.33333330000000	Santander	Guadalupe	Colombia	1
+16968322	0.00000000000000	0.00000000000000	Santander	Guapotá	Colombia	1
+16968324	6.00000000000000	-73.65000000000000	Santander	Guavatá	Colombia	1
+16968327	6.08333330000000	-73.50000000000000	Santander	Guepsa	Colombia	1
+16968344	6.58333330000000	-73.33333330000000	Santander	Hato	Colombia	1
+687	0.00000000000000	0.00000000000000	\N	\N	Samoa	6
+16968368	5.91666670000000	-73.83333330000000	Santander	Jesús María	Colombia	1
+16968370	6.75000000000000	-73.06666670000000	Santander	Jordán	Colombia	1
+16968377	5.86138890000000	-73.96833330000000	Santander	La Belleza	Colombia	1
+16968385	6.22388890000000	-73.81277780000000	Santander	Landázuri	Colombia	1
+16968397	6.25000000000000	-73.46666670000000	Santander	La Paz	Colombia	1
+16968406	0.00000000000000	0.00000000000000	Santander	Lebríja	Colombia	1
+16968418	6.91666670000000	-73.08333330000000	Santander	Los Santos	Colombia	1
+16968425	6.58333330000000	-72.53333330000000	Santander	Macaravita	Colombia	1
+16968432	6.78333330000000	-72.66666670000000	Santander	Málaga	Colombia	1
+16968444	7.41666670000000	-73.08333330000000	Santander	Matanza	Colombia	1
+16968464	6.58333330000000	-72.91666670000000	Santander	Mogotes	Colombia	1
+16968468	6.75000000000000	-72.75000000000000	Santander	Molagavita	Colombia	1
+16968498	6.41666670000000	-73.08333330000000	Santander	Ocamonte	Colombia	1
+16968500	6.30000000000000	-73.25000000000000	Santander	Oiba	Colombia	1
+16968502	6.33333330000000	-72.75000000000000	Santander	Onzaga	Colombia	1
+16968522	6.58333330000000	-73.25000000000000	Santander	Palmar	Colombia	1
+16968524	6.45000000000000	-73.25000000000000	Santander	Palmas del Socorro	Colombia	1
+16968533	6.50000000000000	-73.13333330000000	Santander	Páramo	Colombia	1
+16968547	0.00000000000000	0.00000000000000	Santander	Piedecuesta	Colombia	1
+16968549	6.58333330000000	-73.16666670000000	Santander	Pinchote	Colombia	1
+16968572	5.91666670000000	-73.58333330000000	Santander	Puente Nacional	Colombia	1
+16968573	6.65166670000000	-74.06083330000000	Santander	Puerto Parra	Colombia	1
+16968575	7.58333330000000	-73.66666670000000	Santander	Puerto Wilches	Colombia	1
+16968615	0.00000000000000	0.00000000000000	Santander	Rionegro	Colombia	1
+16968655	7.39805560000000	-73.49694440000000	Santander	Sabana de Torres	Colombia	1
+16968669	6.83333330000000	-72.75000000000000	Santander	San Andrés	Colombia	1
+16968673	6.16666670000000	-73.46666670000000	Santander	San Benito	Colombia	1
+16968679	0.00000000000000	0.00000000000000	Santander	San Gil	Colombia	1
+16968682	6.43333330000000	-72.86666670000000	Santander	San Joaquín	Colombia	1
+16968684	6.70000000000000	-72.66666670000000	Santander	San José de Miranda	Colombia	1
+16968686	0.33944440000000	-76.88305560000000	Santander	San Miguel	Colombia	1
+16968689	0.00000000000000	0.00000000000000	Santander	San Vicente de Chucuri	Colombia	1
+16968705	6.99277780000000	-72.91027780000000	Santander	Santa Bárbara	Colombia	1
+16968720	6.33750000000000	-73.59194440000000	Santander	Santa Helena del Opón	Colombia	1
+16968745	6.44722220000000	-73.34138890000000	Santander	Simacota	Colombia	1
+16968755	6.53333330000000	-73.20000000000000	Santander	Socorro	Colombia	1
+16968770	6.16666670000000	-73.30000000000000	Santander	Suaita	Colombia	1
+16968773	9.00000000000000	-75.00000000000000	Santander	Sucre	Colombia	1
+16968780	7.50000000000000	-72.96666670000000	Santander	Suratá	Colombia	1
+16968820	7.25000000000000	-72.90000000000000	Santander	Tona	Colombia	1
+16968855	6.50000000000000	-73.06666670000000	Santander	Valle de San José	Colombia	1
+16968861	6.08333330000000	-73.58333330000000	Santander	Vélez	Colombia	1
+16968867	7.33333330000000	-72.86666670000000	Santander	Vetas	Colombia	1
+16968872	5.28333330000000	-71.96666670000000	Santander	Villanueva	Colombia	1
+16968895	6.83333330000000	-73.25000000000000	Santander	Zapatoca	Colombia	1
+16970001	9.30472220000000	-75.39777780000000	Sucre	Sincelejo	Colombia	2
+16970110	9.32222220000000	-74.97722220000000	Sucre	Buenavista	Colombia	2
+16970124	8.83333330000000	-75.16666670000000	Sucre	Caimito	Colombia	2
+16970204	0.00000000000000	0.00000000000000	Sucre	Coloso Ricaurte	Colombia	2
+16970215	9.33333330000000	-75.25000000000000	Sucre	Corozal	Colombia	2
+16970221	9.41666670000000	-75.70000000000000	Sucre	Coveñas	Colombia	2
+16970230	9.54916670000000	-75.31611110000000	Sucre	Chalán	Colombia	2
+16970233	9.10000000000000	-75.20000000000000	Sucre	El Roble	Colombia	2
+16970235	0.00000000000000	0.00000000000000	Sucre	Galeras Nueva Granada	Colombia	2
+16970265	8.46972220000000	-75.53833330000000	Sucre	Guaranda	Colombia	2
+16970400	4.53583330000000	-76.10666670000000	Sucre	La Unión	Colombia	2
+16970418	9.38111110000000	-75.27138890000000	Sucre	Los Palmitos	Colombia	2
+16970429	8.50000000000000	-74.66666670000000	Sucre	Majagual	Colombia	2
+16970473	9.41666670000000	-75.33333330000000	Sucre	Morroa	Colombia	2
+16970508	9.50000000000000	-75.16666670000000	Sucre	Ovejas	Colombia	2
+16970523	9.33333330000000	-75.55000000000000	Sucre	Palmito	Colombia	2
+16970670	9.16666670000000	-75.30000000000000	Sucre	Sampués	Colombia	2
+16970678	8.75000000000000	-74.91666670000000	Sucre	San Benito Abad	Colombia	2
+16970702	9.27555560000000	-75.24555560000000	Sucre	San Juan de Betulia	Colombia	2
+16970708	8.58333330000000	-75.16666670000000	Sucre	San Marcos	Colombia	2
+16970713	9.83333330000000	-75.50000000000000	Sucre	San Onofre	Colombia	2
+16970717	4.00000000000000	-76.16666670000000	Sucre	San Pedro	Colombia	2
+16970742	9.16666670000000	-75.00000000000000	Sucre	Sincé	Colombia	2
+16970771	9.00000000000000	-75.00000000000000	Sucre	Sucre	Colombia	2
+16970820	0.00000000000000	0.00000000000000	Sucre	Santiago de Tolú	Colombia	2
+16970823	0.00000000000000	0.00000000000000	Sucre	Toluviejo	Colombia	2
+16973001	4.43888890000000	-75.23222220000000	Tolima	Ibagué	Colombia	1
+16973024	3.41666670000000	-74.91666670000000	Tolima	Alpujarra	Colombia	1
+16973026	4.58333330000000	-75.00000000000000	Tolima	Alvarado	Colombia	1
+16973030	4.83333330000000	-74.83333330000000	Tolima	Ambalema	Colombia	1
+16973043	4.66666670000000	-75.25000000000000	Tolima	Anzoátegui	Colombia	1
+16973055	0.00000000000000	0.00000000000000	Tolima	Armero Guayabal	Colombia	1
+16973067	3.33333330000000	-75.66666670000000	Tolima	Ataco	Colombia	1
+16973124	4.41666670000000	-75.50000000000000	Tolima	Cajamarca	Colombia	1
+16973148	4.15000000000000	-74.73333330000000	Tolima	Carmen de Apicalá	Colombia	1
+16973152	5.08333330000000	-75.16666670000000	Tolima	Casabianca	Colombia	1
+16973168	3.75000000000000	-75.58333330000000	Tolima	Chaparral	Colombia	1
+16973200	4.33333330000000	-74.91666670000000	Tolima	Coello	Colombia	1
+16973217	3.83333330000000	-75.08333330000000	Tolima	Coyaima	Colombia	1
+16973226	4.08333330000000	-74.66666670000000	Tolima	Cunday	Colombia	1
+16973236	3.66666670000000	-74.75000000000000	Tolima	Dolores	Colombia	1
+16973268	4.20000000000000	-74.83333330000000	Tolima	Espinal	Colombia	1
+16973270	5.13333330000000	-75.00000000000000	Tolima	Falan	Colombia	1
+16973275	4.25000000000000	-74.83333330000000	Tolima	Flandes	Colombia	1
+16973283	5.16666670000000	-75.08333330000000	Tolima	Fresno	Colombia	1
+16973319	4.08333330000000	-74.91666670000000	Tolima	Guamo	Colombia	1
+16973347	5.08333330000000	-75.16666670000000	Tolima	Herveo	Colombia	1
+16973349	5.25000000000000	-74.83333330000000	Tolima	Honda	Colombia	1
+16973352	4.16666670000000	-74.55000000000000	Tolima	Icononzo	Colombia	1
+16973408	4.91666670000000	-74.91666670000000	Tolima	Lérida	Colombia	1
+16973411	4.91666670000000	-75.16666670000000	Tolima	Líbano	Colombia	1
+16973443	5.25000000000000	-74.91666670000000	Tolima	Mariquita	Colombia	1
+16973449	4.25000000000000	-74.58333330000000	Tolima	Melgar	Colombia	1
+16973461	4.87694440000000	-75.17388890000000	Tolima	Murillo	Colombia	1
+16973483	3.58333330000000	-75.08333330000000	Tolima	Natagaima	Colombia	1
+16973504	3.91666670000000	-75.25000000000000	Tolima	Ortega	Colombia	1
+16973520	5.13333330000000	-75.03333330000000	Tolima	Palocabildo	Colombia	1
+16973547	4.50000000000000	-74.91666670000000	Tolima	Piedras	Colombia	1
+16973555	3.25000000000000	-75.75000000000000	Tolima	Planadas	Colombia	1
+16973563	3.75000000000000	-74.83333330000000	Tolima	Prado	Colombia	1
+16973585	3.91666670000000	-74.91666670000000	Tolima	Purificación	Colombia	1
+16973616	3.50000000000000	-75.83333330000000	Tolima	Rioblanco	Colombia	1
+16973622	4.08333330000000	-75.58333330000000	Tolima	Roncesvalles	Colombia	1
+16973624	4.25000000000000	-75.33333330000000	Tolima	Rovira	Colombia	1
+16973671	3.93472220000000	-75.02027780000000	Tolima	Saldaña	Colombia	1
+16973675	3.91666670000000	-75.50000000000000	Tolima	San Antonio	Colombia	1
+16973678	4.16666670000000	-75.08333330000000	Tolima	San Luis	Colombia	1
+16973686	4.75000000000000	-75.16666670000000	Tolima	Santa Isabel	Colombia	1
+16973770	4.08333330000000	-74.78333330000000	Tolima	Suárez	Colombia	1
+16973854	4.25000000000000	-75.16666670000000	Tolima	Valle de San Juan	Colombia	1
+16973861	4.75000000000000	-74.91666670000000	Tolima	Venadillo	Colombia	1
+16973870	5.00000000000000	-75.16666670000000	Tolima	Villahermosa	Colombia	1
+16973873	4.00000000000000	-74.58333330000000	Tolima	Villarrica	Colombia	1
+16976001	0.00000000000000	0.00000000000000	Valle del Cauca	Cali	Colombia	4
+16976020	4.66666670000000	-75.75000000000000	Valle del Cauca	Alcalá	Colombia	4
+16976036	4.17416670000000	-76.17027780000000	Valle del Cauca	Andalucía	Colombia	4
+16976041	4.79722220000000	-75995.00000000000000	Valle del Cauca	Ansermanuevo	Colombia	4
+16976054	4.70000000000000	-76.13333330000000	Valle del Cauca	Argelia	Colombia	4
+16976100	4.33333330000000	-76.33333330000000	Valle del Cauca	Bolívar	Colombia	4
+16976109	3.89333330000000	-77.06972220000000	Valle del Cauca	Buenaventura	Colombia	4
+511	0.00000000000000	0.00000000000000	\N	\N	Navidad (Christmas)	6
+16976111	0.00000000000000	0.00000000000000	Valle del Cauca	Guadalajara de Buga	Colombia	4
+16976113	4.20944440000000	-76.16027780000000	Valle del Cauca	Bugalagrande	Colombia	4
+16976122	4.33365917459535	-75.83424568176270	Valle del Cauca	Caicedonia	Colombia	4
+16976126	0.00000000000000	0.00000000000000	Valle del Cauca	Calima Darién	Colombia	4
+16976130	3.41305560000000	-76.35111110000000	Valle del Cauca	Candelaria	Colombia	4
+16976147	4.74638890000000	-75.91166670000000	Valle del Cauca	Cartago	Colombia	4
+16976233	3.66027780000000	-76.69277780000000	Valle del Cauca	Dagua	Colombia	4
+16976243	4.91666670000000	-76.08333330000000	Valle del Cauca	El Águila	Colombia	4
+16976246	4.75000000000000	-76.25000000000000	Valle del Cauca	El Cairo	Colombia	4
+16976248	3.66666670000000	-76.16666670000000	Valle del Cauca	El Cerrito	Colombia	4
+16976250	4.50000000000000	-76.25000000000000	Valle del Cauca	El Dovio	Colombia	4
+16976275	3.32750000000000	-76.23861110000000	Valle del Cauca	Florida	Colombia	4
+16976306	3.75000000000000	-76.16666670000000	Valle del Cauca	Ginebra	Colombia	4
+16976318	3.76944440000000	-76.33805560000000	Valle del Cauca	Guacarí	Colombia	4
+16976364	3.16666670000000	-76.58333330000000	Valle del Cauca	Jamundí	Colombia	4
+16976377	3.66666670000000	-76.58333330000000	Valle del Cauca	La Cumbre	Colombia	4
+16976400	4.53583330000000	-76.10666670000000	Valle del Cauca	La Unión	Colombia	4
+16976403	4.52388890000000	-76.04111110000000	Valle del Cauca	La Victoria	Colombia	4
+16976497	4.58333330000000	-75.91666670000000	Valle del Cauca	Obando	Colombia	4
+16976520	3.53944440000000	-76.30361110000000	Valle del Cauca	Palmira	Colombia	4
+16976563	3.42111110000000	-76.24472220000000	Valle del Cauca	Pradera	Colombia	4
+16976606	3.78333330000000	-76.50000000000000	Valle del Cauca	Restrepo	Colombia	4
+16976616	0.00000000000000	0.00000000000000	Valle del Cauca	Riofrio	Colombia	4
+16976622	4.41472220000000	-76.15472220000000	Valle del Cauca	Roldanillo	Colombia	4
+16976670	4.00000000000000	-76.16666670000000	Valle del Cauca	San Pedro	Colombia	4
+16976736	4.26888890000000	-75.93611110000000	Valle del Cauca	Sevilla	Colombia	4
+16976823	4.61166670000000	-76.08138890000000	Valle del Cauca	Toro	Colombia	4
+16976828	4.25000000000000	-76.33333330000000	Valle del Cauca	Trujillo	Colombia	4
+16976834	4.08666670000000	-76.20000000000000	Valle del Cauca	Tulúa	Colombia	4
+16976845	4.71666670000000	-75.75000000000000	Valle del Cauca	Ulloa	Colombia	4
+16976863	4.66666670000000	-76.25000000000000	Valle del Cauca	Versalles	Colombia	4
+16976869	3.69861110000000	-76.44916670000000	Valle del Cauca	Vijes	Colombia	4
+16976890	3.91666670000000	-76.33333330000000	Valle del Cauca	Yotoco	Colombia	4
+16976892	3585.00000000000000	-76.49583330000000	Valle del Cauca	Yumbo	Colombia	4
+16976895	4.39833330000000	-76.07722220000000	Valle del Cauca	Zarzal	Colombia	4
+16981001	7.09027780000000	-70.76166670000000	Arauca	Arauca	Colombia	3
+16981065	6.82194440000000	-71.32361110000000	Arauca	Arauquita	Colombia	3
+16981220	6.30305560000000	-70.20166670000000	Arauca	Cravo Norte	Colombia	3
+16981300	0.00000000000000	0.00000000000000	Arauca	Fortul	Colombia	3
+16981591	6.27805560000000	-71.10000000000000	Arauca	Puerto Rondón	Colombia	3
+16981736	6.92055560000000	-71.85333330000000	Arauca	Saravena	Colombia	3
+16981794	6.46416670000000	-71.72888890000000	Arauca	Tame	Colombia	3
+16985001	5.33944440000000	-72.39416670000000	Casanare	Yopal	Colombia	3
+16985010	5.17305560000000	-72.55472220000000	Casanare	Aguazul	Colombia	3
+16985015	0.00000000000000	0.00000000000000	Casanare	Chameza	Colombia	3
+16985125	6.15555560000000	-71.76555560000000	Casanare	Hato Corozal	Colombia	3
+16985136	6.18527780000000	-72.34444440000000	Casanare	La Salina	Colombia	3
+16985139	4.83333330000000	-72.33333330000000	Casanare	Maní	Colombia	3
+16985162	4.91666670000000	-72.83333330000000	Casanare	Monterrey	Colombia	3
+16985225	5.64055560000000	-72.19861110000000	Casanare	Nunchía	Colombia	3
+16985230	4.79416670000000	-71.34000000000000	Casanare	Orocué	Colombia	3
+16985250	5.88333330000000	-71.90000000000000	Casanare	Paz de Ariporo	Colombia	3
+16985263	5.67083330000000	-71.93000000000000	Casanare	Pore	Colombia	3
+16985279	5.33333330000000	-72.75000000000000	Casanare	Recetor	Colombia	3
+16985300	4.85361110000000	-73.04305560000000	Casanare	Sabanalarga	Colombia	3
+16985315	6.08333330000000	-72.08333330000000	Casanare	Sácama	Colombia	3
+16985325	0.00000000000000	0.00000000000000	Casanare	San Luis de Palenque	Colombia	3
+16985400	5.82972220000000	-72.16333330000000	Casanare	Támara	Colombia	3
+16985410	5.01861110000000	-72.75527780000000	Casanare	Tauramena	Colombia	3
+16985430	5.43055560000000	-71.63111110000000	Casanare	Trinidad	Colombia	3
+16985440	0.00000000000000	0.00000000000000	Casanare	Villa Nueva	Colombia	3
+16986001	1.14888890000000	-76.64777780000000	Putumayo	Mocoa	Colombia	3
+16986219	1.19361110000000	-76.97694440000000	Putumayo	Colón	Colombia	3
+16986320	0.69666670000000	-76.87472220000000	Putumayo	Orito	Colombia	3
+16986568	0.51583330000000	-76495.00000000000000	Putumayo	Puerto Asís	Colombia	3
+16986569	0.68388890000000	-76.58583330000000	Putumayo	Puerto Caicedo	Colombia	3
+16986571	0.97027780000000	-76.58583330000000	Putumayo	Puerto Guzmán	Colombia	3
+16986573	0.00000000000000	0.00000000000000	Putumayo	Puerto Leguizámo	Colombia	3
+16986749	1.18333330000000	-76.91666670000000	Putumayo	Sibundoy	Colombia	3
+16986755	1.17722220000000	-76.88305560000000	Putumayo	San Francisco	Colombia	3
+16986757	0.33944440000000	-76.88305560000000	Putumayo	San Miguel	Colombia	3
+16986760	1.15111110000000	-77.00750000000000	Putumayo	Santiago	Colombia	3
+16986865	0.00000000000000	0.00000000000000	Putumayo	Valle del Guamuez (La Hormiga)	Colombia	3
+16986885	1038.00000000000000	-76627.00000000000000	Putumayo	Villagarzón	Colombia	3
+16988001	6.83333330000000	-72.75000000000000	San Andrés	San Andrés	Colombia	3
+16988564	12.50000000000000	-81.75000000000000	San Andrés	Providencia	Colombia	3
+16994001	3.86527780000000	-67.92388890000000	Guainía	Inírida	Colombia	3
+16994343	0.00000000000000	0.00000000000000	Guainía	Barranco Minas	Colombia	3
+16994663	0.00000000000000	0.00000000000000	Guainía	Mapiripana	Colombia	3
+16994883	0.00000000000000	0.00000000000000	Guainía	San Felipe	Colombia	3
+16994884	11.01666670000000	-74.88333330000000	Guainía	Puerto Colombia	Colombia	3
+16994885	0.00000000000000	0.00000000000000	Guainía	La Guadalupe	Colombia	3
+16994886	0.00000000000000	0.00000000000000	Guainía	Cacahual	Colombia	3
+16994887	0.00000000000000	0.00000000000000	Guainía	Pana Pana (Campo Alegre)	Colombia	3
+16994888	0.00000000000000	0.00000000000000	Guainía	Morichal Nuevo	Colombia	3
+16995001	2.56833330000000	-72.64166670000000	Guaviare	San José del Guaviare	Colombia	3
+16995015	1.95972220000000	-72.65388890000000	Guaviare	Calamar	Colombia	3
+16995025	2.33055560000000	-72.62777780000000	Guaviare	El Retorno	Colombia	3
+16995200	1.33666670000000	-71.95111110000000	Guaviare	Miraflores	Colombia	3
+16997001	1.19833330000000	-70.17333330000000	Vaupés	Mitú	Colombia	3
+16997161	0.00000000000000	0.00000000000000	Vaupés	Caruru	Colombia	3
+16997511	0.00000000000000	0.00000000000000	Vaupés	Pacoa	Colombia	3
+16991405	0.00000000000000	0.00000000000000	Amazonas	La Chorrera	Colombia	5
+16991263	0.00000000000000	0.00000000000000	Amazonas	El Encanto	Colombia	5
+16991407	0.00000000000000	0.00000000000000	Amazonas	La Pedrera	Colombia	5
+16991430	4.52388890000000	-76.04111110000000	Amazonas	La Victoria	Colombia	5
+16991536	0.00000000000000	0.00000000000000	Amazonas	Puerto Arica	Colombia	5
+16991530	0.00000000000000	0.00000000000000	Amazonas	Puerto Alegría	Colombia	5
+16991540	-3.77027780000000	-70.38305560000000	Amazonas	Puerto Nariño	Colombia	5
+16991669	8.36361110000000	-72.40750000000000	Amazonas	Puerto Santander	Colombia	5
+16991798	0.00000000000000	0.00000000000000	Amazonas	Tarapacá	Colombia	5
+16997666	0.49388890000000	-69.66694440000000	Vaupés	Taraira	Colombia	3
+16997777	0.00000000000000	0.00000000000000	Vaupés	Papunaua (Morichal)	Colombia	3
+16997889	0.00000000000000	0.00000000000000	Vaupés	Yavaraté	Colombia	3
+16999001	6.18777780000000	-67.47305560000000	Vichada	Puerto Carreño	Colombia	3
+16999524	0.00000000000000	0.00000000000000	Vichada	Primavera	Colombia	3
+16999624	0.00000000000000	0.00000000000000	Vichada	Santa Rosalia	Colombia	3
+16999773	4.44444440000000	-69.80027780000000	Vichada	Cumaribo	Colombia	3
+16991001	-4.21527780000000	-69.94055560000000	Amazonas	Leticia	Colombia	5
+16991460	0.00000000000000	0.00000000000000	Amazonas	Miriti Paraná	Colombia	5
+16905	0.00000000000000	0.00000000000000	Antioquia	\N	Colombia	1
+16908	0.00000000000000	0.00000000000000	Atlántico	\N	Colombia	2
+16976	0.00000000000000	0.00000000000000	Valle del Cauca	\N	Colombia	4
+0	0.00000000000000	0.00000000000000	\N	\N	N/A	6
+412	0.00000000000000	0.00000000000000	\N	\N	Kirguizistan	6
+413	0.00000000000000	0.00000000000000	\N	\N	Kuwait	6
+420	0.00000000000000	0.00000000000000	\N	\N	Laos, Republica Democratica de	6
+426	0.00000000000000	0.00000000000000	\N	\N	Lesotho	6
+429	0.00000000000000	0.00000000000000	\N	\N	Letonia	6
+43	0.00000000000000	0.00000000000000	\N	\N	Antigua y Barbuda	6
+431	0.00000000000000	0.00000000000000	\N	\N	Libano	6
+434	0.00000000000000	0.00000000000000	\N	\N	Liberia	6
+438	0.00000000000000	0.00000000000000	\N	\N	Libia (Incluye Fezzan)	6
+440	0.00000000000000	0.00000000000000	\N	\N	Liechtenstein	6
+443	0.00000000000000	0.00000000000000	\N	\N	Lituania	6
+445	0.00000000000000	0.00000000000000	\N	\N	Luxemburgo	6
+447	0.00000000000000	0.00000000000000	\N	\N	Macao	6
+448	0.00000000000000	0.00000000000000	\N	\N	Macedonia	6
+450	0.00000000000000	0.00000000000000	\N	\N	Madagascar	6
+455	0.00000000000000	0.00000000000000	\N	\N	Malasia	6
+458	0.00000000000000	0.00000000000000	\N	\N	Malawi	6
+461	0.00000000000000	0.00000000000000	\N	\N	Maldivas	6
+464	0.00000000000000	0.00000000000000	\N	\N	Mali	6
+93	0.00000000000000	0.00000000000000	\N	\N	Birmania (Myanmar)	6
+467	0.00000000000000	0.00000000000000	\N	\N	Malta	6
+469	0.00000000000000	0.00000000000000	\N	\N	Marianas del Norte, Islas	6
+47	0.00000000000000	0.00000000000000	\N	\N	Antillas Holandesas	6
+16999	0.00000000000000	0.00000000000000	Vichada	\N	Colombia	3
+16991	0.00000000000000	0.00000000000000	Amazonas	\N	Colombia	5
+16913	0.00000000000000	0.00000000000000	Bolívar	\N	Colombia	2
+16915	0.00000000000000	0.00000000000000	Boyacá	\N	Colombia	1
+16917	0.00000000000000	0.00000000000000	Caldas	\N	Colombia	1
+16918	0.00000000000000	0.00000000000000	Caquetá	\N	Colombia	3
+16919	0.00000000000000	0.00000000000000	Cauca	\N	Colombia	4
+16920	0.00000000000000	0.00000000000000	Cesar	\N	Colombia	2
+16923	0.00000000000000	0.00000000000000	Córdoba	\N	Colombia	2
+16925	0.00000000000000	0.00000000000000	Cundinamarca	\N	Colombia	1
+16927	0.00000000000000	0.00000000000000	Chocó	\N	Colombia	4
+16941	0.00000000000000	0.00000000000000	Huila	\N	Colombia	1
+16944	0.00000000000000	0.00000000000000	La Guajira	\N	Colombia	2
+16947	0.00000000000000	0.00000000000000	Magdalena	\N	Colombia	2
+16950	0.00000000000000	0.00000000000000	Meta	\N	Colombia	3
+16952	0.00000000000000	0.00000000000000	Nariño	\N	Colombia	4
+16954	0.00000000000000	0.00000000000000	Norte de Santander	\N	Colombia	1
+16963	0.00000000000000	0.00000000000000	Quindío	\N	Colombia	1
+16966	0.00000000000000	0.00000000000000	Risaralda	\N	Colombia	1
+16968	0.00000000000000	0.00000000000000	Santander	\N	Colombia	1
+16970	0.00000000000000	0.00000000000000	Sucre	\N	Colombia	2
+16973	0.00000000000000	0.00000000000000	Tolima	\N	Colombia	1
+16981	0.00000000000000	0.00000000000000	Arauca	\N	Colombia	3
+16985	0.00000000000000	0.00000000000000	Casanare	\N	Colombia	3
+16986	0.00000000000000	0.00000000000000	Putumayo	\N	Colombia	3
+16988	0.00000000000000	0.00000000000000	San Andrés	\N	Colombia	3
+16994	0.00000000000000	0.00000000000000	Guainía	\N	Colombia	3
+16995	0.00000000000000	0.00000000000000	Guaviare	\N	Colombia	3
+16997	0.00000000000000	0.00000000000000	Vaupés	\N	Colombia	3
+91	0.00000000000000	0.00000000000000	\N	\N	Belorus	6
+472	0.00000000000000	0.00000000000000	\N	\N	Marshall, Islas	6
+477	0.00000000000000	0.00000000000000	\N	\N	Martinica	6
+578	0.00000000000000	0.00000000000000	\N	\N	Palau, Islas	6
+599	0.00000000000000	0.00000000000000	\N	\N	Polinesia Francesa	6
+603	0.00000000000000	0.00000000000000	\N	\N	Polonia	6
+607	0.00000000000000	0.00000000000000	\N	\N	Portugal	6
+611	0.00000000000000	0.00000000000000	\N	\N	Puerto Rico	6
+618	0.00000000000000	0.00000000000000	\N	\N	Qatar	6
+628	0.00000000000000	0.00000000000000	\N	\N	Reino Unido	6
+63	0.00000000000000	0.00000000000000	\N	\N	Argentina	6
+640	0.00000000000000	0.00000000000000	\N	\N	Republica Centroafricana	6
+644	0.00000000000000	0.00000000000000	\N	\N	Republica Checa	6
+647	0.00000000000000	0.00000000000000	\N	\N	Republica Dominicana	6
+660	0.00000000000000	0.00000000000000	\N	\N	Reunion	6
+665	0.00000000000000	0.00000000000000	\N	\N	Zimbabwe	6
+670	0.00000000000000	0.00000000000000	\N	\N	Rumania	6
+97	0.00000000000000	0.00000000000000	\N	\N	Bolivia	6
+675	0.00000000000000	0.00000000000000	\N	\N	Rwanda	6
+676	0.00000000000000	0.00000000000000	\N	\N	Rusia	6
+677	0.00000000000000	0.00000000000000	\N	\N	Salomsn, Islas	6
+998	0.00000000000000	0.00000000000000	\N	\N	Comunidad Europea	6
+685	0.00000000000000	0.00000000000000	\N	\N	Sahara Occidental	6
+69	0.00000000000000	0.00000000000000	\N	\N	Australia	6
+690	0.00000000000000	0.00000000000000	\N	\N	Samoa Norteamericana	6
+695	0.00000000000000	0.00000000000000	\N	\N	San Cristobal y Nieves	6
+697	0.00000000000000	0.00000000000000	\N	\N	San Marino	6
+700	0.00000000000000	0.00000000000000	\N	\N	San Pedro y Miguelon	6
+705	0.00000000000000	0.00000000000000	\N	\N	San Vicente y Las Granadina	6
+710	0.00000000000000	0.00000000000000	\N	\N	Santa Elena	6
+715	0.00000000000000	0.00000000000000	\N	\N	Santa Lucia	6
+72	0.00000000000000	0.00000000000000	\N	\N	Austria	6
+720	0.00000000000000	0.00000000000000	\N	\N	Santo Tome y Principe	6
+728	0.00000000000000	0.00000000000000	\N	\N	Senegal	6
+731	0.00000000000000	0.00000000000000	\N	\N	Seychelles	6
+735	0.00000000000000	0.00000000000000	\N	\N	Sierra Leona	6
+74	0.00000000000000	0.00000000000000	\N	\N	Azerbaijan	6
+741	0.00000000000000	0.00000000000000	\N	\N	Singapur	6
+744	0.00000000000000	0.00000000000000	\N	\N	Siria, Republica Arabe	6
+748	0.00000000000000	0.00000000000000	\N	\N	Somalia	6
+750	0.00000000000000	0.00000000000000	\N	\N	Sri Lanka	6
+756	0.00000000000000	0.00000000000000	\N	\N	Sudafrica, Republica de	6
+759	0.00000000000000	0.00000000000000	\N	\N	Sudan	6
+764	0.00000000000000	0.00000000000000	\N	\N	Suecia	6
+767	0.00000000000000	0.00000000000000	\N	\N	Suiza	6
+77	0.00000000000000	0.00000000000000	\N	\N	Bahamas	6
+770	0.00000000000000	0.00000000000000	\N	\N	Surinam	6
+773	0.00000000000000	0.00000000000000	\N	\N	Swazilandia	6
+774	0.00000000000000	0.00000000000000	\N	\N	Tadjikistan	6
+776	0.00000000000000	0.00000000000000	\N	\N	Tailandia	6
+780	0.00000000000000	0.00000000000000	\N	\N	Tanzania, Republica Unida de	6
+783	0.00000000000000	0.00000000000000	\N	\N	Djibouti	6
+786	0.00000000000000	0.00000000000000	\N	\N	Territorio Antartico Britanico	6
+787	0.00000000000000	0.00000000000000	\N	\N	Territorio Britanico	6
+788	0.00000000000000	0.00000000000000	\N	\N	Timor del Este	6
+80	0.00000000000000	0.00000000000000	\N	\N	Bahrein	6
+800	0.00000000000000	0.00000000000000	\N	\N	Togo	6
+805	0.00000000000000	0.00000000000000	\N	\N	Tokelau	6
+81	0.00000000000000	0.00000000000000	\N	\N	Bangladesh	6
+810	0.00000000000000	0.00000000000000	\N	\N	Tonga	6
+815	0.00000000000000	0.00000000000000	\N	\N	Trinidad y Tobago	6
+820	0.00000000000000	0.00000000000000	\N	\N	Tunicia	6
+823	0.00000000000000	0.00000000000000	\N	\N	Turcas y Caicos, Islas	6
+825	0.00000000000000	0.00000000000000	\N	\N	Turkmenistan	6
+827	0.00000000000000	0.00000000000000	\N	\N	Turquia	6
+828	0.00000000000000	0.00000000000000	\N	\N	Tuvalu	6
+83	0.00000000000000	0.00000000000000	\N	\N	Barbados	6
+830	0.00000000000000	0.00000000000000	\N	\N	Ucrania	6
+833	0.00000000000000	0.00000000000000	\N	\N	Uganda	6
+845	0.00000000000000	0.00000000000000	\N	\N	Uruguay	6
+847	0.00000000000000	0.00000000000000	\N	\N	Uzbekistan	6
+850	0.00000000000000	0.00000000000000	\N	\N	Venezuela	6
+855	0.00000000000000	0.00000000000000	\N	\N	Vietnam	6
+863	0.00000000000000	0.00000000000000	\N	\N	Virgenes, Islas (Britanicas)	6
+866	0.00000000000000	0.00000000000000	\N	\N	Virgenes, Islas (Norteamericanas)	6
+87	0.00000000000000	0.00000000000000	\N	\N	Belgica	6
+870	0.00000000000000	0.00000000000000	\N	\N	Fiji	6
+873	0.00000000000000	0.00000000000000	\N	\N	Wake, Isla	6
+875	0.00000000000000	0.00000000000000	\N	\N	Wallis y Fortuna, Islas	6
+88	0.00000000000000	0.00000000000000	\N	\N	Belice	6
+880	0.00000000000000	0.00000000000000	\N	\N	Yemen	6
+885	0.00000000000000	0.00000000000000	\N	\N	Yugoslavia	6
+888	0.00000000000000	0.00000000000000	\N	\N	Zaire	6
+890	0.00000000000000	0.00000000000000	\N	\N	Zambia	6
+895	0.00000000000000	0.00000000000000	\N	\N	Zona Canal de Panama	6
+897	0.00000000000000	0.00000000000000	\N	\N	Zona Neutral (Palesta)	6
+90	0.00000000000000	0.00000000000000	\N	\N	Bermudas	6
+999	0.00000000000000	0.00000000000000	\N	\N	No Declarados	6
+1	0.00000000000000	0.00000000000000	\N	\N	Nive, Isla	6
+101	0.00000000000000	0.00000000000000	\N	\N	Botswana	6
+105	0.00000000000000	0.00000000000000	\N	\N	Brasil	6
+108	0.00000000000000	0.00000000000000	\N	\N	Brunei Darussalam	6
+111	0.00000000000000	0.00000000000000	\N	\N	Bulgaria	6
+115	0.00000000000000	0.00000000000000	\N	\N	Burundi	6
+119	0.00000000000000	0.00000000000000	\N	\N	Butan	6
+127	0.00000000000000	0.00000000000000	\N	\N	Cabo Verde	6
+13	0.00000000000000	0.00000000000000	\N	\N	Afganistan	6
+137	0.00000000000000	0.00000000000000	\N	\N	Caiman, Islas	6
+141	0.00000000000000	0.00000000000000	\N	\N	Kampuchea (Camboya)	6
+145	0.00000000000000	0.00000000000000	\N	\N	Camerun, Republica Unitaria	6
+149	0.00000000000000	0.00000000000000	\N	\N	Canada	6
+155	0.00000000000000	0.00000000000000	\N	\N	Canal (Normandas), Islas del	6
+157	0.00000000000000	0.00000000000000	\N	\N	Canton y Enderbury, Islas	6
+159	0.00000000000000	0.00000000000000	\N	\N	Ciudad del Vaticano	6
+165	0.00000000000000	0.00000000000000	\N	\N	Cocos (Keeling), Islas	6
+169	0.00000000000000	0.00000000000000	\N	\N	Colombia	6
+586	0.00000000000000	0.00000000000000	\N	\N	Paraguay	6
+589	0.00000000000000	0.00000000000000	\N	\N	Peru	6
+59	0.00000000000000	0.00000000000000	\N	\N	Argelia	6
+593	0.00000000000000	0.00000000000000	\N	\N	Pitcairn, Isla	6
+17	0.00000000000000	0.00000000000000	\N	\N	Albania	6
+173	0.00000000000000	0.00000000000000	\N	\N	Comoras	6
+177	0.00000000000000	0.00000000000000	\N	\N	Congo	6
+183	0.00000000000000	0.00000000000000	\N	\N	Cook, Islas	6
+187	0.00000000000000	0.00000000000000	\N	\N	Corea del Norte, Republica de	6
+190	0.00000000000000	0.00000000000000	\N	\N	Corea del Sur, Republica de	6
+193	0.00000000000000	0.00000000000000	\N	\N	Costa de Marfil	6
+196	0.00000000000000	0.00000000000000	\N	\N	Costa Rica	6
+198	0.00000000000000	0.00000000000000	\N	\N	Croacia	6
+199	0.00000000000000	0.00000000000000	\N	\N	Cuba	6
+203	0.00000000000000	0.00000000000000	\N	\N	Chad	6
+211	0.00000000000000	0.00000000000000	\N	\N	Chile	6
+215	0.00000000000000	0.00000000000000	\N	\N	China	6
+218	0.00000000000000	0.00000000000000	\N	\N	Taiwan (Formosa)	6
+221	0.00000000000000	0.00000000000000	\N	\N	Chipre	6
+229	0.00000000000000	0.00000000000000	\N	\N	Benin	6
+23	0.00000000000000	0.00000000000000	\N	\N	Alemania	6
+232	0.00000000000000	0.00000000000000	\N	\N	Dinamarca	6
+235	0.00000000000000	0.00000000000000	\N	\N	Dominica	6
+239	0.00000000000000	0.00000000000000	\N	\N	Ecuador	6
+240	0.00000000000000	0.00000000000000	\N	\N	Egipto	6
+242	0.00000000000000	0.00000000000000	\N	\N	El Salvador	6
+243	0.00000000000000	0.00000000000000	\N	\N	Eritrea	6
+244	0.00000000000000	0.00000000000000	\N	\N	Emiratos Arabes Unidos	6
+245	0.00000000000000	0.00000000000000	\N	\N	España	6
+246	0.00000000000000	0.00000000000000	\N	\N	Eslovaquia	6
+247	0.00000000000000	0.00000000000000	\N	\N	Eslovenia	6
+249	0.00000000000000	0.00000000000000	\N	\N	Estados Unidos	6
+251	0.00000000000000	0.00000000000000	\N	\N	Estonia	6
+253	0.00000000000000	0.00000000000000	\N	\N	Etiopia	6
+259	0.00000000000000	0.00000000000000	\N	\N	Feroe, Islas	6
+26	0.00000000000000	0.00000000000000	\N	\N	Armenia	6
+267	0.00000000000000	0.00000000000000	\N	\N	Filipinas	6
+27	0.00000000000000	0.00000000000000	\N	\N	Aruba	6
+271	0.00000000000000	0.00000000000000	\N	\N	Finlandia	6
+275	0.00000000000000	0.00000000000000	\N	\N	Francia	6
+281	0.00000000000000	0.00000000000000	\N	\N	Gabon	6
+285	0.00000000000000	0.00000000000000	\N	\N	Gambia	6
+286	0.00000000000000	0.00000000000000	\N	\N	Gaza y Jerico	6
+287	0.00000000000000	0.00000000000000	\N	\N	Georgia	6
+289	0.00000000000000	0.00000000000000	\N	\N	Ghana	6
+29	0.00000000000000	0.00000000000000	\N	\N	Bosnia-Herzegovina	6
+293	0.00000000000000	0.00000000000000	\N	\N	Gibraltar	6
+297	0.00000000000000	0.00000000000000	\N	\N	Granada	6
+301	0.00000000000000	0.00000000000000	\N	\N	Grecia	6
+305	0.00000000000000	0.00000000000000	\N	\N	Groenlandia	6
+309	0.00000000000000	0.00000000000000	\N	\N	Guadalupe	6
+31	0.00000000000000	0.00000000000000	\N	\N	Burkina Fasso	6
+313	0.00000000000000	0.00000000000000	\N	\N	Guam	6
+317	0.00000000000000	0.00000000000000	\N	\N	Guatemala	6
+325	0.00000000000000	0.00000000000000	\N	\N	Guayana Francesa	6
+329	0.00000000000000	0.00000000000000	\N	\N	Guinea	6
+331	0.00000000000000	0.00000000000000	\N	\N	Guinea Ecuatorial	6
+334	0.00000000000000	0.00000000000000	\N	\N	Guinea-Bissau	6
+337	0.00000000000000	0.00000000000000	\N	\N	Guyana	6
+341	0.00000000000000	0.00000000000000	\N	\N	Haiti	6
+345	0.00000000000000	0.00000000000000	\N	\N	Honduras	6
+351	0.00000000000000	0.00000000000000	\N	\N	Hong Kong	6
+355	0.00000000000000	0.00000000000000	\N	\N	Hungria	6
+361	0.00000000000000	0.00000000000000	\N	\N	India	6
+365	0.00000000000000	0.00000000000000	\N	\N	Indonesia	6
+369	0.00000000000000	0.00000000000000	\N	\N	Irak	6
+37	0.00000000000000	0.00000000000000	\N	\N	Andorra	6
+372	0.00000000000000	0.00000000000000	\N	\N	Iran, Republica Islamica del	6
+375	0.00000000000000	0.00000000000000	\N	\N	Irlanda (Eire)	6
+379	0.00000000000000	0.00000000000000	\N	\N	Islandia	6
+383	0.00000000000000	0.00000000000000	\N	\N	Israel	6
+386	0.00000000000000	0.00000000000000	\N	\N	Italia	6
+391	0.00000000000000	0.00000000000000	\N	\N	Jamaica	6
+395	0.00000000000000	0.00000000000000	\N	\N	Johnston, Isla	6
+399	0.00000000000000	0.00000000000000	\N	\N	Japon	6
+40	0.00000000000000	0.00000000000000	\N	\N	Angola	6
+403	0.00000000000000	0.00000000000000	\N	\N	Jordania	6
+406	0.00000000000000	0.00000000000000	\N	\N	Kazajstan	6
+41	0.00000000000000	0.00000000000000	\N	\N	Anguilla	6
+410	0.00000000000000	0.00000000000000	\N	\N	Kenya	6
+411	0.00000000000000	0.00000000000000	\N	\N	Kiribati	6
+485	0.00000000000000	0.00000000000000	\N	\N	Mauricio	6
+488	0.00000000000000	0.00000000000000	\N	\N	Mauritania	6
+493	0.00000000000000	0.00000000000000	\N	\N	Mexico	6
+494	0.00000000000000	0.00000000000000	\N	\N	Micronesia, Estados Federados de	6
+495	0.00000000000000	0.00000000000000	\N	\N	Midway, Islas	6
+496	0.00000000000000	0.00000000000000	\N	\N	Moldavia	6
+497	0.00000000000000	0.00000000000000	\N	\N	Mongolia	6
+498	0.00000000000000	0.00000000000000	\N	\N	Monaco	6
+501	0.00000000000000	0.00000000000000	\N	\N	Monserrat, Isla	6
+517	0.00000000000000	0.00000000000000	\N	\N	Nepal	6
+521	0.00000000000000	0.00000000000000	\N	\N	Nicaragua	6
+525	0.00000000000000	0.00000000000000	\N	\N	Niger	6
+528	0.00000000000000	0.00000000000000	\N	\N	Nigeria	6
+53	0.00000000000000	0.00000000000000	\N	\N	Arabia Saudita	6
+531	0.00000000000000	0.00000000000000	\N	\N	Niue, Isla	6
+535	0.00000000000000	0.00000000000000	\N	\N	Norfolk, Isla	6
+538	0.00000000000000	0.00000000000000	\N	\N	Noruega	6
+542	0.00000000000000	0.00000000000000	\N	\N	Nueva Caledonia	6
+545	0.00000000000000	0.00000000000000	\N	\N	Papuasia Nueva Guinea	6
+548	0.00000000000000	0.00000000000000	\N	\N	Nueva Zelandia	6
+551	0.00000000000000	0.00000000000000	\N	\N	Vanuatu	6
+556	0.00000000000000	0.00000000000000	\N	\N	Oman	6
+566	0.00000000000000	0.00000000000000	\N	\N	Pacifico, Islas del	6
+573	0.00000000000000	0.00000000000000	\N	\N	Paises Bajos (Holanda)	6
+576	0.00000000000000	0.00000000000000	\N	\N	Pakistan	6
+\.
+
+
+--
+-- TOC entry 2858 (class 0 OID 16397)
+-- Dependencies: 197
+-- Data for Name: nivel; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.nivel (id, nombre, descripcion, duracion) FROM stdin;
+4	Formación Titulada	Programas a la medida para las empresas. IMPORTANTE, Recuerde que debe conocer el código privado para inscribirse  	6
+1	Formación Corta	Programas de formación complementaria de corta duración	5
+\.
+
+
+--
+-- TOC entry 2867 (class 0 OID 16503)
+-- Dependencies: 206
+-- Data for Name: oferta; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.oferta (id, fecha_incio_inscripcion, fecha_fin_inscripcion, fecha_inicio_periodo, fecha_fin_periodo, programa_id, jornada_id, centro_formacion_id, imagen_poster, imagen_banner) FROM stdin;
+2	2020-04-02	2020-04-02	2020-04-02	2020-04-02	5	1	1	imagen_poster_2.jpg	imagen_banner_2.jpg
+1	2019-08-01	2019-08-31	2019-09-01	2020-05-31	6	2	1	imagen_poster_1.jpg	imagen_banner_1.jpg
+3	2020-04-03	2020-04-03	2020-04-03	2020-04-03	4	3	1	imagen_poster_3.jpg	imagen_banner_3.jpg
+\.
+
+
+--
+-- TOC entry 2860 (class 0 OID 16408)
+-- Dependencies: 199
+-- Data for Name: programa; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.programa (nombre, nivel_id, id, descripcion, prerrequisito, habilidades) FROM stdin;
+NEGOCIACION INTERNACIONAL	4	1	\N	\N	\N
+DISEÑO DE ELEMENTOS MECÁNICOS PARA SU FABRICACIÓN CON MAQUINAS HERRAMIENTAS CNC	4	2	\N	\N	\N
+GESTIÓN INTEGRADA DE LA CALIDAD, MEDIO AMBIENTE,	4	3	\N	\N	\N
+ESPECIALIZACIÓN EN METODOLOGÍAS DE DESARROLLO DE CALIDAD DE SOFTWARE	4	6	El Centro de Procesos Industriales y Construcción les invita a especializarse en Metodologías de Desarrollo de Calidad de Software, se trabajara desarrollo móvil y web full stack en las siguientes plataformas:	Tecnologos ADSI, Tecnologos en desarrollo de software, Ingenieros de sistemas y programas afines	- Presentación instructores\n- Presentación competencias y resultados de aprendizaje a desarrollar\n- Contenido y forma de desarrollo del programa\n- Tecnologías a implementar (Ionic, Unity y Laravel)
+SEGURIDAD Y SALUD OCUPACIONAL	1	4	\N	\N	\N
+REGENCIA DE FARMACIA	4	5	\N	\N	\N
+\.
+
+
+--
+-- TOC entry 2862 (class 0 OID 16429)
+-- Dependencies: 201
+-- Data for Name: region; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.region (id, nombre) FROM stdin;
+6	No Aplica 
+1	Zona Andina
+2	Zona Caribe 
+3	Zona Amazónica
+4	Zona Pacifica 
+5	Zona de la Orinoquia 
+\.
+
+
+--
+-- TOC entry 2891 (class 0 OID 0)
+-- Dependencies: 203
+-- Name: centro_formación_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."centro_formación_id_seq"', 5, true);
+
+
+--
+-- TOC entry 2892 (class 0 OID 0)
+-- Dependencies: 207
+-- Name: jornada_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.jornada_id_seq', 3, true);
+
+
+--
+-- TOC entry 2893 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: nivel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.nivel_id_seq', 1, false);
+
+
+--
+-- TOC entry 2894 (class 0 OID 0)
+-- Dependencies: 205
+-- Name: oferta_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.oferta_id_seq', 3, true);
+
+
+--
+-- TOC entry 2895 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: programa_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.programa_id_seq', 6, true);
+
+
+--
+-- TOC entry 2896 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: region_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.region_id_seq', 1, false);
+
+
+--
+-- TOC entry 2725 (class 2606 OID 16487)
+-- Name: centro_formacion centro_formación_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.centro_formacion
+    ADD CONSTRAINT "centro_formación_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2729 (class 2606 OID 16519)
+-- Name: jornada jornada_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.jornada
+    ADD CONSTRAINT jornada_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2717 (class 2606 OID 16405)
+-- Name: nivel nivel_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nivel
+    ADD CONSTRAINT nivel_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2727 (class 2606 OID 16508)
+-- Name: oferta oferta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oferta
+    ADD CONSTRAINT oferta_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2723 (class 2606 OID 16495)
+-- Name: localidad pk_localidad; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.localidad
+    ADD CONSTRAINT pk_localidad PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2719 (class 2606 OID 16416)
+-- Name: programa programa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.programa
+    ADD CONSTRAINT programa_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2721 (class 2606 OID 16437)
+-- Name: region region_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.region
+    ADD CONSTRAINT region_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2732 (class 2606 OID 16496)
+-- Name: centro_formacion fk_centro_formacion_localidad; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.centro_formacion
+    ADD CONSTRAINT fk_centro_formacion_localidad FOREIGN KEY (localidad_id) REFERENCES public.localidad(id);
+
+
+--
+-- TOC entry 2731 (class 2606 OID 16467)
+-- Name: localidad fk_localidad_region; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.localidad
+    ADD CONSTRAINT fk_localidad_region FOREIGN KEY (region_id) REFERENCES public.region(id);
+
+
+--
+-- TOC entry 2735 (class 2606 OID 16530)
+-- Name: oferta fk_oferta_centro_formacion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oferta
+    ADD CONSTRAINT fk_oferta_centro_formacion FOREIGN KEY (centro_formacion_id) REFERENCES public.centro_formacion(id) NOT VALID;
+
+
+--
+-- TOC entry 2734 (class 2606 OID 16525)
+-- Name: oferta fk_oferta_jornada; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oferta
+    ADD CONSTRAINT fk_oferta_jornada FOREIGN KEY (jornada_id) REFERENCES public.jornada(id) NOT VALID;
+
+
+--
+-- TOC entry 2733 (class 2606 OID 16520)
+-- Name: oferta fk_oferta_programa; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oferta
+    ADD CONSTRAINT fk_oferta_programa FOREIGN KEY (programa_id) REFERENCES public.programa(id) NOT VALID;
+
+
+--
+-- TOC entry 2730 (class 2606 OID 16417)
+-- Name: programa fk_programa_nivel; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.programa
+    ADD CONSTRAINT fk_programa_nivel FOREIGN KEY (nivel_id) REFERENCES public.nivel(id) NOT VALID;
+
+
+-- Completed on 2020-04-28 01:10:05
+
+--
+-- PostgreSQL database dump complete
+--
+
