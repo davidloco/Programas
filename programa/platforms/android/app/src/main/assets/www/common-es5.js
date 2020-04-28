@@ -1335,6 +1335,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           return this.http.get("/oferts/".concat(id));
         }
       }, {
+        key: "getOfertsByIdNivel",
+        value: function getOfertsByIdNivel(id) {
+          return this.http.get("/oferts/nivel/".concat(id));
+        }
+      }, {
         key: "getProgramas",
         value: function getProgramas() {
           return this.http.get("/programas/");

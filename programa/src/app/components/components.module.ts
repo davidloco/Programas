@@ -12,8 +12,12 @@ import { OfertasPosterComponent } from './ofertas-poster/ofertas-poster.componen
 import { FooterInscribirseComponent } from './footer-inscribirse/footer-inscribirse.component';
 import { NivelesComponent } from './niveles/niveles.component';
 import { NivelComponent } from './nivel/nivel.component';
+import { OfertaDetalleComponent } from './oferta-detalle/oferta-detalle.component';
 
 @NgModule({
+  entryComponents: [
+    OfertaDetalleComponent
+  ],
   declarations: [
     HeaderComponent,
     FooterComponent,
@@ -24,7 +28,8 @@ import { NivelComponent } from './nivel/nivel.component';
     OfertasComponent,
     FooterInscribirseComponent,
     NivelComponent,
-    NivelesComponent
+    NivelesComponent,
+    OfertaDetalleComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +44,8 @@ import { NivelComponent } from './nivel/nivel.component';
     NivelesComponent,
     OfertasPosterComponent,
     OfertasComponent,
-    FooterInscribirseComponent
+    FooterInscribirseComponent,
+    OfertaDetalleComponent
   ]
 })
 export class ComponentsModule { }

@@ -11,6 +11,7 @@ const {
     getOferts,
     getOfertsById,
     getOfertsByLike,
+    getOfertsByIdNivel,
     //Programas
     getProgramaById,
     getProgramasByLike,
@@ -31,6 +32,7 @@ router.get('/niveles/find/:nombre', getNivelesByLike);
 router.get('/oferts', getOferts);
 router.get('/oferts/:id', getOfertsById);
 router.get('/oferts/find/:nombre', getOfertsByLike);
+router.get('/oferts/nivel/:id', getOfertsByIdNivel);
 
 //Programas
 router.get('/programas', getProgramas);

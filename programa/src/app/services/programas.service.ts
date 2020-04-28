@@ -31,6 +31,10 @@ export class ProgramasService {
     return this.http.get<OfertaObject>(`/oferts/${id}`);
   }
 
+  getOfertsByIdNivel(id){
+    return this.http.get<OfertaObject>(`/oferts/nivel/${id}`);
+  }
+
   getProgramas() {
     return this.http.get<ProgramaObject>(`/programas/`);
   }

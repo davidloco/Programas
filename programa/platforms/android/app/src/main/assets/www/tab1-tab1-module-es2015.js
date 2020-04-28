@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content slot=\"middle\">\n\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <h3>Ofertas</h3>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <app-ofertas [ofertas]=\"ofertas\"></app-ofertas>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <h3>Ofertas Poster</h3>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  \n  <app-ofertas-poster [ofertas]=\"ofertas\"></app-ofertas-poster>\n  \n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content slot=\"middle\">\n  \n  <ion-segment scrollable mode=\"md\" (ionChange)=\"cambioNivel($event)\">\n    <ion-segment-button mode=\"md\" *ngFor=\"let nivel of niveles\" [value]=\"nivel.id\">\n      <ion-label text-capitalize>{{ nivel.nombre }}</ion-label>\n    </ion-segment-button>\n  </ion-segment>\n\n  <app-ofertas [ofertas]=\"ofertas\"></app-ofertas>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <h3>Ofertas Top</h3>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  \n  <app-ofertas-poster [ofertas]=\"ofertas\"></app-ofertas-poster>\n  \n</ion-content>");
 
 /***/ }),
 
@@ -94,13 +94,24 @@ let Tab1Page = class Tab1Page {
     constructor(programasServices) {
         this.programasServices = programasServices;
         this.ofertas = [];
+        this.niveles = [];
     }
     ngOnInit() {
-        this.llenarOfertas();
+        this.llenarNiveles();
     }
-    llenarOfertas() {
-        this.programasServices.getOferts().subscribe(resp => {
+    cambioNivel(ev) {
+        this.ofertas = [];
+        this.llenarOfertas(ev.target.value);
+    }
+    llenarOfertas(nivel) {
+        this.programasServices.getOfertsByIdNivel(nivel).subscribe(resp => {
             this.ofertas.push(...resp.oferta);
+        });
+    }
+    llenarNiveles() {
+        this.programasServices.getTopHeadlines().subscribe(resp => {
+            this.niveles.push(...resp.nivel);
+            this.llenarOfertas(this.niveles[0].id);
         });
     }
 };

@@ -767,6 +767,9 @@ let ProgramasService = class ProgramasService {
     getOfertsFind(id) {
         return this.http.get(`/oferts/${id}`);
     }
+    getOfertsByIdNivel(id) {
+        return this.http.get(`/oferts/nivel/${id}`);
+    }
     getProgramas() {
         return this.http.get(`/programas/`);
     }

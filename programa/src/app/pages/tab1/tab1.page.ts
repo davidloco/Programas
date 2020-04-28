@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgramasService } from 'src/app/services/programas.service';
 import { Oferta } from 'src/app/interfaces/ofertInterfaces';
+import { Nivel } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-tab1',
@@ -11,16 +12,30 @@ import { Oferta } from 'src/app/interfaces/ofertInterfaces';
 export class Tab1Page implements OnInit {
 
   ofertas: Oferta[] = [];
+  niveles: Nivel[] = [];
 
   constructor(private programasServices: ProgramasService) { }
 
   ngOnInit() {
-    this.llenarOfertas();
+    this.llenarNiveles();    
   }
 
-  llenarOfertas() {
-    this.programasServices.getOferts().subscribe(resp => {
+  cambioNivel(ev) {
+    this.ofertas = [];
+    this.llenarOfertas(ev.target.value);
+  }
+
+  llenarOfertas(nivel) {
+    this.programasServices.getOfertsByIdNivel(nivel).subscribe(resp => {
       this.ofertas.push(...resp.oferta);
     });
+  }
+
+  llenarNiveles() {
+    this.programasServices.getTopHeadlines().subscribe(resp => {
+      this.niveles.push(...resp.nivel);
+      this.llenarOfertas(this.niveles[0].id);
+    });
+    
   }
 }

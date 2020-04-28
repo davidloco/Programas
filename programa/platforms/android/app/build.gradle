@@ -182,6 +182,7 @@ task cdvPrintProps {
 }
 
 android {
+	buildToolsVersion "23.0.2"
     defaultConfig {
         versionCode cdvVersionCode ?: new BigInteger("" + privateHelpers.extractIntFromManifest("versionCode"))
         applicationId privateHelpers.extractStringFromManifest("package")

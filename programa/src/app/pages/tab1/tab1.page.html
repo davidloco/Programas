@@ -1,21 +1,19 @@
 <app-header></app-header>
 
 <ion-content slot="middle">
-
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <h3>Ofertas</h3>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  
+  <ion-segment scrollable mode="md" (ionChange)="cambioNivel($event)">
+    <ion-segment-button mode="md" *ngFor="let nivel of niveles" [value]="nivel.id">
+      <ion-label text-capitalize>{{ nivel.nombre }}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
   <app-ofertas [ofertas]="ofertas"></app-ofertas>
 
   <ion-grid>
     <ion-row>
       <ion-col>
-        <h3>Ofertas Poster</h3>
+        <h3>Ofertas Top</h3>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -520,6 +520,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/oferta-detalle/oferta-detalle.component.html":
+/*!***************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/oferta-detalle/oferta-detalle.component.html ***!
+  \***************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button text=\"Regresar\" defaultHref=\"/\" (click)=\"cerrar()\"></ion-back-button>\n      </ion-buttons>\n      <ion-title slot=\"end\">\n          MI SENA\n      </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n      <ion-row>\n          <ion-col>\n              <img [src]=\"oferta.imagen_banner | imagen\">\n          </ion-col>\n      </ion-row>\n      <ion-row>\n          <ion-col>\n              <h3>Programa</h3>\n          </ion-col>\n          <ion-col>\n              <h6>{{ oferta.nombre_programa }}</h6>\n          </ion-col>\n      </ion-row>\n      <ion-row>\n          <ion-col>\n              <h3>Jornada</h3>\n          </ion-col>\n          <ion-col>\n              <h6>{{ oferta.nombre_jornada }}</h6>\n          </ion-col>\n      </ion-row>\n      <ion-row>\n          <ion-col>\n              <h3>Centro de Formacion</h3>\n          </ion-col>\n          <ion-col>\n              <h6>{{ oferta.nombre_centro }}</h6>\n          </ion-col>\n      </ion-row>\n      <ion-row>\n          <ion-col>\n              <h3>Localidad</h3>\n          </ion-col>\n          <ion-col>\n              <h6>{{ oferta.departamento }}, {{ oferta.municipio }}</h6>\n          </ion-col>\n      </ion-row>\n      <ion-row>\n          <ion-col>\n\n          </ion-col>\n      </ion-row>\n  </ion-grid>\n</ion-content>\n\n<app-footer-inscribirse></app-footer-inscribirse>");
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/ofertas-poster/ofertas-poster.component.html":
 /*!***************************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/ofertas-poster/ofertas-poster.component.html ***!
@@ -529,7 +542,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-slides [options]=\"slideOptsPoster\">\n  <ion-slide *ngFor=\"let oferta of ofertas\">\n    <ion-card class=\"poster\">\n      <img [src]=\"oferta.imagen_poster | imagen\">\n    </ion-card>\n  </ion-slide>\n</ion-slides>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-slides [options]=\"slideOptsPoster\">\n  <ion-slide *ngFor=\"let oferta of ofertas\">\n    <ion-card class=\"poster\" (click)=\"verDetalle(oferta)\">\n      <img [src]=\"oferta.imagen_poster | imagen\">\n    </ion-card>\n  </ion-slide>\n</ion-slides>");
 
 /***/ }),
 
@@ -542,7 +555,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-slides [options]=\"slideOpts\">\n  <ion-slide *ngFor=\"let oferta of ofertas\">\n    <ion-card (click)=\"abrirOferta(oferta)\">\n      <img [src]=\"oferta.imagen_banner | imagen\">\n    </ion-card>\n  </ion-slide>\n</ion-slides>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-slides [options]=\"slideOpts\">\n  <ion-slide *ngFor=\"let oferta of ofertas\">\n    <ion-card (click)=\"verDetalle(oferta)\">\n      <img [src]=\"oferta.imagen_banner | imagen\">\n    </ion-card>\n  </ion-slide>\n</ion-slides>");
 
 /***/ }),
 
@@ -842,10 +855,6 @@ const routes = [
         loadChildren: () => __webpack_require__.e(/*! import() | pages-tabs-tabs-module */ "pages-tabs-tabs-module").then(__webpack_require__.bind(null, /*! ./pages/tabs/tabs.module */ "./src/app/pages/tabs/tabs.module.ts")).then(m => m.TabsPageModule)
     },
     {
-        path: 'oferta',
-        loadChildren: () => Promise.all(/*! import() | pages-oferta-oferta-module */[__webpack_require__.e("common"), __webpack_require__.e("pages-oferta-oferta-module")]).then(__webpack_require__.bind(null, /*! ./pages/oferta/oferta.module */ "./src/app/pages/oferta/oferta.module.ts")).then(m => m.OfertaPageModule)
-    },
-    {
         path: 'tab5',
         loadChildren: () => Promise.all(/*! import() | pages-tab5-tab5-module */[__webpack_require__.e("common"), __webpack_require__.e("tab5-tab5-module")]).then(__webpack_require__.bind(null, /*! ./pages/tab5/tab5.module */ "./src/app/pages/tab5/tab5.module.ts")).then(m => m.Tab5PageModule)
     }
@@ -1014,6 +1023,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _footer_inscribirse_footer_inscribirse_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./footer-inscribirse/footer-inscribirse.component */ "./src/app/components/footer-inscribirse/footer-inscribirse.component.ts");
 /* harmony import */ var _niveles_niveles_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./niveles/niveles.component */ "./src/app/components/niveles/niveles.component.ts");
 /* harmony import */ var _nivel_nivel_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./nivel/nivel.component */ "./src/app/components/nivel/nivel.component.ts");
+/* harmony import */ var _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./oferta-detalle/oferta-detalle.component */ "./src/app/components/oferta-detalle/oferta-detalle.component.ts");
+
 
 
 
@@ -1033,6 +1044,9 @@ let ComponentsModule = class ComponentsModule {
 };
 ComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        entryComponents: [
+            _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_15__["OfertaDetalleComponent"]
+        ],
         declarations: [
             _header_header_component__WEBPACK_IMPORTED_MODULE_3__["HeaderComponent"],
             _footer_footer_component__WEBPACK_IMPORTED_MODULE_4__["FooterComponent"],
@@ -1043,7 +1057,8 @@ ComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _ofertas_ofertas_component__WEBPACK_IMPORTED_MODULE_9__["OfertasComponent"],
             _footer_inscribirse_footer_inscribirse_component__WEBPACK_IMPORTED_MODULE_12__["FooterInscribirseComponent"],
             _nivel_nivel_component__WEBPACK_IMPORTED_MODULE_14__["NivelComponent"],
-            _niveles_niveles_component__WEBPACK_IMPORTED_MODULE_13__["NivelesComponent"]
+            _niveles_niveles_component__WEBPACK_IMPORTED_MODULE_13__["NivelesComponent"],
+            _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_15__["OfertaDetalleComponent"]
         ],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -1058,7 +1073,8 @@ ComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _niveles_niveles_component__WEBPACK_IMPORTED_MODULE_13__["NivelesComponent"],
             _ofertas_poster_ofertas_poster_component__WEBPACK_IMPORTED_MODULE_11__["OfertasPosterComponent"],
             _ofertas_ofertas_component__WEBPACK_IMPORTED_MODULE_9__["OfertasComponent"],
-            _footer_inscribirse_footer_inscribirse_component__WEBPACK_IMPORTED_MODULE_12__["FooterInscribirseComponent"]
+            _footer_inscribirse_footer_inscribirse_component__WEBPACK_IMPORTED_MODULE_12__["FooterInscribirseComponent"],
+            _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_15__["OfertaDetalleComponent"]
         ]
     })
 ], ComponentsModule);
@@ -1355,6 +1371,65 @@ NivelesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/components/oferta-detalle/oferta-detalle.component.scss":
+/*!*************************************************************************!*\
+  !*** ./src/app/components/oferta-detalle/oferta-detalle.component.scss ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvb2ZlcnRhLWRldGFsbGUvb2ZlcnRhLWRldGFsbGUuY29tcG9uZW50LnNjc3MifQ== */");
+
+/***/ }),
+
+/***/ "./src/app/components/oferta-detalle/oferta-detalle.component.ts":
+/*!***********************************************************************!*\
+  !*** ./src/app/components/oferta-detalle/oferta-detalle.component.ts ***!
+  \***********************************************************************/
+/*! exports provided: OfertaDetalleComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OfertaDetalleComponent", function() { return OfertaDetalleComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+
+
+
+let OfertaDetalleComponent = class OfertaDetalleComponent {
+    constructor(modalCtrl) {
+        this.modalCtrl = modalCtrl;
+    }
+    ngOnInit() {
+    }
+    cerrar() {
+        this.modalCtrl.dismiss();
+    }
+};
+OfertaDetalleComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+], OfertaDetalleComponent.prototype, "oferta", void 0);
+OfertaDetalleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-oferta-detalle',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./oferta-detalle.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/oferta-detalle/oferta-detalle.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./oferta-detalle.component.scss */ "./src/app/components/oferta-detalle/oferta-detalle.component.scss")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]])
+], OfertaDetalleComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/ofertas-poster/ofertas-poster.component.scss":
 /*!*************************************************************************!*\
   !*** ./src/app/components/ofertas-poster/ofertas-poster.component.scss ***!
@@ -1380,10 +1455,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OfertasPosterComponent", function() { return OfertasPosterComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../oferta-detalle/oferta-detalle.component */ "./src/app/components/oferta-detalle/oferta-detalle.component.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+
+
 
 
 let OfertasPosterComponent = class OfertasPosterComponent {
-    constructor() {
+    constructor(modalCtrl) {
+        this.modalCtrl = modalCtrl;
         this.ofertas = [];
         this.slideOptsPoster = {
             slidesPerView: 3.3,
@@ -1391,7 +1471,21 @@ let OfertasPosterComponent = class OfertasPosterComponent {
         };
     }
     ngOnInit() { }
+    verDetalle(oferta) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const modal = yield this.modalCtrl.create({
+                component: _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_2__["OfertaDetalleComponent"],
+                componentProps: {
+                    oferta
+                }
+            });
+            modal.present();
+        });
+    }
 };
+OfertasPosterComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] }
+];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Array)
@@ -1402,7 +1496,7 @@ OfertasPosterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./ofertas-poster.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/ofertas-poster/ofertas-poster.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./ofertas-poster.component.scss */ "./src/app/components/ofertas-poster/ofertas-poster.component.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]])
 ], OfertasPosterComponent);
 
 
@@ -1435,25 +1529,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../oferta-detalle/oferta-detalle.component */ "./src/app/components/oferta-detalle/oferta-detalle.component.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+
+
 
 
 
 let OfertasComponent = class OfertasComponent {
-    constructor(router) {
+    constructor(router, modalCtrl) {
         this.router = router;
+        this.modalCtrl = modalCtrl;
         this.ofertas = [];
         this.slideOpts = {
             slidesPerView: 1.1,
             freeMode: true
         };
     }
-    ngOnInit() { }
-    abrirOferta(oferta) {
-        this.router.navigate(['oferta'], { queryParams: { oferta_id: oferta.id } });
+    ngOnInit() {
+    }
+    verDetalle(oferta) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const modal = yield this.modalCtrl.create({
+                component: _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_3__["OfertaDetalleComponent"],
+                componentProps: {
+                    oferta
+                }
+            });
+            modal.present();
+        });
     }
 };
 OfertasComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
@@ -1465,7 +1574,7 @@ OfertasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./ofertas.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/ofertas/ofertas.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./ofertas.component.scss */ "./src/app/components/ofertas/ofertas.component.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]])
 ], OfertasComponent);
 
 

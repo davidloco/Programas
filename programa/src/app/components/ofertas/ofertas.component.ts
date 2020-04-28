@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Oferta } from 'src/app/interfaces/ofertInterfaces';
 import { Router } from '@angular/router';
+import { OfertaDetalleComponent } from '../oferta-detalle/oferta-detalle.component';
+import { ModalController } from '@ionic/angular';
+import { Nivel } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-ofertas',
@@ -10,6 +13,7 @@ import { Router } from '@angular/router';
 export class OfertasComponent implements OnInit {
 
   @Input() ofertas: Oferta[] = [];
+
   oferta: Oferta;
 
   slideOpts = {
@@ -17,11 +21,19 @@ export class OfertasComponent implements OnInit {
     freeMode: true
   }
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, private modalCtrl: ModalController) { }
 
-  ngOnInit() {}
+  ngOnInit() { 
+    
+  }
 
-  abrirOferta(oferta: Oferta){
-    this.router.navigate(['oferta'], { queryParams: { oferta_id: oferta.id } });
+  async verDetalle(oferta: Oferta) {
+    const modal = await this.modalCtrl.create({
+      component: OfertaDetalleComponent,
+      componentProps: {
+        oferta
+      }
+    });
+    modal.present();
   }
 }

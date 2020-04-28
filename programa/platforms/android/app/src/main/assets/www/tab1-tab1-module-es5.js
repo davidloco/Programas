@@ -29,7 +29,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content slot=\"middle\">\n\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <h3>Ofertas</h3>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <app-ofertas [ofertas]=\"ofertas\"></app-ofertas>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <h3>Ofertas Poster</h3>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  \n  <app-ofertas-poster [ofertas]=\"ofertas\"></app-ofertas-poster>\n  \n</ion-content>";
+    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content slot=\"middle\">\n  \n  <ion-segment scrollable mode=\"md\" (ionChange)=\"cambioNivel($event)\">\n    <ion-segment-button mode=\"md\" *ngFor=\"let nivel of niveles\" [value]=\"nivel.id\">\n      <ion-label text-capitalize>{{ nivel.nombre }}</ion-label>\n    </ion-segment-button>\n  </ion-segment>\n\n  <app-ofertas [ofertas]=\"ofertas\"></app-ofertas>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <h3>Ofertas Top</h3>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  \n  <app-ofertas-poster [ofertas]=\"ofertas\"></app-ofertas-poster>\n  \n</ion-content>";
     /***/
   },
 
@@ -185,22 +185,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.programasServices = programasServices;
         this.ofertas = [];
+        this.niveles = [];
       }
 
       _createClass(Tab1Page, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.llenarOfertas();
+          this.llenarNiveles();
+        }
+      }, {
+        key: "cambioNivel",
+        value: function cambioNivel(ev) {
+          this.ofertas = [];
+          this.llenarOfertas(ev.target.value);
         }
       }, {
         key: "llenarOfertas",
-        value: function llenarOfertas() {
+        value: function llenarOfertas(nivel) {
           var _this = this;
 
-          this.programasServices.getOferts().subscribe(function (resp) {
+          this.programasServices.getOfertsByIdNivel(nivel).subscribe(function (resp) {
             var _this$ofertas;
 
             (_this$ofertas = _this.ofertas).push.apply(_this$ofertas, _toConsumableArray(resp.oferta));
+          });
+        }
+      }, {
+        key: "llenarNiveles",
+        value: function llenarNiveles() {
+          var _this2 = this;
+
+          this.programasServices.getTopHeadlines().subscribe(function (resp) {
+            var _this2$niveles;
+
+            (_this2$niveles = _this2.niveles).push.apply(_this2$niveles, _toConsumableArray(resp.nivel));
+
+            _this2.llenarOfertas(_this2.niveles[0].id);
           });
         }
       }]);
