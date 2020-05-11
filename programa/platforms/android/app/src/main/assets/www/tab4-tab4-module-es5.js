@@ -158,19 +158,56 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_native_qr_scanner_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic-native/qr-scanner/ngx */
+    "./node_modules/@ionic-native/qr-scanner/ngx/index.js");
 
     var Tab4Page = /*#__PURE__*/function () {
-      function Tab4Page() {
+      function Tab4Page(qrScanner) {
         _classCallCheck(this, Tab4Page);
+
+        this.qrScanner = qrScanner;
       }
 
       _createClass(Tab4Page, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          var _this = this;
+
+          this.qrScanner.prepare().then(function (status) {
+            if (status.authorized) {
+              // camera permission was granted
+              // start scanning
+              var scanSub = _this.qrScanner.scan().subscribe(function (text) {
+                console.log('Scanned something', text);
+
+                _this.qrScanner.hide(); // hide camera preview
+
+
+                scanSub.unsubscribe(); // stop scanning
+              });
+            } else if (status.denied) {// camera permission was permanently denied
+              // you must use QRScanner.openSettings() method to guide the user to the settings page
+              // then they can grant the permission from there
+            } else {// permission was denied, but not permanently. You can ask for permission again at a later time.
+              }
+          }).catch(function (e) {
+            return console.log('Error is', e);
+          });
+        }
       }]);
 
       return Tab4Page;
     }();
+
+    Tab4Page.ctorParameters = function () {
+      return [{
+        type: _ionic_native_qr_scanner_ngx__WEBPACK_IMPORTED_MODULE_2__["QRScanner"]
+      }];
+    };
 
     Tab4Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-tab4',
@@ -180,7 +217,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./tab4.page.scss */
       "./src/app/pages/tab4/tab4.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])], Tab4Page);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_qr_scanner_ngx__WEBPACK_IMPORTED_MODULE_2__["QRScanner"]])], Tab4Page);
     /***/
   }
 }]);
