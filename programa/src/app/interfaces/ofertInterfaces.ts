@@ -6,6 +6,8 @@ export interface Oferta {
     id: number;
     fecha_incio_inscripcion: Date;
     fecha_fin_inscripcion: Date;
+    latitud: string;
+    longitud: string;
     fecha_inicio_periodo: Date;
     fecha_fin_periodo: Date;
     nombre_programa: string;

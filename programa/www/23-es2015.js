@@ -182,4 +182,3 @@ const FabList = class {
 /***/ })
 
 }]);
-//# sourceMappingURL=23-es2015.js.map

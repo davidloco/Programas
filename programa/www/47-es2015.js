@@ -403,4 +403,3 @@ const valueToRatio = (value, min, max) => {
 /***/ })
 
 }]);
-//# sourceMappingURL=47-es2015.js.map

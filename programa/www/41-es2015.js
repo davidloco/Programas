@@ -371,4 +371,3 @@ const LIFECYCLE_MAP = {
 /***/ })
 
 }]);
-//# sourceMappingURL=41-es2015.js.map

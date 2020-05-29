@@ -464,7 +464,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\" color=\"dark\">\r\n    <ion-tab-button tab=\"tab1\">\r\n      <ion-icon name=\"home-outline\"></ion-icon>\r\n      <ion-label>Inicio</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab5\">\r\n      <ion-icon name=\"podium-outline\"></ion-icon>\r\n      <ion-label>Niveles</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab2\">\r\n      <ion-icon name=\"podium-outline\"></ion-icon>\r\n      <ion-label>Programas</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab3\">\r\n      <ion-icon name=\"heart-outline\"></ion-icon>\r\n      <ion-label>Favoritos</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab4\">\r\n      <ion-icon name=\"person-circle-outline\"></ion-icon>\r\n      <ion-label>Perfil</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\" color=\"dark\">\r\n    <ion-tab-button tab=\"tab1\">\r\n      <ion-icon name=\"home-outline\"></ion-icon>\r\n      <ion-label>Inicio</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab5\">\r\n      <ion-icon name=\"podium-outline\"></ion-icon>\r\n      <ion-label>Niveles</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab2\">\r\n      <ion-icon name=\"podium-outline\"></ion-icon>\r\n      <ion-label>Programas</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab3\" >\r\n\r\n      <ion-icon name=\"heart-outline\"></ion-icon>\r\n      <ion-badge color=\"primary\" *ngIf=\"cantidad != 0\" item-end>{{cantidad}}</ion-badge>\r\n      <ion-label>Favoritos</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab4\">\r\n      <ion-icon name=\"qr-code-outline\"></ion-icon>\r\n      <ion-label>QR</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>");
 
 /***/ }),
 
@@ -529,7 +529,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button text=\"Regresar\" defaultHref=\"/\" (click)=\"cerrar()\"></ion-back-button>\n      </ion-buttons>\n      <ion-title slot=\"end\">\n          MI SENA\n      </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n      <ion-row>\n          <ion-col>\n              <img [src]=\"oferta.imagen_banner | imagen\">\n          </ion-col>\n      </ion-row>\n      <ion-row>\n          <ion-col>\n              <h3>Programa</h3>\n          </ion-col>\n          <ion-col>\n              <h6>{{ oferta.nombre_programa }}</h6>\n          </ion-col>\n      </ion-row>\n      <ion-row>\n          <ion-col>\n              <h3>Jornada</h3>\n          </ion-col>\n          <ion-col>\n              <h6>{{ oferta.nombre_jornada }}</h6>\n          </ion-col>\n      </ion-row>\n      <ion-row>\n          <ion-col>\n              <h3>Centro de Formacion</h3>\n          </ion-col>\n          <ion-col>\n              <h6>{{ oferta.nombre_centro }}</h6>\n          </ion-col>\n      </ion-row>\n      <ion-row>\n          <ion-col>\n              <h3>Localidad</h3>\n          </ion-col>\n          <ion-col>\n              <h6>{{ oferta.departamento }}, {{ oferta.municipio }}</h6>\n          </ion-col>\n      </ion-row>\n      <ion-row>\n          <ion-col>\n\n          </ion-col>\n      </ion-row>\n  </ion-grid>\n</ion-content>\n\n<app-footer-inscribirse></app-footer-inscribirse>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n    <ion-toolbar>\n        <ion-buttons slot=\"start\">\n            <ion-back-button text=\"Regresar\" defaultHref=\"/\" (click)=\"cerrar()\"></ion-back-button>\n        </ion-buttons>\n        <ion-title slot=\"end\">\n            MI SENA\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <ion-label class=\"titulo\">\n        <h1>{{ oferta.nombre_programa }}</h1>\n    </ion-label>\n\n    <img [src]=\"oferta.imagen_banner | imagen\" *ngIf=\"oferta.imagen_banner\">\n\n    <ion-grid>\n        <ion-row>\n            <ion-col size=\"4\" class=\"poster-detalle-sobre\">\n                <ion-card class=\"poster\">\n                    <img [src]=\"oferta.imagen_poster | imagen\" class=\"poster\" *ngIf=\"oferta.imagen_poster\">\n                </ion-card>\n            </ion-col>\n            <ion-col>\n                <ion-item>\n                  <ion-icon slot=\"start\" name=\"time-outline\" color=\"primary\"></ion-icon>\n                  <ion-label>Hora</ion-label>\n                  <ion-note slot=\"end\" color=\"primary\">{{oferta.hora_inicio}} / {{oferta.hora_fin}}</ion-note>\n                </ion-item>\n                <ion-item>\n                  <ion-icon slot=\"start\" name=\"calendar-outline\" color=\"primary\"></ion-icon>\n                  <ion-label>Duracion</ion-label>\n                  <ion-note slot=\"end\" color=\"primary\">\n                    <ion-datetime displayFormat=\"MMM DD, YYYY HH:mm\" value=\"{{oferta.fecha_inicio_periodo}}\"></ion-datetime>\n                    <ion-datetime displayFormat=\"MMM DD, YYYY HH:mm\" value=\"{{oferta.fecha_fin_periodo}}\"></ion-datetime>\n                </ion-note>\n                </ion-item>\n              </ion-col>\n        </ion-row>\n    </ion-grid>\n\n    <ion-grid fixed>\n        <ion-row>\n            <ion-col size=\"12\">\n                <ion-item>\n                    <ion-label><b>Descripcion</b></ion-label>\n                    <ion-icon slot=\"end\" name=\"book-outline\" color=\"primary\"></ion-icon>\n                </ion-item>\n                <ion-label>\n                    {{oferta.descripcion | slice: 0: leerMas}}...\n                </ion-label>\n                <ion-label color=\"primary\" (click)=\"leerMas=5000\" *ngIf=\"leerMas != 5000\">\n                    Leer Mas\n                </ion-label>\n            </ion-col>\n        </ion-row>\n        <ion-row>\n            <ion-col>\n                <ion-item>\n                    <ion-label><b>Jornada</b></ion-label>\n                    <ion-icon slot=\"end\" name=\"moon-outline\" color=\"primary\"></ion-icon>\n                </ion-item>\n                <ion-item>\n                    <ion-label>\n                        {{ oferta.nombre_jornada }}\n                    </ion-label>\n                </ion-item>\n            </ion-col>\n        </ion-row>\n        <ion-row>\n            <ion-col>\n                <ion-item>\n                    <ion-label><b>Centro de Formacion</b></ion-label>\n                    <ion-icon slot=\"end\" name=\"library-outline\" color=\"primary\"></ion-icon>\n                </ion-item>\n                <ion-item>\n                    <ion-label>\n                        {{ oferta.nombre_centro }}\n                    </ion-label>\n                </ion-item>\n            </ion-col>\n        </ion-row>\n        <ion-row>\n            <ion-col>\n                <ion-item>\n                    <ion-label><b>Localidad</b></ion-label>\n                    <ion-icon slot=\"end\" name=\"pin-outline\" color=\"primary\"></ion-icon>\n                </ion-item>\n                <ion-item>\n                    <ion-label>\n                        <h6>{{ oferta.departamento }}, {{ oferta.municipio }}</h6>\n                    </ion-label>\n                </ion-item>\n                <ion-item>                    \n                    <img src=\"https://static-maps.yandex.ru/1.x/?lang=en-US&ll={{ oferta.longitud }},{{ oferta.latitud }}&z=10&l=map&size=300,300&pt={{ oferta.longitud }},{{ oferta.latitud }},pmrdl\"/>\n                </ion-item>\n            </ion-col>\n        </ion-row>\n        <ion-row>\n            <ion-col>\n                <ion-item>\n                    <ion-label><b>Region</b></ion-label>\n                    <ion-icon slot=\"end\" name=\"map-outline\" color=\"primary\"></ion-icon>\n                </ion-item>\n                <ion-item>\n                    <ion-label>\n                        <h6>{{ oferta.nombre_region }}</h6>\n                    </ion-label>\n                </ion-item>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n</ion-content>\n\n<app-footer-inscribirse></app-footer-inscribirse>");
 
 /***/ }),
 
@@ -559,6 +559,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/programa-detalle/programa-detalle.component.html":
+/*!*******************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/programa-detalle/programa-detalle.component.html ***!
+  \*******************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button text=\"Regresar\" defaultHref=\"/tabs/tab2\" (click)=\"cerrar()\"></ion-back-button>\n    </ion-buttons>\n    <ion-title slot=\"end\">\n      MI SENA\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid fixed>\n    <ion-row>\n      <ion-col>\n        <ion-label><b>{{ programa.nombre }}</b></ion-label>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>\n        <ion-item>\n          <ion-label><b>Nivel de Escolaridad</b></ion-label>\n          <ion-icon slot=\"end\" name=\"library-outline\" color=\"primary\"></ion-icon>\n        </ion-item>\n        <ion-label>\n          {{ programa.nivel_nombre }}\n        </ion-label>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>\n        <ion-item>\n          <ion-label><b>Descripcion</b></ion-label>\n          <ion-icon slot=\"end\" name=\"library-outline\" color=\"primary\"></ion-icon>\n        </ion-item>\n        <ion-label>\n          {{ programa.descripcion }}\n        </ion-label>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>\n        <ion-item>\n          <ion-label><b>Prerrequisitos</b></ion-label>\n          <ion-icon slot=\"end\" name=\"library-outline\" color=\"primary\"></ion-icon>\n        </ion-item>\n        <ion-label>\n          {{ programa.prerrequisito }}\n        </ion-label>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>\n        <ion-item>\n          <ion-label><b>Habilidades</b></ion-label>\n          <ion-icon slot=\"end\" name=\"library-outline\" color=\"primary\"></ion-icon>\n        </ion-item>\n        <ion-label>\n          {{ programa.habilidades }}\n        </ion-label>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>");
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/programa/programa.component.html":
 /*!***************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/programa/programa.component.html ***!
@@ -568,7 +581,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-card>\r\n  <ion-card-header>\r\n\r\n    <ion-card-subtitle>\r\n      <div>\r\n        <span>{{ programa.nivel_nombre }}</span>\r\n        <ion-button fill=\"clear\" (click)=\"lanzarMenu()\">\r\n          <ion-icon slot=\"icon-only\" name=\"ellipsis-horizontal-outline\"></ion-icon>\r\n        </ion-button>\r\n      </div>\r\n    </ion-card-subtitle>\r\n\r\n    <ion-card-title (click)=\"abrirPrograma()\">{{ programa.nombre }}</ion-card-title>\r\n  </ion-card-header>\r\n  <ion-card-content>\r\n    <p>\r\n      {{ programa.descripcion }}\r\n    </p>\r\n  </ion-card-content>\r\n</ion-card>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-card>\r\n  <ion-card-header>\r\n\r\n    <ion-card-subtitle>\r\n      <div>\r\n        <span>{{ programa.nivel_nombre }}</span>\r\n        <ion-button fill=\"clear\" (click)=\"lanzarMenu()\">\r\n          <ion-icon slot=\"icon-only\" name=\"ellipsis-horizontal-outline\"></ion-icon>\r\n        </ion-button>\r\n      </div>\r\n    </ion-card-subtitle>\r\n\r\n    <ion-card-title (click)=\"verDetalle(programa)\">{{ programa.nombre }}</ion-card-title>\r\n  </ion-card-header>\r\n  <ion-card-content>\r\n    <p>\r\n      {{ programa.descripcion }}\r\n    </p>\r\n  </ion-card-content>\r\n</ion-card>");
 
 /***/ }),
 
@@ -965,6 +978,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
 /* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
 /* harmony import */ var _ionic_native_qr_scanner_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/qr-scanner/ngx */ "./node_modules/@ionic-native/qr-scanner/ngx/index.js");
+/* harmony import */ var _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/barcode-scanner/ngx */ "./node_modules/@ionic-native/barcode-scanner/ngx/index.js");
+
 
 
 
@@ -990,6 +1005,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
             _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_12__["InAppBrowser"],
+            _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_14__["BarcodeScanner"],
             _ionic_native_qr_scanner_ngx__WEBPACK_IMPORTED_MODULE_13__["QRScanner"],
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
         ],
@@ -1027,6 +1043,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _niveles_niveles_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./niveles/niveles.component */ "./src/app/components/niveles/niveles.component.ts");
 /* harmony import */ var _nivel_nivel_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./nivel/nivel.component */ "./src/app/components/nivel/nivel.component.ts");
 /* harmony import */ var _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./oferta-detalle/oferta-detalle.component */ "./src/app/components/oferta-detalle/oferta-detalle.component.ts");
+/* harmony import */ var _programa_detalle_programa_detalle_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./programa-detalle/programa-detalle.component */ "./src/app/components/programa-detalle/programa-detalle.component.ts");
+
 
 
 
@@ -1048,7 +1066,8 @@ let ComponentsModule = class ComponentsModule {
 ComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         entryComponents: [
-            _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_15__["OfertaDetalleComponent"]
+            _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_15__["OfertaDetalleComponent"],
+            _programa_detalle_programa_detalle_component__WEBPACK_IMPORTED_MODULE_16__["ProgramaDetalleComponent"]
         ],
         declarations: [
             _header_header_component__WEBPACK_IMPORTED_MODULE_3__["HeaderComponent"],
@@ -1061,7 +1080,8 @@ ComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _footer_inscribirse_footer_inscribirse_component__WEBPACK_IMPORTED_MODULE_12__["FooterInscribirseComponent"],
             _nivel_nivel_component__WEBPACK_IMPORTED_MODULE_14__["NivelComponent"],
             _niveles_niveles_component__WEBPACK_IMPORTED_MODULE_13__["NivelesComponent"],
-            _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_15__["OfertaDetalleComponent"]
+            _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_15__["OfertaDetalleComponent"],
+            _programa_detalle_programa_detalle_component__WEBPACK_IMPORTED_MODULE_16__["ProgramaDetalleComponent"]
         ],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -1077,7 +1097,8 @@ ComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _ofertas_poster_ofertas_poster_component__WEBPACK_IMPORTED_MODULE_11__["OfertasPosterComponent"],
             _ofertas_ofertas_component__WEBPACK_IMPORTED_MODULE_9__["OfertasComponent"],
             _footer_inscribirse_footer_inscribirse_component__WEBPACK_IMPORTED_MODULE_12__["FooterInscribirseComponent"],
-            _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_15__["OfertaDetalleComponent"]
+            _oferta_detalle_oferta_detalle_component__WEBPACK_IMPORTED_MODULE_15__["OfertaDetalleComponent"],
+            _programa_detalle_programa_detalle_component__WEBPACK_IMPORTED_MODULE_16__["ProgramaDetalleComponent"]
         ]
     })
 ], ComponentsModule);
@@ -1161,6 +1182,10 @@ let FooterComponent = class FooterComponent {
     constructor() { }
     ngOnInit() { }
 };
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+], FooterComponent.prototype, "cantidad", void 0);
 FooterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-footer',
@@ -1383,7 +1408,7 @@ NivelesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvb2ZlcnRhLWRldGFsbGUvb2ZlcnRhLWRldGFsbGUuY29tcG9uZW50LnNjc3MifQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".poster-detalle-sobre {\n  position: relative;\n  top: -75px;\n  left: -10px;\n  margin-bottom: -75px;\n}\n\n.titulo {\n  width: 100%;\n  position: absolute;\n  color: white;\n  background-color: red;\n  padding: 5px 5px 40px 5px;\n  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-\n  editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */\n  /* FF3.6-15\n  */\n  /*\n  Chrome10-25,Safari5.1-6 */\n  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.65)), to(rgba(0, 0, 0, 0)));\n  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);\n  /* W3C,\n  IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\"#a6000000\", endColorstr=\"#00000000\",GradientType=0 );\n  /* IE6-9 */\n}\n\n.titulo h1 {\n  position: absolute;\n  top: 28px;\n  left: 5px;\n}\n\n.card-actor {\n  height: 210px;\n}\n\n.actor-name {\n  position: relative;\n  top: 15px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9vZmVydGEtZGV0YWxsZS9EOlxcRGVza3RvcFxcU2VuYSBZYW5ldGhcXEdpdFVQXFxQcm9ncmFtYXNcXHByb2dyYW1hL3NyY1xcYXBwXFxjb21wb25lbnRzXFxvZmVydGEtZGV0YWxsZVxcb2ZlcnRhLWRldGFsbGUuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudHMvb2ZlcnRhLWRldGFsbGUvb2ZlcnRhLWRldGFsbGUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLFVBQUE7RUFDQSxXQUFBO0VBQ0Esb0JBQUE7QUNDSjs7QURFQTtFQUNJLFdBQUE7RUFDQSxrQkFBQTtFQUNBLFlBQUE7RUFDQSxxQkFBQTtFQUNBLHlCQUFBO0VBRUE7NERBQUE7RUFHc0Y7R0FBQTtFQU1uRjsyQkFBQTtFQUVILDRHQUFBO0VBQUEscUZBQUE7RUFJRzsrQ0FBQTtFQUVILHVIQUFBO0VBQzBDLFVBQUE7QUNOOUM7O0FEUUE7RUFDSSxrQkFBQTtFQUNBLFNBQUE7RUFDQSxTQUFBO0FDTEo7O0FET0E7RUFDSSxhQUFBO0FDSko7O0FETUE7RUFDSSxrQkFBQTtFQUNBLFNBQUE7QUNISiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvb2ZlcnRhLWRldGFsbGUvb2ZlcnRhLWRldGFsbGUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucG9zdGVyLWRldGFsbGUtc29icmUge1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgdG9wOiAtNzVweDtcclxuICAgIGxlZnQ6IC0xMHB4O1xyXG4gICAgbWFyZ2luLWJvdHRvbTogLTc1cHg7XHJcbn1cclxuXHJcbi50aXR1bG8ge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZWQ7XHJcbiAgICBwYWRkaW5nOiA1cHggNXB4IDQwcHggNXB4O1xyXG5cclxuICAgIC8qIFBlcm1hbGluayAtIHVzZSB0byBlZGl0IGFuZCBzaGFyZSB0aGlzIGdyYWRpZW50OiBodHRwOi8vY29sb3J6aWxsYS5jb20vZ3JhZGllbnQtXHJcbiAgICBlZGl0b3IvIzAwMDAwMCswLDAwMDAwMCsxMDAmMC42NSswLDArMTAwO05ldXRyYWwrRGVuc2l0eSAqL1xyXG5cclxuICAgIGJhY2tncm91bmQ6IC1tb3otbGluZWFyLWdyYWRpZW50KHRvcCwgcmdiYSgwLCAwLCAwLCAwLjY1KSAwJSwgcmdiYSgwLCAwLCAwLCAwKSAxMDAlKTsgLyogRkYzLjYtMTVcclxuICAgICovXHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudChcclxuICAgICAgICB0b3AsXHJcbiAgICAgICAgcmdiYSgwLCAwLCAwLCAwLjY1KSAwJSxcclxuICAgICAgICByZ2JhKDAsIDAsIDAsIDApIDEwMCVcclxuICAgICk7IC8qXHJcbiAgICBDaHJvbWUxMC0yNSxTYWZhcmk1LjEtNiAqL1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KFxyXG4gICAgICAgIHRvIGJvdHRvbSxcclxuICAgICAgICByZ2JhKDAsIDAsIDAsIDAuNjUpIDAlLFxyXG4gICAgICAgIHJnYmEoMCwgMCwgMCwgMCkgMTAwJVxyXG4gICAgKTsgLyogVzNDLFxyXG4gICAgSUUxMCssIEZGMTYrLCBDaHJvbWUyNissIE9wZXJhMTIrLCBTYWZhcmk3KyAqL1xyXG4gICAgZmlsdGVyOiBwcm9naWQ6RFhJbWFnZVRyYW5zZm9ybS5NaWNyb3NvZnQuZ3JhZGllbnQoIHN0YXJ0Q29sb3JzdHI9JyNhNjAwMDAwMCcsXHJcbiAgICBlbmRDb2xvcnN0cj0nIzAwMDAwMDAwJyxHcmFkaWVudFR5cGU9MCApOyAvKiBJRTYtOSAqL1xyXG59XHJcbi50aXR1bG8gaDEge1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgdG9wOiAyOHB4O1xyXG4gICAgbGVmdDogNXB4O1xyXG59XHJcbi5jYXJkLWFjdG9yIHtcclxuICAgIGhlaWdodDogMjEwcHg7XHJcbn1cclxuLmFjdG9yLW5hbWUge1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgdG9wOiAxNXB4O1xyXG59XHJcbiIsIi5wb3N0ZXItZGV0YWxsZS1zb2JyZSB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgdG9wOiAtNzVweDtcbiAgbGVmdDogLTEwcHg7XG4gIG1hcmdpbi1ib3R0b206IC03NXB4O1xufVxuXG4udGl0dWxvIHtcbiAgd2lkdGg6IDEwMCU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgY29sb3I6IHdoaXRlO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZWQ7XG4gIHBhZGRpbmc6IDVweCA1cHggNDBweCA1cHg7XG4gIC8qIFBlcm1hbGluayAtIHVzZSB0byBlZGl0IGFuZCBzaGFyZSB0aGlzIGdyYWRpZW50OiBodHRwOi8vY29sb3J6aWxsYS5jb20vZ3JhZGllbnQtXG4gIGVkaXRvci8jMDAwMDAwKzAsMDAwMDAwKzEwMCYwLjY1KzAsMCsxMDA7TmV1dHJhbCtEZW5zaXR5ICovXG4gIGJhY2tncm91bmQ6IC1tb3otbGluZWFyLWdyYWRpZW50KHRvcCwgcmdiYSgwLCAwLCAwLCAwLjY1KSAwJSwgcmdiYSgwLCAwLCAwLCAwKSAxMDAlKTtcbiAgLyogRkYzLjYtMTVcbiAgKi9cbiAgYmFja2dyb3VuZDogLXdlYmtpdC1saW5lYXItZ3JhZGllbnQodG9wLCByZ2JhKDAsIDAsIDAsIDAuNjUpIDAlLCByZ2JhKDAsIDAsIDAsIDApIDEwMCUpO1xuICAvKlxuICBDaHJvbWUxMC0yNSxTYWZhcmk1LjEtNiAqL1xuICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQodG8gYm90dG9tLCByZ2JhKDAsIDAsIDAsIDAuNjUpIDAlLCByZ2JhKDAsIDAsIDAsIDApIDEwMCUpO1xuICAvKiBXM0MsXG4gIElFMTArLCBGRjE2KywgQ2hyb21lMjYrLCBPcGVyYTEyKywgU2FmYXJpNysgKi9cbiAgZmlsdGVyOiBwcm9naWQ6RFhJbWFnZVRyYW5zZm9ybS5NaWNyb3NvZnQuZ3JhZGllbnQoIHN0YXJ0Q29sb3JzdHI9XCIjYTYwMDAwMDBcIiwgZW5kQ29sb3JzdHI9XCIjMDAwMDAwMDBcIixHcmFkaWVudFR5cGU9MCApO1xuICAvKiBJRTYtOSAqL1xufVxuXG4udGl0dWxvIGgxIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDI4cHg7XG4gIGxlZnQ6IDVweDtcbn1cblxuLmNhcmQtYWN0b3Ige1xuICBoZWlnaHQ6IDIxMHB4O1xufVxuXG4uYWN0b3ItbmFtZSB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgdG9wOiAxNXB4O1xufSJdfQ== */");
 
 /***/ }),
 
@@ -1406,6 +1431,7 @@ __webpack_require__.r(__webpack_exports__);
 let OfertaDetalleComponent = class OfertaDetalleComponent {
     constructor(modalCtrl) {
         this.modalCtrl = modalCtrl;
+        this.leerMas = 150;
     }
     ngOnInit() {
     }
@@ -1584,6 +1610,65 @@ OfertasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/components/programa-detalle/programa-detalle.component.scss":
+/*!*****************************************************************************!*\
+  !*** ./src/app/components/programa-detalle/programa-detalle.component.scss ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcHJvZ3JhbWEtZGV0YWxsZS9wcm9ncmFtYS1kZXRhbGxlLmNvbXBvbmVudC5zY3NzIn0= */");
+
+/***/ }),
+
+/***/ "./src/app/components/programa-detalle/programa-detalle.component.ts":
+/*!***************************************************************************!*\
+  !*** ./src/app/components/programa-detalle/programa-detalle.component.ts ***!
+  \***************************************************************************/
+/*! exports provided: ProgramaDetalleComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProgramaDetalleComponent", function() { return ProgramaDetalleComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+
+
+
+let ProgramaDetalleComponent = class ProgramaDetalleComponent {
+    constructor(modalCtrl) {
+        this.modalCtrl = modalCtrl;
+    }
+    ngOnInit() {
+    }
+    cerrar() {
+        this.modalCtrl.dismiss();
+    }
+};
+ProgramaDetalleComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+], ProgramaDetalleComponent.prototype, "programa", void 0);
+ProgramaDetalleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-programa-detalle',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./programa-detalle.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/programa-detalle/programa-detalle.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./programa-detalle.component.scss */ "./src/app/components/programa-detalle/programa-detalle.component.scss")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]])
+], ProgramaDetalleComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/programa/programa.component.scss":
 /*!*************************************************************!*\
   !*** ./src/app/components/programa/programa.component.scss ***!
@@ -1612,6 +1697,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services_data_local_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/data-local.service */ "./src/app/services/data-local.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
+/* harmony import */ var _programa_detalle_programa_detalle_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../programa-detalle/programa-detalle.component */ "./src/app/components/programa-detalle/programa-detalle.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
 
 
 
@@ -1620,14 +1709,27 @@ __webpack_require__.r(__webpack_exports__);
 let ProgramaComponent = class ProgramaComponent {
     constructor(iab, actionSheetCtrl, 
     //private socialSharing: SocialSharing,
-    datalocalService) {
+    datalocalService, router, modalCtrl) {
         this.iab = iab;
         this.actionSheetCtrl = actionSheetCtrl;
         this.datalocalService = datalocalService;
+        this.router = router;
+        this.modalCtrl = modalCtrl;
     }
     ngOnInit() { }
     abrirPrograma() {
         const browser = this.iab.create(this.programa.nombre, '_system');
+    }
+    verDetalle(programa) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const modal = yield this.modalCtrl.create({
+                component: _programa_detalle_programa_detalle_component__WEBPACK_IMPORTED_MODULE_5__["ProgramaDetalleComponent"],
+                componentProps: {
+                    programa
+                }
+            });
+            modal.present();
+        });
     }
     lanzarMenu() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
@@ -1683,7 +1785,9 @@ let ProgramaComponent = class ProgramaComponent {
 ProgramaComponent.ctorParameters = () => [
     { type: _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_4__["InAppBrowser"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"] },
-    { type: src_app_services_data_local_service__WEBPACK_IMPORTED_MODULE_2__["DataLocalService"] }
+    { type: src_app_services_data_local_service__WEBPACK_IMPORTED_MODULE_2__["DataLocalService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
@@ -1705,7 +1809,9 @@ ProgramaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_4__["InAppBrowser"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"],
-        src_app_services_data_local_service__WEBPACK_IMPORTED_MODULE_2__["DataLocalService"]])
+        src_app_services_data_local_service__WEBPACK_IMPORTED_MODULE_2__["DataLocalService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]])
 ], ProgramaComponent);
 
 
@@ -1766,6 +1872,41 @@ ProgramasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
 ], ProgramasComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/pipes/filtro-municipios.pipe.ts":
+/*!*************************************************!*\
+  !*** ./src/app/pipes/filtro-municipios.pipe.ts ***!
+  \*************************************************/
+/*! exports provided: FiltroMunicipiosPipe */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FiltroMunicipiosPipe", function() { return FiltroMunicipiosPipe; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let FiltroMunicipiosPipe = class FiltroMunicipiosPipe {
+    transform(ofertas, texto) {
+        if (texto.length === 0) {
+            return ofertas;
+        }
+        texto = texto.toLocaleLowerCase();
+        return ofertas.filter(oferta => {
+            return oferta.municipio.toLocaleLowerCase().includes(texto);
+        });
+    }
+};
+FiltroMunicipiosPipe = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Pipe"])({
+        name: 'filtroMunicipios'
+    })
+], FiltroMunicipiosPipe);
 
 
 
@@ -1895,6 +2036,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _imagen_pipe__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./imagen.pipe */ "./src/app/pipes/imagen.pipe.ts");
 /* harmony import */ var _filtro_pipe__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./filtro.pipe */ "./src/app/pipes/filtro.pipe.ts");
 /* harmony import */ var _filtro_nivel_pipe__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./filtro-nivel.pipe */ "./src/app/pipes/filtro-nivel.pipe.ts");
+/* harmony import */ var _filtro_municipios_pipe__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./filtro-municipios.pipe */ "./src/app/pipes/filtro-municipios.pipe.ts");
+
 
 
 
@@ -1905,7 +2048,7 @@ let PipesModule = class PipesModule {
 };
 PipesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_imagen_pipe__WEBPACK_IMPORTED_MODULE_3__["ImagenPipe"], _filtro_pipe__WEBPACK_IMPORTED_MODULE_4__["FiltroPipe"], _filtro_nivel_pipe__WEBPACK_IMPORTED_MODULE_5__["FiltroNivelPipe"]],
+        declarations: [_imagen_pipe__WEBPACK_IMPORTED_MODULE_3__["ImagenPipe"], _filtro_pipe__WEBPACK_IMPORTED_MODULE_4__["FiltroPipe"], _filtro_nivel_pipe__WEBPACK_IMPORTED_MODULE_5__["FiltroNivelPipe"], _filtro_municipios_pipe__WEBPACK_IMPORTED_MODULE_6__["FiltroMunicipiosPipe"]],
         exports: [_imagen_pipe__WEBPACK_IMPORTED_MODULE_3__["ImagenPipe"], _filtro_pipe__WEBPACK_IMPORTED_MODULE_4__["FiltroPipe"], _filtro_nivel_pipe__WEBPACK_IMPORTED_MODULE_5__["FiltroNivelPipe"]],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"]
@@ -2005,7 +2148,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const environment = {
     production: false,
-    urlJson: "http://localhost:8090",
+    urlJson: "http://192.168.0.157:8090",
     urlImagen: "./assets",
     imgOriginal: "original.jpg"
 };
@@ -2062,4 +2205,3 @@ module.exports = __webpack_require__(/*! D:\Desktop\Sena Yaneth\GitUP\Programas\
 /***/ })
 
 },[[0,"runtime","vendor"]]]);
-//# sourceMappingURL=main-es2015.js.map

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlJson: "http://localhost:8090",
+  urlJson: "http://192.168.0.157:8090",
   urlImagen: "./assets",
   imgOriginal: "original.jpg"
  };

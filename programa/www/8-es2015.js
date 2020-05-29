@@ -81,4 +81,3 @@ const BackButton = class {
 /***/ })
 
 }]);
-//# sourceMappingURL=8-es2015.js.map

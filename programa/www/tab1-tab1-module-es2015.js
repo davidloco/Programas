@@ -132,4 +132,3 @@ Tab1Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /***/ })
 
 }]);
-//# sourceMappingURL=tab1-tab1-module-es2015.js.map

@@ -10,6 +10,7 @@ import { Oferta } from 'src/app/interfaces/ofertInterfaces';
 export class OfertaDetalleComponent implements OnInit {
 
   @Input() oferta: Oferta;
+  leerMas = 150;
 
   constructor(public modalCtrl: ModalController) { }
 

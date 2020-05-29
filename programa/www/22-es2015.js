@@ -1485,4 +1485,3 @@ const TRANSITION_DURATION = 150;
 /***/ })
 
 }]);
-//# sourceMappingURL=22-es2015.js.map

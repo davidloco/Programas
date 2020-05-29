@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content>\n\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n    <ion-slides [options]=\"swiperOpts\">\n        <ion-slide>\n            <ion-button expand=\"full\" fill=\"outline\" size=\"large\" shape=\"round\" (click)=\"scan()\">\n                Ir al SENA\n            </ion-button>\n        </ion-slide>\n    </ion-slides>\n</ion-content>");
 
 /***/ }),
 
@@ -84,39 +84,87 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_native_qr_scanner_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/qr-scanner/ngx */ "./node_modules/@ionic-native/qr-scanner/ngx/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/barcode-scanner/ngx */ "./node_modules/@ionic-native/barcode-scanner/ngx/index.js");
+/* harmony import */ var src_app_services_programas_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/programas.service */ "./src/app/services/programas.service.ts");
+
+
+
 
 
 
 let Tab4Page = class Tab4Page {
-    constructor(qrScanner) {
+    constructor(qrScanner, route, barcodeScanner, datalocal) {
         this.qrScanner = qrScanner;
+        this.route = route;
+        this.barcodeScanner = barcodeScanner;
+        this.datalocal = datalocal;
+        this.swiperOpts = {
+            allowSlidePrev: false,
+            allowSlideNext: false
+        };
+    }
+    ionViewDidEnter() {
+        // console.log('viewDidEnter');
+    }
+    ionViewDidLeave() {
+        // console.log('viewDidLeave');
+    }
+    ionViewWillEnter() {
+        // console.log('viewWillEnter');
+        this.scan();
+    }
+    ionViewWillLeave() {
+        // console.log('viewWillLeave');
+    }
+    scan() {
+        this.barcodeScanner.scan().then(barcodeData => {
+            console.log('Barcode data', barcodeData);
+            if (!barcodeData.cancelled) {
+                this.datalocal.guardarRegistro(barcodeData.format, barcodeData.text);
+            }
+        }).catch(err => {
+            console.log('Error', err);
+            this.datalocal.guardarRegistro('QRCode', 'geo:5.031389,-75.451262');
+        });
     }
     ngOnInit() {
-        this.qrScanner.prepare()
-            .then((status) => {
+        //let geo: any = this.route.snapshot.paramMap.get('geo');
+        //geo = geo.subscribe(4);
+        //geo = geo.split(',');
+        //this.latitud = geo[0];
+        //this.longitud = geo[1];
+        //console.log(this.latitud, this.longitud);
+        /*this.qrScanner.prepare()
+          .then((status: QRScannerStatus) => {
             if (status.authorized) {
-                // camera permission was granted
-                // start scanning
-                let scanSub = this.qrScanner.scan().subscribe((text) => {
-                    console.log('Scanned something', text);
-                    this.qrScanner.hide(); // hide camera preview
-                    scanSub.unsubscribe(); // stop scanning
-                });
+              // camera permission was granted
+    
+    
+              // start scanning
+              let scanSub = this.qrScanner.scan().subscribe((text: string) => {
+                console.log('Scanned something', text);
+    
+                this.qrScanner.hide(); // hide camera preview
+                scanSub.unsubscribe(); // stop scanning
+              });
+    
+            } else if (status.denied) {
+              // camera permission was permanently denied
+              // you must use QRScanner.openSettings() method to guide the user to the settings page
+              // then they can grant the permission from there
+            } else {
+              // permission was denied, but not permanently. You can ask for permission again at a later time.
             }
-            else if (status.denied) {
-                // camera permission was permanently denied
-                // you must use QRScanner.openSettings() method to guide the user to the settings page
-                // then they can grant the permission from there
-            }
-            else {
-                // permission was denied, but not permanently. You can ask for permission again at a later time.
-            }
-        })
-            .catch((e) => console.log('Error is', e));
+          })
+          .catch((e: any) => console.log('Error is', e));*/
     }
 };
 Tab4Page.ctorParameters = () => [
-    { type: _ionic_native_qr_scanner_ngx__WEBPACK_IMPORTED_MODULE_2__["QRScanner"] }
+    { type: _ionic_native_qr_scanner_ngx__WEBPACK_IMPORTED_MODULE_2__["QRScanner"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_4__["BarcodeScanner"] },
+    { type: src_app_services_programas_service__WEBPACK_IMPORTED_MODULE_5__["ProgramasService"] }
 ];
 Tab4Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -124,7 +172,10 @@ Tab4Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./tab4.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/tab4/tab4.page.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./tab4.page.scss */ "./src/app/pages/tab4/tab4.page.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_qr_scanner_ngx__WEBPACK_IMPORTED_MODULE_2__["QRScanner"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_qr_scanner_ngx__WEBPACK_IMPORTED_MODULE_2__["QRScanner"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+        _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_4__["BarcodeScanner"],
+        src_app_services_programas_service__WEBPACK_IMPORTED_MODULE_5__["ProgramasService"]])
 ], Tab4Page);
 
 
@@ -132,4 +183,3 @@ Tab4Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /***/ })
 
 }]);
-//# sourceMappingURL=tab4-tab4-module-es2015.js.map

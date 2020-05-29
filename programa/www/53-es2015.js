@@ -104,4 +104,3 @@ const INITIAL_ORIGIN_SCALE = 0.5;
 /***/ })
 
 }]);
-//# sourceMappingURL=53-es2015.js.map

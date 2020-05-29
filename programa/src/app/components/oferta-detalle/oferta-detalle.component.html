@@ -1,59 +1,117 @@
 <ion-header>
-  <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button text="Regresar" defaultHref="/" (click)="cerrar()"></ion-back-button>
-      </ion-buttons>
-      <ion-title slot="end">
-          MI SENA
-      </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button text="Regresar" defaultHref="/" (click)="cerrar()"></ion-back-button>
+        </ion-buttons>
+        <ion-title slot="end">
+            MI SENA
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-      <ion-row>
-          <ion-col>
-              <img [src]="oferta.imagen_banner | imagen">
-          </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col>
-              <h3>Programa</h3>
-          </ion-col>
-          <ion-col>
-              <h6>{{ oferta.nombre_programa }}</h6>
-          </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col>
-              <h3>Jornada</h3>
-          </ion-col>
-          <ion-col>
-              <h6>{{ oferta.nombre_jornada }}</h6>
-          </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col>
-              <h3>Centro de Formacion</h3>
-          </ion-col>
-          <ion-col>
-              <h6>{{ oferta.nombre_centro }}</h6>
-          </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col>
-              <h3>Localidad</h3>
-          </ion-col>
-          <ion-col>
-              <h6>{{ oferta.departamento }}, {{ oferta.municipio }}</h6>
-          </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col>
+    <ion-label class="titulo">
+        <h1>{{ oferta.nombre_programa }}</h1>
+    </ion-label>
 
-          </ion-col>
-      </ion-row>
-  </ion-grid>
+    <img [src]="oferta.imagen_banner | imagen" *ngIf="oferta.imagen_banner">
+
+    <ion-grid>
+        <ion-row>
+            <ion-col size="4" class="poster-detalle-sobre">
+                <ion-card class="poster">
+                    <img [src]="oferta.imagen_poster | imagen" class="poster" *ngIf="oferta.imagen_poster">
+                </ion-card>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                  <ion-icon slot="start" name="time-outline" color="primary"></ion-icon>
+                  <ion-label>Hora</ion-label>
+                  <ion-note slot="end" color="primary">{{oferta.hora_inicio}} / {{oferta.hora_fin}}</ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-icon slot="start" name="calendar-outline" color="primary"></ion-icon>
+                  <ion-label>Duracion</ion-label>
+                  <ion-note slot="end" color="primary">
+                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" value="{{oferta.fecha_inicio_periodo}}"></ion-datetime>
+                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" value="{{oferta.fecha_fin_periodo}}"></ion-datetime>
+                </ion-note>
+                </ion-item>
+              </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col size="12">
+                <ion-item>
+                    <ion-label><b>Descripcion</b></ion-label>
+                    <ion-icon slot="end" name="book-outline" color="primary"></ion-icon>
+                </ion-item>
+                <ion-label>
+                    {{oferta.descripcion | slice: 0: leerMas}}...
+                </ion-label>
+                <ion-label color="primary" (click)="leerMas=5000" *ngIf="leerMas != 5000">
+                    Leer Mas
+                </ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label><b>Jornada</b></ion-label>
+                    <ion-icon slot="end" name="moon-outline" color="primary"></ion-icon>
+                </ion-item>
+                <ion-item>
+                    <ion-label>
+                        {{ oferta.nombre_jornada }}
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label><b>Centro de Formacion</b></ion-label>
+                    <ion-icon slot="end" name="library-outline" color="primary"></ion-icon>
+                </ion-item>
+                <ion-item>
+                    <ion-label>
+                        {{ oferta.nombre_centro }}
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label><b>Localidad</b></ion-label>
+                    <ion-icon slot="end" name="pin-outline" color="primary"></ion-icon>
+                </ion-item>
+                <ion-item>
+                    <ion-label>
+                        <h6>{{ oferta.departamento }}, {{ oferta.municipio }}</h6>
+                    </ion-label>
+                </ion-item>
+                <ion-item>                    
+                    <img src="https://static-maps.yandex.ru/1.x/?lang=en-US&ll={{ oferta.longitud }},{{ oferta.latitud }}&z=10&l=map&size=300,300&pt={{ oferta.longitud }},{{ oferta.latitud }},pmrdl"/>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label><b>Region</b></ion-label>
+                    <ion-icon slot="end" name="map-outline" color="primary"></ion-icon>
+                </ion-item>
+                <ion-item>
+                    <ion-label>
+                        <h6>{{ oferta.nombre_region }}</h6>
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
 
 <app-footer-inscribirse></app-footer-inscribirse>

@@ -405,4 +405,3 @@ const waitForSlides = (el) => {
 /***/ })
 
 }]);
-//# sourceMappingURL=61-es2015.js.map

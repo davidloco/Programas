@@ -733,6 +733,47 @@ ExploreContainerComponentModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate
 
 /***/ }),
 
+/***/ "./src/app/interfaces/registro.model.ts":
+/*!**********************************************!*\
+  !*** ./src/app/interfaces/registro.model.ts ***!
+  \**********************************************/
+/*! exports provided: Registro */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Registro", function() { return Registro; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+
+class Registro {
+    constructor(format, text) {
+        this.format = format;
+        this.text = text;
+        this.created = new Date();
+        this.determinarTipo();
+    }
+    determinarTipo() {
+        const inicioTexto = this.text.substr(0, 4);
+        console.log('TIPO', inicioTexto);
+        switch (inicioTexto) {
+            case 'http':
+                this.type = 'http';
+                this.icon = 'globe';
+                break;
+            case 'geo:':
+                this.type = 'geo';
+                this.icon = 'pin';
+                break;
+            default:
+                this.type = 'No reconocido';
+                this.icon = 'create';
+        }
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/app/services/programas.service.ts":
 /*!***********************************************!*\
   !*** ./src/app/services/programas.service.ts ***!
@@ -747,13 +788,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
+/* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _interfaces_registro_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../interfaces/registro.model */ "./src/app/interfaces/registro.model.ts");
+
+
+
+
 
 
 
 
 let ProgramasService = class ProgramasService {
-    constructor(http) {
+    constructor(http, storage, navCtrl, inAppBrowser) {
         this.http = http;
+        this.storage = storage;
+        this.navCtrl = navCtrl;
+        this.inAppBrowser = inAppBrowser;
+        this.guardados = [];
+        this.cargarStorage();
+    }
+    cargarStorage() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            this.guardados = (yield this.storage.get('registros')) || [];
+        });
+    }
+    guardarRegistro(format, text) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.cargarStorage();
+            const nuevoRegistro = new _interfaces_registro_model__WEBPACK_IMPORTED_MODULE_7__["Registro"](format, text);
+            this.guardados.unshift(nuevoRegistro);
+            console.log(this.guardados);
+            this.storage.set('registros', this.guardados);
+            this.abrirRegistro(nuevoRegistro);
+        });
+    }
+    abrirRegistro(registro) {
+        this.navCtrl.navigateForward('/tabs/tab2');
+        switch (registro.type) {
+            case 'http':
+                this.inAppBrowser.create(registro.text, '_system');
+                break;
+            case 'geo':
+                this.navCtrl.navigateForward(`/tabs/tab2/mapa/${registro.text}`);
+                break;
+        }
+    }
+    enviarCorreo() {
+        const arrTemp = [];
+        const titulos = 'Tipo, Formato, Creado en, Texto\n';
+        arrTemp.push(titulos);
+        this.guardados.forEach(registro => {
+            const linea = `${registro.type}, ${registro.format}, ${registro.created}, ${registro.text.replace(',', ' ')}\n`;
+            arrTemp.push(linea);
+        });
     }
     getTopHeadlines() {
         return this.http.get(`/niveles/`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["delay"])(2500));
@@ -771,20 +860,28 @@ let ProgramasService = class ProgramasService {
         return this.http.get(`/oferts/nivel/${id}`);
     }
     getProgramas() {
-        return this.http.get(`/programas/`);
+        return this.http.get(`/programas/`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["delay"])(2500));
+        ;
     }
     getProgramasFind(id) {
-        return this.http.get(`/programas/${id}`);
+        return this.http.get(`/programas/${id}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["delay"])(2500));
+        ;
     }
 };
 ProgramasService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"] },
+    { type: _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__["InAppBrowser"] }
 ];
 ProgramasService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+        _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"],
+        _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__["InAppBrowser"]])
 ], ProgramasService);
 
 
@@ -792,4 +889,3 @@ ProgramasService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /***/ })
 
 }]);
-//# sourceMappingURL=common-es2015.js.map

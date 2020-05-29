@@ -87,12 +87,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_services_programas_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/programas.service */ "./src/app/services/programas.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+
 
 
 
 let Tab2Page = class Tab2Page {
-    constructor(programasServices) {
+    constructor(programasServices, loadingCtrl) {
         this.programasServices = programasServices;
+        this.loadingCtrl = loadingCtrl;
         this.programas = [];
         this.textoBuscar = '';
     }
@@ -111,7 +114,8 @@ let Tab2Page = class Tab2Page {
     }
 };
 Tab2Page.ctorParameters = () => [
-    { type: src_app_services_programas_service__WEBPACK_IMPORTED_MODULE_2__["ProgramasService"] }
+    { type: src_app_services_programas_service__WEBPACK_IMPORTED_MODULE_2__["ProgramasService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] }
 ];
 Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -119,7 +123,8 @@ Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./tab2.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/tab2/tab2.page.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./tab2.page.scss */ "./src/app/pages/tab2/tab2.page.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_programas_service__WEBPACK_IMPORTED_MODULE_2__["ProgramasService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_programas_service__WEBPACK_IMPORTED_MODULE_2__["ProgramasService"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"]])
 ], Tab2Page);
 
 
@@ -127,4 +132,3 @@ Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /***/ })
 
 }]);
-//# sourceMappingURL=tab2-tab2-module-es2015.js.map

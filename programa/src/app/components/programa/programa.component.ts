@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Nivel } from 'src/app/interfaces/interfaces';
 import { DataLocalService } from 'src/app/services/data-local.service';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Programa } from 'src/app/interfaces/programa.model';
+import { ProgramaDetalleComponent } from '../programa-detalle/programa-detalle.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-programa',
@@ -20,12 +22,24 @@ export class ProgramaComponent implements OnInit {
   constructor( private iab: InAppBrowser,
                private actionSheetCtrl: ActionSheetController,
                //private socialSharing: SocialSharing,
-               private datalocalService: DataLocalService ) { }
+               public datalocalService: DataLocalService,
+               public router: Router, 
+               private modalCtrl: ModalController) { }
 
   ngOnInit() {}
 
   abrirPrograma() {
     const browser = this.iab.create(this.programa.nombre, '_system');
+  }
+
+  async verDetalle(programa: Programa) {
+    const modal = await this.modalCtrl.create({
+      component: ProgramaDetalleComponent,
+      componentProps: {
+        programa
+      }
+    });
+    modal.present();
   }
 
   async lanzarMenu() {

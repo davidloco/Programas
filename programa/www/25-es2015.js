@@ -83,4 +83,3 @@ const Img = class {
 /***/ })
 
 }]);
-//# sourceMappingURL=25-es2015.js.map

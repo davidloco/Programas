@@ -336,4 +336,3 @@ const Searchbar = class {
 /***/ })
 
 }]);
-//# sourceMappingURL=56-es2015.js.map

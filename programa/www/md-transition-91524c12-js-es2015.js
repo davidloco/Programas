@@ -78,4 +78,3 @@ const mdTransitionAnimation = (_, opts) => {
 /***/ })
 
 }]);
-//# sourceMappingURL=md-transition-91524c12-js-es2015.js.map

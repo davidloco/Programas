@@ -66,4 +66,3 @@ const createSwipeBackGesture = (el, canStartHandler, onStartHandler, onMoveHandl
 /***/ })
 
 }]);
-//# sourceMappingURL=swipe-back-d2cdbf9a-js-es2015.js.map

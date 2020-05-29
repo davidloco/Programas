@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content>\n\n  <ion-slides [options]=\"sliderOpts\"\n              *ngIf=\"datalocalService.programas.length === 0\">\n    <ion-slide>\n      \n      <ion-label>No hay favoritos</ion-label>\n\n    </ion-slide>\n  </ion-slides>\n\n  <app-programas *ngIf=\"datalocalService.programas.length > 0\" \n                [enFavoritos]=\"true\"\n                [programas]=\"datalocalService.programas\"\n                [textoBuscar]=\"textoBuscar\">\n  </app-programas>\n\n  </ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content>\n\n  <ion-slides [options]=\"sliderOpts\" *ngIf=\"datalocalService.programas.length === 0\">\n    <ion-slide>\n\n      <ion-label>No hay favoritos</ion-label>\n\n    </ion-slide>\n  </ion-slides>\n\n  <app-programas *ngIf=\"datalocalService.programas.length > 0\" [enFavoritos]=\"true\"\n    [programas]=\"datalocalService.programas\" [textoBuscar]=\"textoBuscar\">\n  </app-programas>\n\n</ion-content>");
 
 /***/ }),
 
@@ -117,4 +117,3 @@ Tab3Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /***/ })
 
 }]);
-//# sourceMappingURL=tab3-tab3-module-es2015.js.map

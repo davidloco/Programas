@@ -160,4 +160,3 @@ const Row = class {
 /***/ })
 
 }]);
-//# sourceMappingURL=20-es2015.js.map
